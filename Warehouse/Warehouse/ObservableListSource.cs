@@ -8,7 +8,7 @@ using System.Data.Entity;
 namespace Warehouse
 {
     public class ObservableListSource<T> : ObservableCollection<T>, IListSource
-                where T : class
+              where T : class
     {
         private IBindingList _bindingList;
 
