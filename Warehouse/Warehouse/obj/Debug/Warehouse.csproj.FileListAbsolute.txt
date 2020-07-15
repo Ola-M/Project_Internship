@@ -1,0 +1,16 @@
+C:\Users\BartoszSkrabka\Desktop\Apka\Warehouse\Warehouse\bin\Debug\Database.mdf
+C:\Users\BartoszSkrabka\Desktop\Apka\Warehouse\Warehouse\bin\Debug\Database_log.ldf
+C:\Users\BartoszSkrabka\Desktop\Apka\Warehouse\Warehouse\bin\Debug\Warehouse.exe.config
+C:\Users\BartoszSkrabka\Desktop\Apka\Warehouse\Warehouse\bin\Debug\Warehouse.exe
+C:\Users\BartoszSkrabka\Desktop\Apka\Warehouse\Warehouse\bin\Debug\Warehouse.pdb
+C:\Users\BartoszSkrabka\Desktop\Apka\Warehouse\Warehouse\bin\Debug\EntityFramework.dll
+C:\Users\BartoszSkrabka\Desktop\Apka\Warehouse\Warehouse\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\BartoszSkrabka\Desktop\Apka\Warehouse\Warehouse\bin\Debug\EntityFramework.xml
+C:\Users\BartoszSkrabka\Desktop\Apka\Warehouse\Warehouse\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\BartoszSkrabka\Desktop\Apka\Warehouse\Warehouse\obj\Debug\Warehouse.csprojAssemblyReference.cache
+C:\Users\BartoszSkrabka\Desktop\Apka\Warehouse\Warehouse\obj\Debug\Warehouse.Properties.Resources.resources
+C:\Users\BartoszSkrabka\Desktop\Apka\Warehouse\Warehouse\obj\Debug\Warehouse.csproj.GenerateResource.cache
+C:\Users\BartoszSkrabka\Desktop\Apka\Warehouse\Warehouse\obj\Debug\Warehouse.csproj.CoreCompileInputs.cache
+C:\Users\BartoszSkrabka\Desktop\Apka\Warehouse\Warehouse\obj\Debug\Warehouse.csproj.CopyComplete
+C:\Users\BartoszSkrabka\Desktop\Apka\Warehouse\Warehouse\obj\Debug\Warehouse.exe
+C:\Users\BartoszSkrabka\Desktop\Apka\Warehouse\Warehouse\obj\Debug\Warehouse.pdb

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b5bc8ec46a4349288a67a8ba70bd6399" Name="Diagram1" ZoomLevel="80">
+        <EntityTypeShape EntityType="DBModel.user" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.provider" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="DBModel.deliveryCompliance" Width="1.5" PointX="13.125" PointY="4.25" />
+        <EntityTypeShape EntityType="DBModel.deliveryNote" Width="1.5" PointX="9.625" PointY="4.875" />
+        <EntityTypeShape EntityType="DBModel.pickUpDelivery" Width="1.5" PointX="10.875" PointY="1.75" />
+        <EntityTypeShape EntityType="DBModel.supply" Width="1.5" PointX="7.125" PointY="1.25" />
+        <AssociationConnector Association="DBModel.FK_deliveryCompliance_deliveryNote" />
+        <AssociationConnector Association="DBModel.FK_deliveryCompliance_pickUpDelivery" />
+        <AssociationConnector Association="DBModel.FK_deliveryNote_supply" />
+        <AssociationConnector Association="DBModel.FK_pickUpDelivery_supply" />
+        <AssociationConnector Association="DBModel.FK_supply_provider" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

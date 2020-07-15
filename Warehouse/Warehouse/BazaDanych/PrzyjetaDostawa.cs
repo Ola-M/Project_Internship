@@ -9,6 +9,6 @@ namespace Warehouse.BazaDanych
     public class PrzyjetaDostawa
     {
         public Guid przyjetaDostawaId { get; set; }
-        public 
+        
     }
 }
