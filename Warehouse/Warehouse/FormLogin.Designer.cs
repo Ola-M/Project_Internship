@@ -68,6 +68,7 @@
             this.textBoxHaslo.PasswordChar = '*';
             this.textBoxHaslo.Size = new System.Drawing.Size(244, 20);
             this.textBoxHaslo.TabIndex = 3;
+            this.textBoxHaslo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxHaslo_KeyDown);
             // 
             // buttonLogin
             // 

@@ -14,8 +14,6 @@ namespace Warehouse
 {
     public partial class FormLogin : Form
     {
-        //string connection = (@"Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=warehouseDatabase;Integrated Security=True");
-
         public FormLogin()
         {
             InitializeComponent();
@@ -49,6 +47,16 @@ namespace Warehouse
             else
             {
                 MessageBox.Show("Uzupełnij login i hasło");
+            }
+        }
+
+
+
+        private void textBoxHaslo_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                buttonLogin.PerformClick();
             }
         }
     }
