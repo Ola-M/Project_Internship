@@ -23,7 +23,7 @@ namespace Warehouse
         private void buttonLogin_Click(object sender, EventArgs e)
         {
             warehouseDatabaseEntities context = new warehouseDatabaseEntities();
-
+            PobieranieDanych pobieranie = new PobieranieDanych();
             if (textBoxLogin.Text != string.Empty || textBoxHaslo.Text != string.Empty)
             {
                 var user = context.users.Where(u => u.login.Equals(textBoxLogin.Text)).FirstOrDefault();
@@ -31,8 +31,10 @@ namespace Warehouse
                 {
                     if (user.password.Equals(textBoxHaslo.Text))
                     {
-                        MessageBox.Show("yey");
-                        int xxx = user.permission;
+                        pobieranie.userID = user.userID;
+                        FormZalogowany success = new FormZalogowany();
+                        success.Show();
+                        this.Hide();
                     }
                     else
                     {
