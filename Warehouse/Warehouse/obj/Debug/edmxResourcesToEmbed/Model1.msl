@@ -74,9 +74,9 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="user">
-      <EntityTypeMapping TypeName="warehouseDatabaseModel.user">
-        <MappingFragment StoreEntitySet="user">
+    <EntitySetMapping Name="users">
+      <EntityTypeMapping TypeName="warehouseDatabaseModel.users">
+        <MappingFragment StoreEntitySet="users">
           <ScalarProperty Name="userID" ColumnName="userID" />
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="forname" ColumnName="forname" />

@@ -31,6 +31,6 @@ namespace Warehouse
         public virtual DbSet<provider> provider { get; set; }
         public virtual DbSet<summary> summary { get; set; }
         public virtual DbSet<supply> supply { get; set; }
-        public virtual DbSet<user> user { get; set; }
+        public virtual DbSet<users> users { get; set; }
     }
 }

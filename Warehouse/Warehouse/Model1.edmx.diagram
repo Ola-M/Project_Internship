@@ -4,14 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="cc310ca7d01c45e7899f1192f36f2f55" Name="Diagram1" ZoomLevel="59">
+      <Diagram DiagramId="d4733845b1904f028b40d17032a123c8" Name="Diagram1">
         <EntityTypeShape EntityType="warehouseDatabaseModel.checkedInvoice" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
         <EntityTypeShape EntityType="warehouseDatabaseModel.invoice" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
         <EntityTypeShape EntityType="warehouseDatabaseModel.pickUpDelivery" Width="1.5" PointX="5.25" PointY="6.5" IsExpanded="true" />
         <EntityTypeShape EntityType="warehouseDatabaseModel.provider" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
         <EntityTypeShape EntityType="warehouseDatabaseModel.summary" Width="1.5" PointX="8.25" PointY="7.375" IsExpanded="true" />
         <EntityTypeShape EntityType="warehouseDatabaseModel.supply" Width="1.5" PointX="5.25" PointY="9.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="warehouseDatabaseModel.user" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="warehouseDatabaseModel.users" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
         <AssociationConnector Association="warehouseDatabaseModel.FK_checkedInvoice_provider" ManuallyRouted="false" />
         <AssociationConnector Association="warehouseDatabaseModel.FK_checkedInvoice_user" ManuallyRouted="false" />
         <AssociationConnector Association="warehouseDatabaseModel.FK_pickUpDelivery_invoice" ManuallyRouted="false" />

@@ -72,7 +72,7 @@
           <Property Name="invoiceID" Type="int" Nullable="false" />
           <Property Name="deliveryStatus" Type="bit" Nullable="false" />
         </EntityType>
-        <EntityType Name="user">
+        <EntityType Name="users">
           <Key>
             <PropertyRef Name="userID" />
           </Key>
@@ -81,7 +81,7 @@
           <Property Name="forname" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="login" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="permission" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="permission" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_checkedInvoice_provider">
           <End Role="provider" Type="Self.provider" Multiplicity="1" />
@@ -96,10 +96,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_checkedInvoice_user">
-          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="users" Type="Self.users" Multiplicity="1" />
           <End Role="checkedInvoice" Type="Self.checkedInvoice" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="user">
+            <Principal Role="users">
               <PropertyRef Name="userID" />
             </Principal>
             <Dependent Role="checkedInvoice">
@@ -186,13 +186,13 @@
           <EntitySet Name="provider" EntityType="Self.provider" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="summary" EntityType="Self.summary" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="supply" EntityType="Self.supply" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_checkedInvoice_provider" Association="Self.FK_checkedInvoice_provider">
             <End Role="provider" EntitySet="provider" />
             <End Role="checkedInvoice" EntitySet="checkedInvoice" />
           </AssociationSet>
           <AssociationSet Name="FK_checkedInvoice_user" Association="Self.FK_checkedInvoice_user">
-            <End Role="user" EntitySet="user" />
+            <End Role="users" EntitySet="users" />
             <End Role="checkedInvoice" EntitySet="checkedInvoice" />
           </AssociationSet>
           <AssociationSet Name="FK_invoice_provider" Association="Self.FK_invoice_provider">
@@ -242,7 +242,7 @@
           <Property Name="cSerialNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="userID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="provider" Relationship="Self.FK_checkedInvoice_provider" FromRole="checkedInvoice" ToRole="provider" />
-          <NavigationProperty Name="user" Relationship="Self.FK_checkedInvoice_user" FromRole="checkedInvoice" ToRole="user" />
+          <NavigationProperty Name="users" Relationship="Self.FK_checkedInvoice_user" FromRole="checkedInvoice" ToRole="users" />
           <NavigationProperty Name="pickUpDelivery" Relationship="Self.FK_pickUpDelivery_invoice" FromRole="checkedInvoice" ToRole="pickUpDelivery" />
           <NavigationProperty Name="summary" Relationship="Self.FK_summary_checkedInvoice" FromRole="checkedInvoice" ToRole="summary" />
         </EntityType>
@@ -307,7 +307,7 @@
           <Property Name="deliveryStatus" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="invoice" Relationship="Self.FK_supply_invoice" FromRole="supply" ToRole="invoice" />
         </EntityType>
-        <EntityType Name="user">
+        <EntityType Name="users">
           <Key>
             <PropertyRef Name="userID" />
           </Key>
@@ -316,8 +316,8 @@
           <Property Name="forname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="permission" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="checkedInvoice" Relationship="Self.FK_checkedInvoice_user" FromRole="user" ToRole="checkedInvoice" />
+          <Property Name="permission" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="checkedInvoice" Relationship="Self.FK_checkedInvoice_user" FromRole="users" ToRole="checkedInvoice" />
         </EntityType>
         <Association Name="FK_checkedInvoice_provider">
           <End Role="provider" Type="Self.provider" Multiplicity="1" />
@@ -332,10 +332,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_checkedInvoice_user">
-          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="users" Type="Self.users" Multiplicity="1" />
           <End Role="checkedInvoice" Type="Self.checkedInvoice" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="user">
+            <Principal Role="users">
               <PropertyRef Name="userID" />
             </Principal>
             <Dependent Role="checkedInvoice">
@@ -422,13 +422,13 @@
           <EntitySet Name="provider" EntityType="Self.provider" />
           <EntitySet Name="summary" EntityType="Self.summary" />
           <EntitySet Name="supply" EntityType="Self.supply" />
-          <EntitySet Name="user" EntityType="Self.user" />
+          <EntitySet Name="users" EntityType="Self.users" />
           <AssociationSet Name="FK_checkedInvoice_provider" Association="Self.FK_checkedInvoice_provider">
             <End Role="provider" EntitySet="provider" />
             <End Role="checkedInvoice" EntitySet="checkedInvoice" />
           </AssociationSet>
           <AssociationSet Name="FK_checkedInvoice_user" Association="Self.FK_checkedInvoice_user">
-            <End Role="user" EntitySet="user" />
+            <End Role="users" EntitySet="users" />
             <End Role="checkedInvoice" EntitySet="checkedInvoice" />
           </AssociationSet>
           <AssociationSet Name="FK_pickUpDelivery_invoice" Association="Self.FK_pickUpDelivery_invoice">
@@ -535,9 +535,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="user">
-            <EntityTypeMapping TypeName="warehouseDatabaseModel.user">
-              <MappingFragment StoreEntitySet="user">
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="warehouseDatabaseModel.users">
+              <MappingFragment StoreEntitySet="users">
                 <ScalarProperty Name="userID" ColumnName="userID" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="forname" ColumnName="forname" />

@@ -36,4 +36,3 @@ C:\Users\BartoszSkrabka\Desktop\Apka\Warehouse\Warehouse\bin\Debug\System.Buffer
 C:\Users\BartoszSkrabka\Desktop\Apka\Warehouse\Warehouse\bin\Debug\System.Memory.xml
 C:\Users\BartoszSkrabka\Desktop\Apka\Warehouse\Warehouse\bin\Debug\System.Numerics.Vectors.xml
 C:\Users\BartoszSkrabka\Desktop\Apka\Warehouse\Warehouse\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
-C:\Users\BartoszSkrabka\Desktop\Apka\Warehouse\Warehouse\obj\Debug\Warehouse.FormZalogowano.resources

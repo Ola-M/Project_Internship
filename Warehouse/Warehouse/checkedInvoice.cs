@@ -35,7 +35,7 @@ namespace Warehouse
         public int userID { get; set; }
     
         public virtual provider provider { get; set; }
-        public virtual user user { get; set; }
+        public virtual users users { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<pickUpDelivery> pickUpDelivery { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
