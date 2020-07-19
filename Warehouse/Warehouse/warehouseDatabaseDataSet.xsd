@@ -12,17 +12,19 @@
               <DbSource ConnectionRef="warehouseDatabaseConnectionString (Settings)" DbObjectName="warehouseDatabase.dbo.ProviderInvoice" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT deliveryDate, deliveryReportNo, companyName, numberOfItems FROM dbo.ProviderInvoice</CommandText>
+                    <CommandText>SELECT deliveryReportNo, deliveryDate, companyName, numberOfItems, addDate, deliveryStatus FROM dbo.ProviderInvoice</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
             </MainSource>
             <Mappings>
-              <Mapping SourceColumn="deliveryDate" DataSetColumn="deliveryDate" />
               <Mapping SourceColumn="deliveryReportNo" DataSetColumn="deliveryReportNo" />
+              <Mapping SourceColumn="deliveryDate" DataSetColumn="deliveryDate" />
               <Mapping SourceColumn="companyName" DataSetColumn="companyName" />
               <Mapping SourceColumn="numberOfItems" DataSetColumn="numberOfItems" />
+              <Mapping SourceColumn="addDate" DataSetColumn="addDate" />
+              <Mapping SourceColumn="deliveryStatus" DataSetColumn="deliveryStatus" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -37,7 +39,6 @@
         <xs:element name="ProviderInvoice" msprop:Generator_TableClassName="ProviderInvoiceDataTable" msprop:Generator_TableVarName="tableProviderInvoice" msprop:Generator_TablePropName="ProviderInvoice" msprop:Generator_RowDeletingName="ProviderInvoiceRowDeleting" msprop:Generator_RowChangingName="ProviderInvoiceRowChanging" msprop:Generator_RowEvHandlerName="ProviderInvoiceRowChangeEventHandler" msprop:Generator_RowDeletedName="ProviderInvoiceRowDeleted" msprop:Generator_UserTableName="ProviderInvoice" msprop:Generator_RowChangedName="ProviderInvoiceRowChanged" msprop:Generator_RowEvArgName="ProviderInvoiceRowChangeEvent" msprop:Generator_RowClassName="ProviderInvoiceRow">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="deliveryDate" msprop:Generator_ColumnVarNameInTable="columndeliveryDate" msprop:Generator_ColumnPropNameInRow="deliveryDate" msprop:Generator_ColumnPropNameInTable="deliveryDateColumn" msprop:Generator_UserColumnName="deliveryDate" type="xs:dateTime" />
               <xs:element name="deliveryReportNo" msprop:Generator_ColumnVarNameInTable="columndeliveryReportNo" msprop:Generator_ColumnPropNameInRow="deliveryReportNo" msprop:Generator_ColumnPropNameInTable="deliveryReportNoColumn" msprop:Generator_UserColumnName="deliveryReportNo">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
@@ -45,6 +46,7 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
+              <xs:element name="deliveryDate" msprop:Generator_ColumnVarNameInTable="columndeliveryDate" msprop:Generator_ColumnPropNameInRow="deliveryDate" msprop:Generator_ColumnPropNameInTable="deliveryDateColumn" msprop:Generator_UserColumnName="deliveryDate" type="xs:dateTime" />
               <xs:element name="companyName" msprop:Generator_ColumnVarNameInTable="columncompanyName" msprop:Generator_ColumnPropNameInRow="companyName" msprop:Generator_ColumnPropNameInTable="companyNameColumn" msprop:Generator_UserColumnName="companyName">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
@@ -53,6 +55,8 @@
                 </xs:simpleType>
               </xs:element>
               <xs:element name="numberOfItems" msprop:Generator_ColumnVarNameInTable="columnnumberOfItems" msprop:Generator_ColumnPropNameInRow="numberOfItems" msprop:Generator_ColumnPropNameInTable="numberOfItemsColumn" msprop:Generator_UserColumnName="numberOfItems" type="xs:int" minOccurs="0" />
+              <xs:element name="addDate" msprop:Generator_ColumnVarNameInTable="columnaddDate" msprop:Generator_ColumnPropNameInRow="addDate" msprop:Generator_ColumnPropNameInTable="addDateColumn" msprop:Generator_UserColumnName="addDate" type="xs:dateTime" />
+              <xs:element name="deliveryStatus" msprop:Generator_ColumnVarNameInTable="columndeliveryStatus" msprop:Generator_ColumnPropNameInRow="deliveryStatus" msprop:Generator_ColumnPropNameInTable="deliveryStatusColumn" msprop:Generator_UserColumnName="deliveryStatus" type="xs:boolean" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

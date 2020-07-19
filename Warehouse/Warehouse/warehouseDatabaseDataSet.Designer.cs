@@ -279,13 +279,17 @@ namespace Warehouse {
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class ProviderInvoiceDataTable : global::System.Data.TypedTableBase<ProviderInvoiceRow> {
             
-            private global::System.Data.DataColumn columndeliveryDate;
-            
             private global::System.Data.DataColumn columndeliveryReportNo;
+            
+            private global::System.Data.DataColumn columndeliveryDate;
             
             private global::System.Data.DataColumn columncompanyName;
             
             private global::System.Data.DataColumn columnnumberOfItems;
+            
+            private global::System.Data.DataColumn columnaddDate;
+            
+            private global::System.Data.DataColumn columndeliveryStatus;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
@@ -322,17 +326,17 @@ namespace Warehouse {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn deliveryDateColumn {
+            public global::System.Data.DataColumn deliveryReportNoColumn {
                 get {
-                    return this.columndeliveryDate;
+                    return this.columndeliveryReportNo;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn deliveryReportNoColumn {
+            public global::System.Data.DataColumn deliveryDateColumn {
                 get {
-                    return this.columndeliveryReportNo;
+                    return this.columndeliveryDate;
                 }
             }
             
@@ -349,6 +353,22 @@ namespace Warehouse {
             public global::System.Data.DataColumn numberOfItemsColumn {
                 get {
                     return this.columnnumberOfItems;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn addDateColumn {
+                get {
+                    return this.columnaddDate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn deliveryStatusColumn {
+                get {
+                    return this.columndeliveryStatus;
                 }
             }
             
@@ -389,13 +409,15 @@ namespace Warehouse {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public ProviderInvoiceRow AddProviderInvoiceRow(System.DateTime deliveryDate, string deliveryReportNo, string companyName, int numberOfItems) {
+            public ProviderInvoiceRow AddProviderInvoiceRow(string deliveryReportNo, System.DateTime deliveryDate, string companyName, int numberOfItems, System.DateTime addDate, bool deliveryStatus) {
                 ProviderInvoiceRow rowProviderInvoiceRow = ((ProviderInvoiceRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        deliveryDate,
                         deliveryReportNo,
+                        deliveryDate,
                         companyName,
-                        numberOfItems};
+                        numberOfItems,
+                        addDate,
+                        deliveryStatus};
                 rowProviderInvoiceRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowProviderInvoiceRow);
                 return rowProviderInvoiceRow;
@@ -418,28 +440,36 @@ namespace Warehouse {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             internal void InitVars() {
-                this.columndeliveryDate = base.Columns["deliveryDate"];
                 this.columndeliveryReportNo = base.Columns["deliveryReportNo"];
+                this.columndeliveryDate = base.Columns["deliveryDate"];
                 this.columncompanyName = base.Columns["companyName"];
                 this.columnnumberOfItems = base.Columns["numberOfItems"];
+                this.columnaddDate = base.Columns["addDate"];
+                this.columndeliveryStatus = base.Columns["deliveryStatus"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             private void InitClass() {
-                this.columndeliveryDate = new global::System.Data.DataColumn("deliveryDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columndeliveryDate);
                 this.columndeliveryReportNo = new global::System.Data.DataColumn("deliveryReportNo", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndeliveryReportNo);
+                this.columndeliveryDate = new global::System.Data.DataColumn("deliveryDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndeliveryDate);
                 this.columncompanyName = new global::System.Data.DataColumn("companyName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncompanyName);
                 this.columnnumberOfItems = new global::System.Data.DataColumn("numberOfItems", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnnumberOfItems);
-                this.columndeliveryDate.AllowDBNull = false;
+                this.columnaddDate = new global::System.Data.DataColumn("addDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnaddDate);
+                this.columndeliveryStatus = new global::System.Data.DataColumn("deliveryStatus", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndeliveryStatus);
                 this.columndeliveryReportNo.AllowDBNull = false;
                 this.columndeliveryReportNo.MaxLength = 50;
+                this.columndeliveryDate.AllowDBNull = false;
                 this.columncompanyName.AllowDBNull = false;
                 this.columncompanyName.MaxLength = 2147483647;
+                this.columnaddDate.AllowDBNull = false;
+                this.columndeliveryStatus.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -582,23 +612,23 @@ namespace Warehouse {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public System.DateTime deliveryDate {
-                get {
-                    return ((global::System.DateTime)(this[this.tableProviderInvoice.deliveryDateColumn]));
-                }
-                set {
-                    this[this.tableProviderInvoice.deliveryDateColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public string deliveryReportNo {
                 get {
                     return ((string)(this[this.tableProviderInvoice.deliveryReportNoColumn]));
                 }
                 set {
                     this[this.tableProviderInvoice.deliveryReportNoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public System.DateTime deliveryDate {
+                get {
+                    return ((global::System.DateTime)(this[this.tableProviderInvoice.deliveryDateColumn]));
+                }
+                set {
+                    this[this.tableProviderInvoice.deliveryDateColumn] = value;
                 }
             }
             
@@ -626,6 +656,28 @@ namespace Warehouse {
                 }
                 set {
                     this[this.tableProviderInvoice.numberOfItemsColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public System.DateTime addDate {
+                get {
+                    return ((global::System.DateTime)(this[this.tableProviderInvoice.addDateColumn]));
+                }
+                set {
+                    this[this.tableProviderInvoice.addDateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool deliveryStatus {
+                get {
+                    return ((bool)(this[this.tableProviderInvoice.deliveryStatusColumn]));
+                }
+                set {
+                    this[this.tableProviderInvoice.deliveryStatusColumn] = value;
                 }
             }
             
@@ -801,10 +853,12 @@ namespace Warehouse.warehouseDatabaseDataSetTableAdapters {
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
             tableMapping.DataSetTable = "ProviderInvoice";
-            tableMapping.ColumnMappings.Add("deliveryDate", "deliveryDate");
             tableMapping.ColumnMappings.Add("deliveryReportNo", "deliveryReportNo");
+            tableMapping.ColumnMappings.Add("deliveryDate", "deliveryDate");
             tableMapping.ColumnMappings.Add("companyName", "companyName");
             tableMapping.ColumnMappings.Add("numberOfItems", "numberOfItems");
+            tableMapping.ColumnMappings.Add("addDate", "addDate");
+            tableMapping.ColumnMappings.Add("deliveryStatus", "deliveryStatus");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -821,8 +875,8 @@ namespace Warehouse.warehouseDatabaseDataSetTableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT deliveryDate, deliveryReportNo, companyName, numberOfItems FROM dbo.Provid" +
-                "erInvoice";
+            this._commandCollection[0].CommandText = "SELECT deliveryReportNo, deliveryDate, companyName, numberOfItems, addDate, deliv" +
+                "eryStatus FROM dbo.ProviderInvoice";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
