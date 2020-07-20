@@ -10,12 +10,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Z.Dapper.Plus;
+using System.Data.SqlClient;
+using System.Data.Entity.Migrations;
+using System.Data.Entity.Validation;
 
 namespace Warehouse
 {
     public partial class FormZalogowany : Form
     {
-        warehouseDatabaseEntities context = new warehouseDatabaseEntities();
+       warehouseDatabaseEntities context = new warehouseDatabaseEntities();
 
         public FormZalogowany()
         {
@@ -24,7 +27,12 @@ namespace Warehouse
 
         private void FormZalogowany_Load(object sender, EventArgs e)
         {
-      
+            // TODO: Ten wiersz kodu wczytuje dane do tabeli 'warehouseDatabaseDataSet1.invoice' . Możesz go przenieść lub usunąć.
+            this.invoiceTableAdapter.Fill(this.warehouseDatabaseDataSet1.invoice);
+            // TODO: Ten wiersz kodu wczytuje dane do tabeli 'warehouseDatabaseDataSet.ProviderInvoice' . Możesz go przenieść lub usunąć.
+            this.providerInvoiceTableAdapter.Fill(this.warehouseDatabaseDataSet.ProviderInvoice);
+
+
         }
 
         private void buttonWyloguj_Click(object sender, EventArgs e)
@@ -34,15 +42,7 @@ namespace Warehouse
             this.Close();
         }
 
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            //pobiera dane wybranego rekordu 
-            foreach(DataGridViewRow row in dataGridView1.SelectedRows)
-    {
-                string value1 = row.Cells[1].Value.ToString();
 
-            }
-        }
 
         DataTableCollection tableCollection;
         private void buttonDodajPDF_Click(object sender, EventArgs e)
@@ -83,40 +83,75 @@ namespace Warehouse
                 }
             }
 
+            MessageBox.Show(fileContent, "File Content at path: " + filePath, MessageBoxButtons.OK);
         }
 
         private void comboBoxWidok_SelectedIndexChanged(object sender, EventArgs e)
         {
             DataTable dataTable = tableCollection[comboBoxWidok.SelectedItem.ToString()];
-            dataGridView1.DataSource = dataTable;
+            dataGridViewShowNew.DataSource = dataTable;
             var nazwaDostawcy = comboBoxWidok.Text;
 
-            if(dataTable != null)
+            if (dataTable != null)
             {
                 List<invoice> invoices = new List<invoice>();
-                for(int i = 5; i < 8; i++)
+                for (int i = 5; i < 8; i++)
                 {
                     invoice invo = new invoice();
                     invo.deliveryReportNo = dataTable.Rows[0][4].ToString();
                     invo.productName = dataTable.Rows[i][4].ToString();
-         
+                    invo.company = dataTable.Rows[i][4].ToString();
+                    invo.productCode = dataTable.Rows[i][4].ToString();
+                    invo.orderNumber = dataTable.Rows[i][4].ToString();
+                    invo.serialNo = dataTable.Rows[i][4].ToString();
+                    invo.providerID = 1;
+
                     invoices.Add(invo);
                 }
                 invoiceBindingSource.DataSource = invoices;
+
+                
             }
         }
 
-        private void buttonSendToDatabase_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
             try
             {
                 DapperPlusManager.Entity<invoice>().Table("invoice");
                 List<invoice> invoices = invoiceBindingSource.DataSource as List<invoice>;
+                if(invoices != null)
+                {
+                   foreach(invoice inv in invoices)
+                    {
+                        context.invoice.Add(inv);
+                    }
+                    context.SaveChanges();
+                }
 
             }
-            catch(Exception ex)
+            catch (DbEntityValidationException ex)
             {
-                MessageBox.Show(ex.Message, "Messege", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                foreach (var eve in ex.EntityValidationErrors)
+                {
+                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
+                
+            }
+        }
+
+        private void dataGridViewShowNotes_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            foreach(DataGridViewRow row in dataGridViewShowNotes.SelectedRows)
+    {
+                string value1 = row.Cells[0].Value.ToString();
+
             }
         }
     }
