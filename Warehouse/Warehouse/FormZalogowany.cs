@@ -9,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Z.Dapper.Plus;
+
 namespace Warehouse
 {
     public partial class FormZalogowany : Form
@@ -22,13 +24,7 @@ namespace Warehouse
 
         private void FormZalogowany_Load(object sender, EventArgs e)
         {
-            // TODO: Ten wiersz kodu wczytuje dane do tabeli 'warehouseDatabaseDataSet2.invoice' . Możesz go przenieść lub usunąć.
-            this.invoiceTableAdapter.Fill(this.warehouseDatabaseDataSet2.invoice);
-            // TODO: Ten wiersz kodu wczytuje dane do tabeli 'warehouseDatabaseDataSet.ProviderInvoice' . Możesz go przenieść lub usunąć.
-            this.providerInvoiceTableAdapter.Fill(this.warehouseDatabaseDataSet.ProviderInvoice);
-            // TODO: Ten wiersz kodu wczytuje dane do tabeli 'warehouseDatabaseDataSet1.ProviderInvoice' . Możesz go przenieść lub usunąć.
-
-
+      
         }
 
         private void buttonWyloguj_Click(object sender, EventArgs e)
@@ -40,6 +36,7 @@ namespace Warehouse
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            //pobiera dane wybranego rekordu 
             foreach(DataGridViewRow row in dataGridView1.SelectedRows)
     {
                 string value1 = row.Cells[1].Value.ToString();
@@ -86,13 +83,41 @@ namespace Warehouse
                 }
             }
 
-            MessageBox.Show(fileContent, "File Content at path: " + filePath, MessageBoxButtons.OK);
         }
 
         private void comboBoxWidok_SelectedIndexChanged(object sender, EventArgs e)
         {
             DataTable dataTable = tableCollection[comboBoxWidok.SelectedItem.ToString()];
             dataGridView1.DataSource = dataTable;
+            var nazwaDostawcy = comboBoxWidok.Text;
+
+            if(dataTable != null)
+            {
+                List<invoice> invoices = new List<invoice>();
+                for(int i = 5; i < 8; i++)
+                {
+                    invoice invo = new invoice();
+                    invo.deliveryReportNo = dataTable.Rows[0][4].ToString();
+                    invo.productName = dataTable.Rows[i][4].ToString();
+         
+                    invoices.Add(invo);
+                }
+                invoiceBindingSource.DataSource = invoices;
+            }
+        }
+
+        private void buttonSendToDatabase_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DapperPlusManager.Entity<invoice>().Table("invoice");
+                List<invoice> invoices = invoiceBindingSource.DataSource as List<invoice>;
+
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Messege", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
