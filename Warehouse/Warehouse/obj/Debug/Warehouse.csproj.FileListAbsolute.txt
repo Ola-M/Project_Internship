@@ -90,3 +90,5 @@ C:\Users\BartoszSkrabka\Desktop\Apka\Warehouse\Warehouse\bin\Debug\ExcelDataRead
 C:\Users\BartoszSkrabka\Desktop\Apka\Warehouse\Warehouse\bin\Debug\ExcelDataReader.DataSet.xml
 C:\Users\BartoszSkrabka\Desktop\Apka\Warehouse\Warehouse\bin\Debug\Z.Dapper.Plus.dll
 C:\Users\BartoszSkrabka\Desktop\Apka\Warehouse\Warehouse\bin\Debug\Z.Dapper.Plus.xml
+D:\Project_Internship\Warehouse\Warehouse\bin\Debug\Z.Dapper.Plus.dll
+D:\Project_Internship\Warehouse\Warehouse\bin\Debug\Z.Dapper.Plus.xml

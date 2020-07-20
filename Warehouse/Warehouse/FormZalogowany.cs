@@ -95,16 +95,26 @@ namespace Warehouse
             if (dataTable != null)
             {
                 List<invoice> invoices = new List<invoice>();
-                for (int i = 5; i < 8; i++)
+                for (int i = 5; i <dataTable.Rows.Count; i++)
                 {
                     invoice invo = new invoice();
-                    invo.deliveryReportNo = dataTable.Rows[0][4].ToString();
-                    invo.productName = dataTable.Rows[i][4].ToString();
-                    invo.company = dataTable.Rows[i][4].ToString();
-                    invo.productCode = dataTable.Rows[i][4].ToString();
-                    invo.orderNumber = dataTable.Rows[i][4].ToString();
-                    invo.serialNo = dataTable.Rows[i][4].ToString();
                     invo.providerID = 1;
+                    invo.deliveryReportNo = dataTable.Columns[4].ToString();
+
+                    string konwersjaDeliveryDate = dataTable.Rows[0][4].ToString();
+                    invo.deliveryDate = DateTime.Parse(konwersjaDeliveryDate);
+
+                    invo.numberOfItems = dataTable.Rows[1][2].GetHashCode();
+                    invo.company = dataTable.Rows[i][0].ToString();
+                    invo.orderNumber = dataTable.Rows[i][1].ToString();
+
+                    string konwersjaItemNumber = dataTable.Rows[i][2].ToString();
+                    invo.itemNumber  = int.Parse(konwersjaItemNumber);
+
+                    invo.productCode = dataTable.Rows[i][3].ToString();
+                    invo.productName = dataTable.Rows[i][4].ToString();
+                    invo.serialNo = dataTable.Rows[i][5].ToString();
+                    
 
                     invoices.Add(invo);
                 }
