@@ -98,18 +98,21 @@ namespace Warehouse
                 for (int i = 5; i <dataTable.Rows.Count; i++)
                 {
                     invoice invo = new invoice();
-                    invo.providerID = 1;
+
+                  //provider prov = context.provider.FirstOrDefault(c=> c.companyName ==) comboBox pobieranie nazwy firmy
+                    //invo.providerID = 1;
                     invo.deliveryReportNo = dataTable.Columns[4].ToString();
 
-                    string konwersjaDeliveryDate = dataTable.Rows[0][4].ToString();
-                    invo.deliveryDate = DateTime.Parse(konwersjaDeliveryDate);
+                   // string konwersjaDeliveryDate = dataTable.Rows[0][4].ToString();
+                    invo.deliveryDate = DateTime.Parse(dataTable.Rows[0][4].ToString());
 
-                    invo.numberOfItems = dataTable.Rows[1][2].GetHashCode();
+                    // string konversjaNumberOfItems = dataTable.Rows[1][2].ToString();
+                    invo.numberOfItems = int.Parse(dataTable.Rows[1][2].ToString());
                     invo.company = dataTable.Rows[i][0].ToString();
                     invo.orderNumber = dataTable.Rows[i][1].ToString();
 
-                    string konwersjaItemNumber = dataTable.Rows[i][2].ToString();
-                    invo.itemNumber  = int.Parse(konwersjaItemNumber);
+                   // string konwersjaItemNumber = dataTable.Rows[i][2].ToString();
+                    invo.itemNumber  = int.Parse(dataTable.Rows[i][2].ToString());
 
                     invo.productCode = dataTable.Rows[i][3].ToString();
                     invo.productName = dataTable.Rows[i][4].ToString();
