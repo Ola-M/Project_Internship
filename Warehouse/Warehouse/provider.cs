@@ -12,13 +12,13 @@ namespace Warehouse
     using System;
     using System.Collections.Generic;
     
-    public partial class provider
+    public partial class Provider
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public provider()
+        public Provider()
         {
-            this.checkedInvoice = new HashSet<checkedInvoice>();
-            this.invoice = new HashSet<invoice>();
+            this.CheckedInvoice = new HashSet<CheckedInvoice>();
+            this.Invoice = new HashSet<Invoice>();
         }
     
         public int providerID { get; set; }
@@ -26,8 +26,8 @@ namespace Warehouse
         public string contact { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<checkedInvoice> checkedInvoice { get; set; }
+        public virtual ICollection<CheckedInvoice> CheckedInvoice { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<invoice> invoice { get; set; }
+        public virtual ICollection<Invoice> Invoice { get; set; }
     }
 }

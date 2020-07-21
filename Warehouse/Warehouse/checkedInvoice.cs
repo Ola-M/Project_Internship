@@ -12,13 +12,13 @@ namespace Warehouse
     using System;
     using System.Collections.Generic;
     
-    public partial class checkedInvoice
+    public partial class CheckedInvoice
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public checkedInvoice()
+        public CheckedInvoice()
         {
-            this.pickUpDelivery = new HashSet<pickUpDelivery>();
-            this.summary = new HashSet<summary>();
+            this.PickUpDelivery = new HashSet<PickUpDelivery>();
+            this.Summary = new HashSet<Summary>();
         }
     
         public int checkedInvoiceID { get; set; }
@@ -34,11 +34,11 @@ namespace Warehouse
         public string cSerialNo { get; set; }
         public int userID { get; set; }
     
-        public virtual provider provider { get; set; }
-        public virtual users users { get; set; }
+        public virtual Provider Provider { get; set; }
+        public virtual Users Users { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<pickUpDelivery> pickUpDelivery { get; set; }
+        public virtual ICollection<PickUpDelivery> PickUpDelivery { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<summary> summary { get; set; }
+        public virtual ICollection<Summary> Summary { get; set; }
     }
 }

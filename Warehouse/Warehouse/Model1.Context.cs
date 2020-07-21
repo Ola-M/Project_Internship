@@ -13,10 +13,10 @@ namespace Warehouse
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class warehouseDatabaseEntities : DbContext
+    public partial class warehouseDatabaseEntities1 : DbContext
     {
-        public warehouseDatabaseEntities()
-            : base("name=warehouseDatabaseEntities")
+        public warehouseDatabaseEntities1()
+            : base("name=warehouseDatabaseEntities1")
         {
         }
     
@@ -25,12 +25,13 @@ namespace Warehouse
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<checkedInvoice> checkedInvoice { get; set; }
-        public virtual DbSet<invoice> invoice { get; set; }
-        public virtual DbSet<pickUpDelivery> pickUpDelivery { get; set; }
-        public virtual DbSet<provider> provider { get; set; }
-        public virtual DbSet<summary> summary { get; set; }
-        public virtual DbSet<supply> supply { get; set; }
-        public virtual DbSet<users> users { get; set; }
+        public virtual DbSet<CheckedInvoice> CheckedInvoice { get; set; }
+        public virtual DbSet<Invoice> Invoice { get; set; }
+        public virtual DbSet<PickUpDelivery> PickUpDelivery { get; set; }
+        public virtual DbSet<Provider> Provider { get; set; }
+        public virtual DbSet<Summary> Summary { get; set; }
+        public virtual DbSet<Supply> Supply { get; set; }
+        public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<ProviderInvoice> ProviderInvoice { get; set; }
     }
 }

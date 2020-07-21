@@ -12,14 +12,14 @@ namespace Warehouse
     using System;
     using System.Collections.Generic;
     
-    public partial class summary
+    public partial class Summary
     {
         public int summaryID { get; set; }
         public int invoiceID { get; set; }
         public int checkedInvoiceID { get; set; }
         public bool deliveryCompatible { get; set; }
     
-        public virtual checkedInvoice checkedInvoice { get; set; }
-        public virtual invoice invoice { get; set; }
+        public virtual CheckedInvoice CheckedInvoice { get; set; }
+        public virtual Invoice Invoice { get; set; }
     }
 }

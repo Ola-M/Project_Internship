@@ -12,12 +12,12 @@ namespace Warehouse
     using System;
     using System.Collections.Generic;
     
-    public partial class users
+    public partial class Users
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public users()
+        public Users()
         {
-            this.checkedInvoice = new HashSet<checkedInvoice>();
+            this.CheckedInvoice = new HashSet<CheckedInvoice>();
         }
     
         public int userID { get; set; }
@@ -28,6 +28,6 @@ namespace Warehouse
         public int permission { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<checkedInvoice> checkedInvoice { get; set; }
+        public virtual ICollection<CheckedInvoice> CheckedInvoice { get; set; }
     }
 }

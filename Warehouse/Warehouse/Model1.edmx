@@ -4,8 +4,8 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="warehouseDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="checkedInvoice">
+    <Schema Namespace="warehouseDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CheckedInvoice">
           <Key>
             <PropertyRef Name="checkedInvoiceID" />
           </Key>
@@ -22,23 +22,22 @@
           <Property Name="cSerialNo" Type="varchar(max)" Nullable="false" />
           <Property Name="userID" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="invoice">
+        <EntityType Name="Invoice">
           <Key>
             <PropertyRef Name="invoiceID" />
           </Key>
           <Property Name="invoiceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="providerID" Type="int" Nullable="false" />
-          <Property Name="deliveryReportNo" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="deliveryDate" Type="date" Nullable="false" />
-          <Property Name="numberOfItems" Type="int" />
-          <Property Name="company" Type="varchar(max)" Nullable="false" />
-          <Property Name="orderNumber" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="itemNumber" Type="int" Nullable="false" />
-          <Property Name="productCode" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="productName" Type="varchar(max)" Nullable="false" />
-          <Property Name="serialNo" Type="varchar(max)" Nullable="false" />
+          <Property Name="providerID" Type="int" />
+          <Property Name="deliveryReportNo" Type="varchar" MaxLength="50" />
+          <Property Name="deliveryDate" Type="date" />
+          <Property Name="company" Type="varchar(max)" />
+          <Property Name="orderNumber" Type="varchar" MaxLength="50" />
+          <Property Name="itemNumber" Type="int" />
+          <Property Name="productCode" Type="varchar" MaxLength="50" />
+          <Property Name="productName" Type="varchar(max)" />
+          <Property Name="serialNo" Type="varchar(max)" />
         </EntityType>
-        <EntityType Name="pickUpDelivery">
+        <EntityType Name="PickUpDelivery">
           <Key>
             <PropertyRef Name="pickUpDeliveryID" />
           </Key>
@@ -46,7 +45,7 @@
           <Property Name="invoiceID" Type="int" Nullable="false" />
           <Property Name="checkedInvoiceID" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="provider">
+        <EntityType Name="Provider">
           <Key>
             <PropertyRef Name="providerID" />
           </Key>
@@ -54,7 +53,7 @@
           <Property Name="companyName" Type="varchar(max)" Nullable="false" />
           <Property Name="contact" Type="varchar(max)" Nullable="false" />
         </EntityType>
-        <EntityType Name="summary">
+        <EntityType Name="Summary">
           <Key>
             <PropertyRef Name="summaryID" />
           </Key>
@@ -63,16 +62,17 @@
           <Property Name="checkedInvoiceID" Type="int" Nullable="false" />
           <Property Name="deliveryCompatible" Type="bit" Nullable="false" />
         </EntityType>
-        <EntityType Name="supply">
+        <EntityType Name="Supply">
           <Key>
             <PropertyRef Name="supplyID" />
           </Key>
           <Property Name="supplyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="deliveryDate" Type="datetime" Nullable="false" />
+          <Property Name="addDate" Type="datetime" Nullable="false" />
           <Property Name="invoiceID" Type="int" Nullable="false" />
           <Property Name="deliveryStatus" Type="bit" Nullable="false" />
+          <Property Name="numberOfItems" Type="int" />
         </EntityType>
-        <EntityType Name="users">
+        <EntityType Name="Users">
           <Key>
             <PropertyRef Name="userID" />
           </Key>
@@ -83,149 +83,173 @@
           <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="permission" Type="int" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'warehouseDatabase.dbo.ProviderInvoice' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ProviderInvoice">
+          <Key>
+            <PropertyRef Name="companyName" />
+            <PropertyRef Name="addDate" />
+            <PropertyRef Name="deliveryStatus" />
+          </Key>
+          <Property Name="deliveryReportNo" Type="varchar" MaxLength="50" />
+          <Property Name="deliveryDate" Type="date" />
+          <Property Name="companyName" Type="varchar(max)" Nullable="false" />
+          <Property Name="numberOfItems" Type="int" />
+          <Property Name="addDate" Type="datetime" Nullable="false" />
+          <Property Name="deliveryStatus" Type="bit" Nullable="false" />
+        </EntityType>
         <Association Name="FK_checkedInvoice_provider">
-          <End Role="provider" Type="Self.provider" Multiplicity="1" />
-          <End Role="checkedInvoice" Type="Self.checkedInvoice" Multiplicity="*" />
+          <End Role="Provider" Type="Self.Provider" Multiplicity="1" />
+          <End Role="CheckedInvoice" Type="Self.CheckedInvoice" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="provider">
+            <Principal Role="Provider">
               <PropertyRef Name="providerID" />
             </Principal>
-            <Dependent Role="checkedInvoice">
+            <Dependent Role="CheckedInvoice">
               <PropertyRef Name="providerID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_checkedInvoice_user">
-          <End Role="users" Type="Self.users" Multiplicity="1" />
-          <End Role="checkedInvoice" Type="Self.checkedInvoice" Multiplicity="*" />
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="CheckedInvoice" Type="Self.CheckedInvoice" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="users">
+            <Principal Role="Users">
               <PropertyRef Name="userID" />
             </Principal>
-            <Dependent Role="checkedInvoice">
+            <Dependent Role="CheckedInvoice">
               <PropertyRef Name="userID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_invoice_provider">
-          <End Role="provider" Type="Self.provider" Multiplicity="1" />
-          <End Role="invoice" Type="Self.invoice" Multiplicity="*" />
+          <End Role="Provider" Type="Self.Provider" Multiplicity="0..1" />
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="provider">
+            <Principal Role="Provider">
               <PropertyRef Name="providerID" />
             </Principal>
-            <Dependent Role="invoice">
+            <Dependent Role="Invoice">
               <PropertyRef Name="providerID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_pickUpDelivery_checkedInvoice">
-          <End Role="invoice" Type="Self.invoice" Multiplicity="1" />
-          <End Role="pickUpDelivery" Type="Self.pickUpDelivery" Multiplicity="*" />
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="1" />
+          <End Role="PickUpDelivery" Type="Self.PickUpDelivery" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="invoice">
+            <Principal Role="Invoice">
               <PropertyRef Name="invoiceID" />
             </Principal>
-            <Dependent Role="pickUpDelivery">
+            <Dependent Role="PickUpDelivery">
               <PropertyRef Name="invoiceID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_pickUpDelivery_invoice">
-          <End Role="checkedInvoice" Type="Self.checkedInvoice" Multiplicity="1" />
-          <End Role="pickUpDelivery" Type="Self.pickUpDelivery" Multiplicity="*" />
+          <End Role="CheckedInvoice" Type="Self.CheckedInvoice" Multiplicity="1" />
+          <End Role="PickUpDelivery" Type="Self.PickUpDelivery" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="checkedInvoice">
+            <Principal Role="CheckedInvoice">
               <PropertyRef Name="checkedInvoiceID" />
             </Principal>
-            <Dependent Role="pickUpDelivery">
+            <Dependent Role="PickUpDelivery">
               <PropertyRef Name="checkedInvoiceID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_summary_checkedInvoice">
-          <End Role="checkedInvoice" Type="Self.checkedInvoice" Multiplicity="1" />
-          <End Role="summary" Type="Self.summary" Multiplicity="*" />
+          <End Role="CheckedInvoice" Type="Self.CheckedInvoice" Multiplicity="1" />
+          <End Role="Summary" Type="Self.Summary" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="checkedInvoice">
+            <Principal Role="CheckedInvoice">
               <PropertyRef Name="checkedInvoiceID" />
             </Principal>
-            <Dependent Role="summary">
+            <Dependent Role="Summary">
               <PropertyRef Name="checkedInvoiceID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_summary_invoice">
-          <End Role="invoice" Type="Self.invoice" Multiplicity="1" />
-          <End Role="summary" Type="Self.summary" Multiplicity="*" />
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="1" />
+          <End Role="Summary" Type="Self.Summary" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="invoice">
+            <Principal Role="Invoice">
               <PropertyRef Name="invoiceID" />
             </Principal>
-            <Dependent Role="summary">
+            <Dependent Role="Summary">
               <PropertyRef Name="invoiceID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_supply_invoice">
-          <End Role="invoice" Type="Self.invoice" Multiplicity="1" />
-          <End Role="supply" Type="Self.supply" Multiplicity="*" />
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="1" />
+          <End Role="Supply" Type="Self.Supply" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="invoice">
+            <Principal Role="Invoice">
               <PropertyRef Name="invoiceID" />
             </Principal>
-            <Dependent Role="supply">
+            <Dependent Role="Supply">
               <PropertyRef Name="invoiceID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="warehouseDatabaseModelStoreContainer">
-          <EntitySet Name="checkedInvoice" EntityType="Self.checkedInvoice" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="invoice" EntityType="Self.invoice" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="pickUpDelivery" EntityType="Self.pickUpDelivery" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="provider" EntityType="Self.provider" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="summary" EntityType="Self.summary" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="supply" EntityType="Self.supply" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CheckedInvoice" EntityType="Self.CheckedInvoice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Invoice" EntityType="Self.Invoice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PickUpDelivery" EntityType="Self.PickUpDelivery" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Provider" EntityType="Self.Provider" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Summary" EntityType="Self.Summary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Supply" EntityType="Self.Supply" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProviderInvoice" EntityType="Self.ProviderInvoice" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ProviderInvoice].[deliveryReportNo] AS [deliveryReportNo], 
+    [ProviderInvoice].[deliveryDate] AS [deliveryDate], 
+    [ProviderInvoice].[companyName] AS [companyName], 
+    [ProviderInvoice].[numberOfItems] AS [numberOfItems], 
+    [ProviderInvoice].[addDate] AS [addDate], 
+    [ProviderInvoice].[deliveryStatus] AS [deliveryStatus]
+    FROM [dbo].[ProviderInvoice] AS [ProviderInvoice]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_checkedInvoice_provider" Association="Self.FK_checkedInvoice_provider">
-            <End Role="provider" EntitySet="provider" />
-            <End Role="checkedInvoice" EntitySet="checkedInvoice" />
+            <End Role="Provider" EntitySet="Provider" />
+            <End Role="CheckedInvoice" EntitySet="CheckedInvoice" />
           </AssociationSet>
           <AssociationSet Name="FK_checkedInvoice_user" Association="Self.FK_checkedInvoice_user">
-            <End Role="users" EntitySet="users" />
-            <End Role="checkedInvoice" EntitySet="checkedInvoice" />
+            <End Role="Users" EntitySet="Users" />
+            <End Role="CheckedInvoice" EntitySet="CheckedInvoice" />
           </AssociationSet>
           <AssociationSet Name="FK_invoice_provider" Association="Self.FK_invoice_provider">
-            <End Role="provider" EntitySet="provider" />
-            <End Role="invoice" EntitySet="invoice" />
+            <End Role="Provider" EntitySet="Provider" />
+            <End Role="Invoice" EntitySet="Invoice" />
           </AssociationSet>
           <AssociationSet Name="FK_pickUpDelivery_checkedInvoice" Association="Self.FK_pickUpDelivery_checkedInvoice">
-            <End Role="invoice" EntitySet="invoice" />
-            <End Role="pickUpDelivery" EntitySet="pickUpDelivery" />
+            <End Role="Invoice" EntitySet="Invoice" />
+            <End Role="PickUpDelivery" EntitySet="PickUpDelivery" />
           </AssociationSet>
           <AssociationSet Name="FK_pickUpDelivery_invoice" Association="Self.FK_pickUpDelivery_invoice">
-            <End Role="checkedInvoice" EntitySet="checkedInvoice" />
-            <End Role="pickUpDelivery" EntitySet="pickUpDelivery" />
+            <End Role="CheckedInvoice" EntitySet="CheckedInvoice" />
+            <End Role="PickUpDelivery" EntitySet="PickUpDelivery" />
           </AssociationSet>
           <AssociationSet Name="FK_summary_checkedInvoice" Association="Self.FK_summary_checkedInvoice">
-            <End Role="checkedInvoice" EntitySet="checkedInvoice" />
-            <End Role="summary" EntitySet="summary" />
+            <End Role="CheckedInvoice" EntitySet="CheckedInvoice" />
+            <End Role="Summary" EntitySet="Summary" />
           </AssociationSet>
           <AssociationSet Name="FK_summary_invoice" Association="Self.FK_summary_invoice">
-            <End Role="invoice" EntitySet="invoice" />
-            <End Role="summary" EntitySet="summary" />
+            <End Role="Invoice" EntitySet="Invoice" />
+            <End Role="Summary" EntitySet="Summary" />
           </AssociationSet>
           <AssociationSet Name="FK_supply_invoice" Association="Self.FK_supply_invoice">
-            <End Role="invoice" EntitySet="invoice" />
-            <End Role="supply" EntitySet="supply" />
+            <End Role="Invoice" EntitySet="Invoice" />
+            <End Role="Supply" EntitySet="Supply" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="warehouseDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="checkedInvoice">
+        <EntityType Name="CheckedInvoice">
           <Key>
             <PropertyRef Name="checkedInvoiceID" />
           </Key>
@@ -241,52 +265,51 @@
           <Property Name="cProductName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="cSerialNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="userID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="provider" Relationship="Self.FK_checkedInvoice_provider" FromRole="checkedInvoice" ToRole="provider" />
-          <NavigationProperty Name="users" Relationship="Self.FK_checkedInvoice_user" FromRole="checkedInvoice" ToRole="users" />
-          <NavigationProperty Name="pickUpDelivery" Relationship="Self.FK_pickUpDelivery_invoice" FromRole="checkedInvoice" ToRole="pickUpDelivery" />
-          <NavigationProperty Name="summary" Relationship="Self.FK_summary_checkedInvoice" FromRole="checkedInvoice" ToRole="summary" />
+          <NavigationProperty Name="Provider" Relationship="Self.FK_checkedInvoice_provider" FromRole="CheckedInvoice" ToRole="Provider" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_checkedInvoice_user" FromRole="CheckedInvoice" ToRole="Users" />
+          <NavigationProperty Name="PickUpDelivery" Relationship="Self.FK_pickUpDelivery_invoice" FromRole="CheckedInvoice" ToRole="PickUpDelivery" />
+          <NavigationProperty Name="Summary" Relationship="Self.FK_summary_checkedInvoice" FromRole="CheckedInvoice" ToRole="Summary" />
         </EntityType>
-        <EntityType Name="invoice">
+        <EntityType Name="Invoice">
           <Key>
             <PropertyRef Name="invoiceID" />
           </Key>
           <Property Name="invoiceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="providerID" Type="Int32" Nullable="false" />
-          <Property Name="deliveryReportNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="deliveryDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="numberOfItems" Type="Int32" />
-          <Property Name="company" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="orderNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="itemNumber" Type="Int32" Nullable="false" />
-          <Property Name="productCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="productName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="serialNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="provider" Relationship="Self.FK_invoice_provider" FromRole="invoice" ToRole="provider" />
-          <NavigationProperty Name="pickUpDelivery" Relationship="Self.FK_pickUpDelivery_checkedInvoice" FromRole="invoice" ToRole="pickUpDelivery" />
-          <NavigationProperty Name="summary" Relationship="Self.FK_summary_invoice" FromRole="invoice" ToRole="summary" />
-          <NavigationProperty Name="supply" Relationship="Self.FK_supply_invoice" FromRole="invoice" ToRole="supply" />
+          <Property Name="providerID" Type="Int32" />
+          <Property Name="deliveryReportNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="deliveryDate" Type="DateTime" Precision="0" />
+          <Property Name="company" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="orderNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="itemNumber" Type="Int32" />
+          <Property Name="productCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="productName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="serialNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Provider" Relationship="Self.FK_invoice_provider" FromRole="Invoice" ToRole="Provider" />
+          <NavigationProperty Name="PickUpDelivery" Relationship="Self.FK_pickUpDelivery_checkedInvoice" FromRole="Invoice" ToRole="PickUpDelivery" />
+          <NavigationProperty Name="Summary" Relationship="Self.FK_summary_invoice" FromRole="Invoice" ToRole="Summary" />
+          <NavigationProperty Name="Supply" Relationship="Self.FK_supply_invoice" FromRole="Invoice" ToRole="Supply" />
         </EntityType>
-        <EntityType Name="pickUpDelivery">
+        <EntityType Name="PickUpDelivery">
           <Key>
             <PropertyRef Name="pickUpDeliveryID" />
           </Key>
           <Property Name="pickUpDeliveryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="invoiceID" Type="Int32" Nullable="false" />
           <Property Name="checkedInvoiceID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="checkedInvoice" Relationship="Self.FK_pickUpDelivery_invoice" FromRole="pickUpDelivery" ToRole="checkedInvoice" />
-          <NavigationProperty Name="invoice" Relationship="Self.FK_pickUpDelivery_checkedInvoice" FromRole="pickUpDelivery" ToRole="invoice" />
+          <NavigationProperty Name="CheckedInvoice" Relationship="Self.FK_pickUpDelivery_invoice" FromRole="PickUpDelivery" ToRole="CheckedInvoice" />
+          <NavigationProperty Name="Invoice" Relationship="Self.FK_pickUpDelivery_checkedInvoice" FromRole="PickUpDelivery" ToRole="Invoice" />
         </EntityType>
-        <EntityType Name="provider">
+        <EntityType Name="Provider">
           <Key>
             <PropertyRef Name="providerID" />
           </Key>
           <Property Name="providerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="companyName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="contact" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="checkedInvoice" Relationship="Self.FK_checkedInvoice_provider" FromRole="provider" ToRole="checkedInvoice" />
-          <NavigationProperty Name="invoice" Relationship="Self.FK_invoice_provider" FromRole="provider" ToRole="invoice" />
+          <NavigationProperty Name="CheckedInvoice" Relationship="Self.FK_checkedInvoice_provider" FromRole="Provider" ToRole="CheckedInvoice" />
+          <NavigationProperty Name="Invoice" Relationship="Self.FK_invoice_provider" FromRole="Provider" ToRole="Invoice" />
         </EntityType>
-        <EntityType Name="summary">
+        <EntityType Name="Summary">
           <Key>
             <PropertyRef Name="summaryID" />
           </Key>
@@ -294,20 +317,21 @@
           <Property Name="invoiceID" Type="Int32" Nullable="false" />
           <Property Name="checkedInvoiceID" Type="Int32" Nullable="false" />
           <Property Name="deliveryCompatible" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="checkedInvoice" Relationship="Self.FK_summary_checkedInvoice" FromRole="summary" ToRole="checkedInvoice" />
-          <NavigationProperty Name="invoice" Relationship="Self.FK_summary_invoice" FromRole="summary" ToRole="invoice" />
+          <NavigationProperty Name="CheckedInvoice" Relationship="Self.FK_summary_checkedInvoice" FromRole="Summary" ToRole="CheckedInvoice" />
+          <NavigationProperty Name="Invoice" Relationship="Self.FK_summary_invoice" FromRole="Summary" ToRole="Invoice" />
         </EntityType>
-        <EntityType Name="supply">
+        <EntityType Name="Supply">
           <Key>
             <PropertyRef Name="supplyID" />
           </Key>
           <Property Name="supplyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="deliveryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="addDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="invoiceID" Type="Int32" Nullable="false" />
           <Property Name="deliveryStatus" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="invoice" Relationship="Self.FK_supply_invoice" FromRole="supply" ToRole="invoice" />
+          <Property Name="numberOfItems" Type="Int32" />
+          <NavigationProperty Name="Invoice" Relationship="Self.FK_supply_invoice" FromRole="Supply" ToRole="Invoice" />
         </EntityType>
-        <EntityType Name="users">
+        <EntityType Name="Users">
           <Key>
             <PropertyRef Name="userID" />
           </Key>
@@ -317,143 +341,157 @@
           <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="permission" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="checkedInvoice" Relationship="Self.FK_checkedInvoice_user" FromRole="users" ToRole="checkedInvoice" />
+          <NavigationProperty Name="CheckedInvoice" Relationship="Self.FK_checkedInvoice_user" FromRole="Users" ToRole="CheckedInvoice" />
+        </EntityType>
+        <EntityType Name="ProviderInvoice">
+          <Key>
+            <PropertyRef Name="companyName" />
+            <PropertyRef Name="addDate" />
+            <PropertyRef Name="deliveryStatus" />
+          </Key>
+          <Property Name="deliveryReportNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="deliveryDate" Type="DateTime" Precision="0" />
+          <Property Name="companyName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="numberOfItems" Type="Int32" />
+          <Property Name="addDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="deliveryStatus" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK_checkedInvoice_provider">
-          <End Role="provider" Type="Self.provider" Multiplicity="1" />
-          <End Role="checkedInvoice" Type="Self.checkedInvoice" Multiplicity="*" />
+          <End Role="Provider" Type="Self.Provider" Multiplicity="1" />
+          <End Role="CheckedInvoice" Type="Self.CheckedInvoice" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="provider">
+            <Principal Role="Provider">
               <PropertyRef Name="providerID" />
             </Principal>
-            <Dependent Role="checkedInvoice">
+            <Dependent Role="CheckedInvoice">
               <PropertyRef Name="providerID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_checkedInvoice_user">
-          <End Role="users" Type="Self.users" Multiplicity="1" />
-          <End Role="checkedInvoice" Type="Self.checkedInvoice" Multiplicity="*" />
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="CheckedInvoice" Type="Self.CheckedInvoice" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="users">
+            <Principal Role="Users">
               <PropertyRef Name="userID" />
             </Principal>
-            <Dependent Role="checkedInvoice">
+            <Dependent Role="CheckedInvoice">
               <PropertyRef Name="userID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_pickUpDelivery_invoice">
-          <End Role="checkedInvoice" Type="Self.checkedInvoice" Multiplicity="1" />
-          <End Role="pickUpDelivery" Type="Self.pickUpDelivery" Multiplicity="*" />
+          <End Role="CheckedInvoice" Type="Self.CheckedInvoice" Multiplicity="1" />
+          <End Role="PickUpDelivery" Type="Self.PickUpDelivery" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="checkedInvoice">
+            <Principal Role="CheckedInvoice">
               <PropertyRef Name="checkedInvoiceID" />
             </Principal>
-            <Dependent Role="pickUpDelivery">
+            <Dependent Role="PickUpDelivery">
               <PropertyRef Name="checkedInvoiceID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_summary_checkedInvoice">
-          <End Role="checkedInvoice" Type="Self.checkedInvoice" Multiplicity="1" />
-          <End Role="summary" Type="Self.summary" Multiplicity="*" />
+          <End Role="CheckedInvoice" Type="Self.CheckedInvoice" Multiplicity="1" />
+          <End Role="Summary" Type="Self.Summary" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="checkedInvoice">
+            <Principal Role="CheckedInvoice">
               <PropertyRef Name="checkedInvoiceID" />
             </Principal>
-            <Dependent Role="summary">
+            <Dependent Role="Summary">
               <PropertyRef Name="checkedInvoiceID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_invoice_provider">
-          <End Role="provider" Type="Self.provider" Multiplicity="1" />
-          <End Role="invoice" Type="Self.invoice" Multiplicity="*" />
+          <End Role="Provider" Type="Self.Provider" Multiplicity="0..1" />
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="provider">
+            <Principal Role="Provider">
               <PropertyRef Name="providerID" />
             </Principal>
-            <Dependent Role="invoice">
+            <Dependent Role="Invoice">
               <PropertyRef Name="providerID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_pickUpDelivery_checkedInvoice">
-          <End Role="invoice" Type="Self.invoice" Multiplicity="1" />
-          <End Role="pickUpDelivery" Type="Self.pickUpDelivery" Multiplicity="*" />
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="1" />
+          <End Role="PickUpDelivery" Type="Self.PickUpDelivery" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="invoice">
+            <Principal Role="Invoice">
               <PropertyRef Name="invoiceID" />
             </Principal>
-            <Dependent Role="pickUpDelivery">
+            <Dependent Role="PickUpDelivery">
               <PropertyRef Name="invoiceID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_summary_invoice">
-          <End Role="invoice" Type="Self.invoice" Multiplicity="1" />
-          <End Role="summary" Type="Self.summary" Multiplicity="*" />
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="1" />
+          <End Role="Summary" Type="Self.Summary" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="invoice">
+            <Principal Role="Invoice">
               <PropertyRef Name="invoiceID" />
             </Principal>
-            <Dependent Role="summary">
+            <Dependent Role="Summary">
               <PropertyRef Name="invoiceID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_supply_invoice">
-          <End Role="invoice" Type="Self.invoice" Multiplicity="1" />
-          <End Role="supply" Type="Self.supply" Multiplicity="*" />
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="1" />
+          <End Role="Supply" Type="Self.Supply" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="invoice">
+            <Principal Role="Invoice">
               <PropertyRef Name="invoiceID" />
             </Principal>
-            <Dependent Role="supply">
+            <Dependent Role="Supply">
               <PropertyRef Name="invoiceID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="warehouseDatabaseEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="checkedInvoice" EntityType="Self.checkedInvoice" />
-          <EntitySet Name="invoice" EntityType="Self.invoice" />
-          <EntitySet Name="pickUpDelivery" EntityType="Self.pickUpDelivery" />
-          <EntitySet Name="provider" EntityType="Self.provider" />
-          <EntitySet Name="summary" EntityType="Self.summary" />
-          <EntitySet Name="supply" EntityType="Self.supply" />
-          <EntitySet Name="users" EntityType="Self.users" />
+        <EntityContainer Name="warehouseDatabaseEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CheckedInvoice" EntityType="Self.CheckedInvoice" />
+          <EntitySet Name="Invoice" EntityType="Self.Invoice" />
+          <EntitySet Name="PickUpDelivery" EntityType="Self.PickUpDelivery" />
+          <EntitySet Name="Provider" EntityType="Self.Provider" />
+          <EntitySet Name="Summary" EntityType="Self.Summary" />
+          <EntitySet Name="Supply" EntityType="Self.Supply" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <EntitySet Name="ProviderInvoice" EntityType="Self.ProviderInvoice" />
           <AssociationSet Name="FK_checkedInvoice_provider" Association="Self.FK_checkedInvoice_provider">
-            <End Role="provider" EntitySet="provider" />
-            <End Role="checkedInvoice" EntitySet="checkedInvoice" />
+            <End Role="Provider" EntitySet="Provider" />
+            <End Role="CheckedInvoice" EntitySet="CheckedInvoice" />
           </AssociationSet>
           <AssociationSet Name="FK_checkedInvoice_user" Association="Self.FK_checkedInvoice_user">
-            <End Role="users" EntitySet="users" />
-            <End Role="checkedInvoice" EntitySet="checkedInvoice" />
+            <End Role="Users" EntitySet="Users" />
+            <End Role="CheckedInvoice" EntitySet="CheckedInvoice" />
           </AssociationSet>
           <AssociationSet Name="FK_pickUpDelivery_invoice" Association="Self.FK_pickUpDelivery_invoice">
-            <End Role="checkedInvoice" EntitySet="checkedInvoice" />
-            <End Role="pickUpDelivery" EntitySet="pickUpDelivery" />
+            <End Role="CheckedInvoice" EntitySet="CheckedInvoice" />
+            <End Role="PickUpDelivery" EntitySet="PickUpDelivery" />
           </AssociationSet>
           <AssociationSet Name="FK_summary_checkedInvoice" Association="Self.FK_summary_checkedInvoice">
-            <End Role="checkedInvoice" EntitySet="checkedInvoice" />
-            <End Role="summary" EntitySet="summary" />
+            <End Role="CheckedInvoice" EntitySet="CheckedInvoice" />
+            <End Role="Summary" EntitySet="Summary" />
           </AssociationSet>
           <AssociationSet Name="FK_invoice_provider" Association="Self.FK_invoice_provider">
-            <End Role="provider" EntitySet="provider" />
-            <End Role="invoice" EntitySet="invoice" />
+            <End Role="Provider" EntitySet="Provider" />
+            <End Role="Invoice" EntitySet="Invoice" />
           </AssociationSet>
           <AssociationSet Name="FK_pickUpDelivery_checkedInvoice" Association="Self.FK_pickUpDelivery_checkedInvoice">
-            <End Role="invoice" EntitySet="invoice" />
-            <End Role="pickUpDelivery" EntitySet="pickUpDelivery" />
+            <End Role="Invoice" EntitySet="Invoice" />
+            <End Role="PickUpDelivery" EntitySet="PickUpDelivery" />
           </AssociationSet>
           <AssociationSet Name="FK_summary_invoice" Association="Self.FK_summary_invoice">
-            <End Role="invoice" EntitySet="invoice" />
-            <End Role="summary" EntitySet="summary" />
+            <End Role="Invoice" EntitySet="Invoice" />
+            <End Role="Summary" EntitySet="Summary" />
           </AssociationSet>
           <AssociationSet Name="FK_supply_invoice" Association="Self.FK_supply_invoice">
-            <End Role="invoice" EntitySet="invoice" />
-            <End Role="supply" EntitySet="supply" />
+            <End Role="Invoice" EntitySet="Invoice" />
+            <End Role="Supply" EntitySet="Supply" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -461,10 +499,10 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="warehouseDatabaseModelStoreContainer" CdmEntityContainer="warehouseDatabaseEntities">
-          <EntitySetMapping Name="checkedInvoice">
-            <EntityTypeMapping TypeName="warehouseDatabaseModel.checkedInvoice">
-              <MappingFragment StoreEntitySet="checkedInvoice">
+        <EntityContainerMapping StorageEntityContainer="warehouseDatabaseModelStoreContainer" CdmEntityContainer="warehouseDatabaseEntities1">
+          <EntitySetMapping Name="CheckedInvoice">
+            <EntityTypeMapping TypeName="warehouseDatabaseModel.CheckedInvoice">
+              <MappingFragment StoreEntitySet="CheckedInvoice">
                 <ScalarProperty Name="checkedInvoiceID" ColumnName="checkedInvoiceID" />
                 <ScalarProperty Name="providerID" ColumnName="providerID" />
                 <ScalarProperty Name="cDeliveryReportNo" ColumnName="cDeliveryReportNo" />
@@ -480,14 +518,13 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="invoice">
-            <EntityTypeMapping TypeName="warehouseDatabaseModel.invoice">
-              <MappingFragment StoreEntitySet="invoice">
+          <EntitySetMapping Name="Invoice">
+            <EntityTypeMapping TypeName="warehouseDatabaseModel.Invoice">
+              <MappingFragment StoreEntitySet="Invoice">
                 <ScalarProperty Name="invoiceID" ColumnName="invoiceID" />
                 <ScalarProperty Name="providerID" ColumnName="providerID" />
                 <ScalarProperty Name="deliveryReportNo" ColumnName="deliveryReportNo" />
                 <ScalarProperty Name="deliveryDate" ColumnName="deliveryDate" />
-                <ScalarProperty Name="numberOfItems" ColumnName="numberOfItems" />
                 <ScalarProperty Name="company" ColumnName="company" />
                 <ScalarProperty Name="orderNumber" ColumnName="orderNumber" />
                 <ScalarProperty Name="itemNumber" ColumnName="itemNumber" />
@@ -497,27 +534,27 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="pickUpDelivery">
-            <EntityTypeMapping TypeName="warehouseDatabaseModel.pickUpDelivery">
-              <MappingFragment StoreEntitySet="pickUpDelivery">
+          <EntitySetMapping Name="PickUpDelivery">
+            <EntityTypeMapping TypeName="warehouseDatabaseModel.PickUpDelivery">
+              <MappingFragment StoreEntitySet="PickUpDelivery">
                 <ScalarProperty Name="pickUpDeliveryID" ColumnName="pickUpDeliveryID" />
                 <ScalarProperty Name="invoiceID" ColumnName="invoiceID" />
                 <ScalarProperty Name="checkedInvoiceID" ColumnName="checkedInvoiceID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="provider">
-            <EntityTypeMapping TypeName="warehouseDatabaseModel.provider">
-              <MappingFragment StoreEntitySet="provider">
+          <EntitySetMapping Name="Provider">
+            <EntityTypeMapping TypeName="warehouseDatabaseModel.Provider">
+              <MappingFragment StoreEntitySet="Provider">
                 <ScalarProperty Name="providerID" ColumnName="providerID" />
                 <ScalarProperty Name="companyName" ColumnName="companyName" />
                 <ScalarProperty Name="contact" ColumnName="contact" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="summary">
-            <EntityTypeMapping TypeName="warehouseDatabaseModel.summary">
-              <MappingFragment StoreEntitySet="summary">
+          <EntitySetMapping Name="Summary">
+            <EntityTypeMapping TypeName="warehouseDatabaseModel.Summary">
+              <MappingFragment StoreEntitySet="Summary">
                 <ScalarProperty Name="summaryID" ColumnName="summaryID" />
                 <ScalarProperty Name="invoiceID" ColumnName="invoiceID" />
                 <ScalarProperty Name="checkedInvoiceID" ColumnName="checkedInvoiceID" />
@@ -525,25 +562,38 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="supply">
-            <EntityTypeMapping TypeName="warehouseDatabaseModel.supply">
-              <MappingFragment StoreEntitySet="supply">
+          <EntitySetMapping Name="Supply">
+            <EntityTypeMapping TypeName="warehouseDatabaseModel.Supply">
+              <MappingFragment StoreEntitySet="Supply">
                 <ScalarProperty Name="supplyID" ColumnName="supplyID" />
-                <ScalarProperty Name="deliveryDate" ColumnName="deliveryDate" />
+                <ScalarProperty Name="addDate" ColumnName="addDate" />
                 <ScalarProperty Name="invoiceID" ColumnName="invoiceID" />
                 <ScalarProperty Name="deliveryStatus" ColumnName="deliveryStatus" />
+                <ScalarProperty Name="numberOfItems" ColumnName="numberOfItems" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="users">
-            <EntityTypeMapping TypeName="warehouseDatabaseModel.users">
-              <MappingFragment StoreEntitySet="users">
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="warehouseDatabaseModel.Users">
+              <MappingFragment StoreEntitySet="Users">
                 <ScalarProperty Name="userID" ColumnName="userID" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="forname" ColumnName="forname" />
                 <ScalarProperty Name="login" ColumnName="login" />
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="permission" ColumnName="permission" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProviderInvoice">
+            <EntityTypeMapping TypeName="warehouseDatabaseModel.ProviderInvoice">
+              <MappingFragment StoreEntitySet="ProviderInvoice">
+                <ScalarProperty Name="deliveryReportNo" ColumnName="deliveryReportNo" />
+                <ScalarProperty Name="deliveryDate" ColumnName="deliveryDate" />
+                <ScalarProperty Name="companyName" ColumnName="companyName" />
+                <ScalarProperty Name="numberOfItems" ColumnName="numberOfItems" />
+                <ScalarProperty Name="addDate" ColumnName="addDate" />
+                <ScalarProperty Name="deliveryStatus" ColumnName="deliveryStatus" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

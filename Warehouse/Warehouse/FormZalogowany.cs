@@ -18,7 +18,7 @@ namespace Warehouse
 {
     public partial class FormZalogowany : Form
     {
-       warehouseDatabaseEntities context = new warehouseDatabaseEntities();
+       warehouseDatabaseEntities1 context = new warehouseDatabaseEntities1();
 
         public FormZalogowany()
         {
@@ -27,8 +27,9 @@ namespace Warehouse
 
         private void FormZalogowany_Load(object sender, EventArgs e)
         {
+
             // TODO: Ten wiersz kodu wczytuje dane do tabeli 'warehouseDatabaseDataSet1.invoice' . Możesz go przenieść lub usunąć.
-            this.invoiceTableAdapter.Fill(this.warehouseDatabaseDataSet1.invoice);
+            this.invoiceTableAdapter.Fill(this.warehouseDatabaseDataSetInvoice.Invoice);
             // TODO: Ten wiersz kodu wczytuje dane do tabeli 'warehouseDatabaseDataSet.ProviderInvoice' . Możesz go przenieść lub usunąć.
             this.providerInvoiceTableAdapter.Fill(this.warehouseDatabaseDataSet.ProviderInvoice);
 
@@ -83,61 +84,77 @@ namespace Warehouse
                 }
             }
 
-            MessageBox.Show(fileContent, "File Content at path: " + filePath, MessageBoxButtons.OK);
         }
 
         private void comboBoxWidok_SelectedIndexChanged(object sender, EventArgs e)
         {
             DataTable dataTable = tableCollection[comboBoxWidok.SelectedItem.ToString()];
-            dataGridViewShowNew.DataSource = dataTable;
+            dataGridViewInvoice.DataSource = dataTable;
             var nazwaDostawcy = comboBoxWidok.Text;
-
-            if (dataTable != null)
+            DateTime thisDay = DateTime.Now;
+            if ((dataTable != null) && (dataTable.Rows.Count>=5))
             {
-                List<invoice> invoices = new List<invoice>();
-                for (int i = 5; i <dataTable.Rows.Count; i++)
+                Supply supply = new Supply();
+                supply.numberOfItems = int.Parse(dataTable.Rows[2][1].ToString());
+                supply.addDate = thisDay;
+                supply.deliveryStatus = false;
+
+
+                List<Invoice> invoices = new List<Invoice>();
+                for (int i = 5; i < dataTable.Rows.Count; i++)
                 {
-                    invoice invo = new invoice();
+                    try
+                    {
+                        Invoice invoice = new Invoice();
+                       
+                        Provider prov = context.Provider.FirstOrDefault(c => c.companyName == nazwaDostawcy);
+                        invoice.providerID = prov.providerID;
+                        invoice.deliveryReportNo = dataTable.Columns[4].ToString();
 
-                  //provider prov = context.provider.FirstOrDefault(c=> c.companyName ==) comboBox pobieranie nazwy firmy
-                    //invo.providerID = 1;
-                    invo.deliveryReportNo = dataTable.Columns[4].ToString();
+                        invoice.deliveryDate = DateTime.Parse(dataTable.Rows[0][4].ToString());
+                        invoice.company = dataTable.Rows[i][0].ToString();
+                        invoice.orderNumber = dataTable.Rows[i][1].ToString();
 
-                   // string konwersjaDeliveryDate = dataTable.Rows[0][4].ToString();
-                    invo.deliveryDate = DateTime.Parse(dataTable.Rows[0][4].ToString());
+                        invoice.itemNumber = int.Parse(dataTable.Rows[i][2].ToString());
 
-                    // string konversjaNumberOfItems = dataTable.Rows[1][2].ToString();
-                    invo.numberOfItems = int.Parse(dataTable.Rows[1][2].ToString());
-                    invo.company = dataTable.Rows[i][0].ToString();
-                    invo.orderNumber = dataTable.Rows[i][1].ToString();
+                        invoice.productCode = dataTable.Rows[i][3].ToString();
+                        invoice.productName = dataTable.Rows[i][4].ToString();
+                        invoice.serialNo = dataTable.Rows[i][5].ToString();
 
-                   // string konwersjaItemNumber = dataTable.Rows[i][2].ToString();
-                    invo.itemNumber  = int.Parse(dataTable.Rows[i][2].ToString());
 
-                    invo.productCode = dataTable.Rows[i][3].ToString();
-                    invo.productName = dataTable.Rows[i][4].ToString();
-                    invo.serialNo = dataTable.Rows[i][5].ToString();
-                    
+                        supply.numberOfItems = int.Parse(dataTable.Rows[2][1].ToString());
+                        supply.addDate = thisDay;
+                        supply.deliveryStatus = false;
 
-                    invoices.Add(invo);
+                        invoices.Add(invoice);
+                    }catch(Exception exc)
+                    {
+                        MessageBox.Show("Błędna struktura pliku");
+                    }
+
                 }
                 invoiceBindingSource.DataSource = invoices;
 
                 
             }
+            else
+            {
+                MessageBox.Show("Błędna struktura pliku");
+            }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void buttonDodajExcelDoBazy_Click(object sender, EventArgs e)
         {
+
             try
             {
-                DapperPlusManager.Entity<invoice>().Table("invoice");
-                List<invoice> invoices = invoiceBindingSource.DataSource as List<invoice>;
+                DapperPlusManager.Entity<Invoice>().Table("invoice");
+                List<Invoice> invoices = invoiceBindingSource.DataSource as List<Invoice>;
                 if(invoices != null)
                 {
-                   foreach(invoice inv in invoices)
+                   foreach(Invoice invoice in invoices)
                     {
-                        context.invoice.Add(inv);
+                        context.Invoice.Add(invoice);
                     }
                     context.SaveChanges();
                 }
@@ -157,11 +174,14 @@ namespace Warehouse
                 }
                 
             }
+
+
+
         }
 
-        private void dataGridViewShowNotes_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridViewProviderInvoice_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            foreach(DataGridViewRow row in dataGridViewShowNotes.SelectedRows)
+            foreach(DataGridViewRow row in dataGridViewProviderInvoice.SelectedRows)
     {
                 string value1 = row.Cells[0].Value.ToString();
 
