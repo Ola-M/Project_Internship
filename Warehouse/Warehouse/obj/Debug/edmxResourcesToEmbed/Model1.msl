@@ -1,100 +1,114 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="warehouseDatabaseModelStoreContainer" CdmEntityContainer="warehouseDatabaseEntities1">
-    <EntitySetMapping Name="CheckedInvoice">
-      <EntityTypeMapping TypeName="warehouseDatabaseModel.CheckedInvoice">
-        <MappingFragment StoreEntitySet="CheckedInvoice">
-          <ScalarProperty Name="checkedInvoiceID" ColumnName="checkedInvoiceID" />
-          <ScalarProperty Name="providerID" ColumnName="providerID" />
-          <ScalarProperty Name="cDeliveryReportNo" ColumnName="cDeliveryReportNo" />
-          <ScalarProperty Name="cDeliveryDate" ColumnName="cDeliveryDate" />
-          <ScalarProperty Name="cNumberOfItems" ColumnName="cNumberOfItems" />
-          <ScalarProperty Name="cCompany" ColumnName="cCompany" />
-          <ScalarProperty Name="cOrderNumber" ColumnName="cOrderNumber" />
-          <ScalarProperty Name="cItemNumber" ColumnName="cItemNumber" />
-          <ScalarProperty Name="cProductCode" ColumnName="cProductCode" />
-          <ScalarProperty Name="cProductName" ColumnName="cProductName" />
-          <ScalarProperty Name="cSerialNo" ColumnName="cSerialNo" />
-          <ScalarProperty Name="userID" ColumnName="userID" />
+    <EntitySetMapping Name="Delivery">
+      <EntityTypeMapping TypeName="warehouseDatabaseModel.Delivery">
+        <MappingFragment StoreEntitySet="Delivery">
+          <ScalarProperty Name="checked" ColumnName="checked" />
+          <ScalarProperty Name="deliveryNoteID" ColumnName="deliveryNoteID" />
+          <ScalarProperty Name="deliveryID" ColumnName="deliveryID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Invoice">
-      <EntityTypeMapping TypeName="warehouseDatabaseModel.Invoice">
-        <MappingFragment StoreEntitySet="Invoice">
-          <ScalarProperty Name="invoiceID" ColumnName="invoiceID" />
+    <EntitySetMapping Name="DeliveryNote">
+      <EntityTypeMapping TypeName="warehouseDatabaseModel.DeliveryNote">
+        <MappingFragment StoreEntitySet="DeliveryNote">
+          <ScalarProperty Name="numberOfItems" ColumnName="numberOfItems" />
+          <ScalarProperty Name="invoiceDate" ColumnName="invoiceDate" />
+          <ScalarProperty Name="deliveryNumber" ColumnName="deliveryNumber" />
           <ScalarProperty Name="providerID" ColumnName="providerID" />
-          <ScalarProperty Name="deliveryReportNo" ColumnName="deliveryReportNo" />
-          <ScalarProperty Name="deliveryDate" ColumnName="deliveryDate" />
-          <ScalarProperty Name="company" ColumnName="company" />
-          <ScalarProperty Name="orderNumber" ColumnName="orderNumber" />
-          <ScalarProperty Name="itemNumber" ColumnName="itemNumber" />
-          <ScalarProperty Name="productCode" ColumnName="productCode" />
-          <ScalarProperty Name="productName" ColumnName="productName" />
+          <ScalarProperty Name="deliveryNoteID" ColumnName="deliveryNoteID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Permissions">
+      <EntityTypeMapping TypeName="warehouseDatabaseModel.Permissions">
+        <MappingFragment StoreEntitySet="Permissions">
+          <ScalarProperty Name="permissionName" ColumnName="permissionName" />
+          <ScalarProperty Name="permissionID" ColumnName="permissionID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Product">
+      <EntityTypeMapping TypeName="warehouseDatabaseModel.Product">
+        <MappingFragment StoreEntitySet="Product">
           <ScalarProperty Name="serialNo" ColumnName="serialNo" />
+          <ScalarProperty Name="productName" ColumnName="productName" />
+          <ScalarProperty Name="productCode" ColumnName="productCode" />
+          <ScalarProperty Name="itemNumber" ColumnName="itemNumber" />
+          <ScalarProperty Name="orderNumber" ColumnName="orderNumber" />
+          <ScalarProperty Name="company" ColumnName="company" />
+          <ScalarProperty Name="deliveryNoteID" ColumnName="deliveryNoteID" />
+          <ScalarProperty Name="productID" ColumnName="productID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="PickUpDelivery">
-      <EntityTypeMapping TypeName="warehouseDatabaseModel.PickUpDelivery">
-        <MappingFragment StoreEntitySet="PickUpDelivery">
-          <ScalarProperty Name="pickUpDeliveryID" ColumnName="pickUpDeliveryID" />
-          <ScalarProperty Name="invoiceID" ColumnName="invoiceID" />
-          <ScalarProperty Name="checkedInvoiceID" ColumnName="checkedInvoiceID" />
+    <EntitySetMapping Name="ProvenProduct">
+      <EntityTypeMapping TypeName="warehouseDatabaseModel.ProvenProduct">
+        <MappingFragment StoreEntitySet="ProvenProduct">
+          <ScalarProperty Name="cSerialNo" ColumnName="cSerialNo" />
+          <ScalarProperty Name="cProductName" ColumnName="cProductName" />
+          <ScalarProperty Name="cProductCode" ColumnName="cProductCode" />
+          <ScalarProperty Name="cItemNumber" ColumnName="cItemNumber" />
+          <ScalarProperty Name="cOrderNumber" ColumnName="cOrderNumber" />
+          <ScalarProperty Name="cCompany" ColumnName="cCompany" />
+          <ScalarProperty Name="checkDate" ColumnName="checkDate" />
+          <ScalarProperty Name="usersID" ColumnName="usersID" />
+          <ScalarProperty Name="deliveryNoteID" ColumnName="deliveryNoteID" />
+          <ScalarProperty Name="provenProductID" ColumnName="provenProductID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Provider">
       <EntityTypeMapping TypeName="warehouseDatabaseModel.Provider">
         <MappingFragment StoreEntitySet="Provider">
-          <ScalarProperty Name="providerID" ColumnName="providerID" />
-          <ScalarProperty Name="companyName" ColumnName="companyName" />
           <ScalarProperty Name="contact" ColumnName="contact" />
+          <ScalarProperty Name="companyName" ColumnName="companyName" />
+          <ScalarProperty Name="providerID" ColumnName="providerID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Summary">
       <EntityTypeMapping TypeName="warehouseDatabaseModel.Summary">
         <MappingFragment StoreEntitySet="Summary">
+          <ScalarProperty Name="deliveryCloseDate" ColumnName="deliveryCloseDate" />
+          <ScalarProperty Name="closed" ColumnName="closed" />
+          <ScalarProperty Name="correct" ColumnName="correct" />
+          <ScalarProperty Name="usersID" ColumnName="usersID" />
+          <ScalarProperty Name="deliveryID" ColumnName="deliveryID" />
+          <ScalarProperty Name="deliveryNoteID" ColumnName="deliveryNoteID" />
           <ScalarProperty Name="summaryID" ColumnName="summaryID" />
-          <ScalarProperty Name="invoiceID" ColumnName="invoiceID" />
-          <ScalarProperty Name="checkedInvoiceID" ColumnName="checkedInvoiceID" />
-          <ScalarProperty Name="deliveryCompatible" ColumnName="deliveryCompatible" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Supply">
-      <EntityTypeMapping TypeName="warehouseDatabaseModel.Supply">
-        <MappingFragment StoreEntitySet="Supply">
-          <ScalarProperty Name="supplyID" ColumnName="supplyID" />
-          <ScalarProperty Name="addDate" ColumnName="addDate" />
-          <ScalarProperty Name="invoiceID" ColumnName="invoiceID" />
-          <ScalarProperty Name="deliveryStatus" ColumnName="deliveryStatus" />
-          <ScalarProperty Name="numberOfItems" ColumnName="numberOfItems" />
+    <EntitySetMapping Name="UserPermissions">
+      <EntityTypeMapping TypeName="warehouseDatabaseModel.UserPermissions">
+        <MappingFragment StoreEntitySet="UserPermissions">
+          <ScalarProperty Name="permissionsID" ColumnName="permissionsID" />
+          <ScalarProperty Name="userID" ColumnName="userID" />
+          <ScalarProperty Name="userPermissionsID" ColumnName="userPermissionsID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="warehouseDatabaseModel.Users">
         <MappingFragment StoreEntitySet="Users">
-          <ScalarProperty Name="userID" ColumnName="userID" />
-          <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="forname" ColumnName="forname" />
-          <ScalarProperty Name="login" ColumnName="login" />
           <ScalarProperty Name="password" ColumnName="password" />
-          <ScalarProperty Name="permission" ColumnName="permission" />
+          <ScalarProperty Name="login" ColumnName="login" />
+          <ScalarProperty Name="forname" ColumnName="forname" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="usersID" ColumnName="usersID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ProviderInvoice">
-      <EntityTypeMapping TypeName="warehouseDatabaseModel.ProviderInvoice">
-        <MappingFragment StoreEntitySet="ProviderInvoice">
-          <ScalarProperty Name="deliveryReportNo" ColumnName="deliveryReportNo" />
-          <ScalarProperty Name="deliveryDate" ColumnName="deliveryDate" />
+    <EntitySetMapping Name="DeliveryView">
+      <EntityTypeMapping TypeName="warehouseDatabaseModel.DeliveryView">
+        <MappingFragment StoreEntitySet="DeliveryView">
+          <ScalarProperty Name="checked" ColumnName="checked" />
           <ScalarProperty Name="companyName" ColumnName="companyName" />
           <ScalarProperty Name="numberOfItems" ColumnName="numberOfItems" />
-          <ScalarProperty Name="addDate" ColumnName="addDate" />
-          <ScalarProperty Name="deliveryStatus" ColumnName="deliveryStatus" />
+          <ScalarProperty Name="invoiceDate" ColumnName="invoiceDate" />
+          <ScalarProperty Name="deliveryNumber" ColumnName="deliveryNumber" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -12,14 +12,12 @@ namespace Warehouse
     using System;
     using System.Collections.Generic;
     
-    public partial class Supply
+    public partial class DeliveryView
     {
-        public int supplyID { get; set; }
-        public System.DateTime addDate { get; set; }
-        public int invoiceID { get; set; }
-        public bool deliveryStatus { get; set; }
-        public Nullable<int> numberOfItems { get; set; }
-    
-        public virtual Invoice Invoice { get; set; }
+        public string deliveryNumber { get; set; }
+        public System.DateTime invoiceDate { get; set; }
+        public int numberOfItems { get; set; }
+        public string companyName { get; set; }
+        public bool @checked { get; set; }
     }
 }

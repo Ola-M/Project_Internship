@@ -12,26 +12,17 @@ namespace Warehouse
     using System;
     using System.Collections.Generic;
     
-    public partial class Users
+    public partial class Permissions
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Users()
+        public Permissions()
         {
-            this.ProvenProduct = new HashSet<ProvenProduct>();
-            this.Summary = new HashSet<Summary>();
             this.UserPermissions = new HashSet<UserPermissions>();
         }
     
-        public int usersID { get; set; }
-        public string name { get; set; }
-        public string forname { get; set; }
-        public string login { get; set; }
-        public string password { get; set; }
+        public int permissionID { get; set; }
+        public string permissionName { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProvenProduct> ProvenProduct { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Summary> Summary { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserPermissions> UserPermissions { get; set; }
     }

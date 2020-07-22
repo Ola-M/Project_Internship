@@ -29,7 +29,7 @@ namespace Warehouse
                 {
                     if (user.password.Equals(textBoxHaslo.Text))
                     {
-                        pobieranie.userID = user.userID;
+                        pobieranie.userID = user.usersID;
                         FormZalogowany success = new FormZalogowany();
                         success.Show();
                         this.Hide();

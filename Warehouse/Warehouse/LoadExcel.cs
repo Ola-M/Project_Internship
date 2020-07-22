@@ -10,14 +10,17 @@ using System.Windows.Forms;
 
 namespace Warehouse
 {
-    class DodawaniePDF
+    public class LoadExcel
     {
-        DataTableCollection tableCollection;
-        
+        FormZalogowany formZalogowany = new FormZalogowany();
+
+      //  DataTableCollection tableCollection;
+
 
         
-       /* public void pobieraniePliku(string comboBox, string textBox)
+        public DataTableCollection getFile(ComboBox comboBox)
         {
+            DataTableCollection dataTableCollection = null;
             var fileContent = string.Empty;
             var filePath = string.Empty;
 
@@ -31,8 +34,8 @@ namespace Warehouse
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
 
-                    textBoxLokalizacjaPliku.Text = openFileDialog.FileName;
-                    using (var stream= File.Open(openFileDialog.FileName, FileMode.Open, FileAccess.Read))
+                    formZalogowany.textBoxLokalizacjaPliku.Text = openFileDialog.FileName;
+                    using (var stream = File.Open(openFileDialog.FileName, FileMode.Open, FileAccess.Read))
                     {
                         using (IExcelDataReader reader = ExcelReaderFactory.CreateReader(stream))
                         {
@@ -43,16 +46,22 @@ namespace Warehouse
                                     UseHeaderRow = true
                                 }
                             });
-                            this.tableCollection = result.Tables;
-                            comboBoxWidok.Items.Clear();
+                            dataTableCollection = result.Tables;
+                            //var xxx = dataTableCollection;
+                            comboBox.Items.Clear();
 
                             foreach (DataTable dt in result.Tables)
-                            comboBoxWidok.Items.Add(dt.TableName);
+                                comboBox.Items.Add(dt.TableName);
 
                         }
                     }
                 }
             }
+            return dataTableCollection;
+        }
+       /* public DataTableCollection getData()
+        {
+            return this.tableCollection;
         }*/
     }
 }

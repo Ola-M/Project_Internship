@@ -12,33 +12,31 @@ namespace Warehouse
     using System;
     using System.Collections.Generic;
     
-    public partial class Invoice
+    public partial class DeliveryNote
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Invoice()
+        public DeliveryNote()
         {
-            this.PickUpDelivery = new HashSet<PickUpDelivery>();
+            this.ProvenProduct = new HashSet<ProvenProduct>();
             this.Summary = new HashSet<Summary>();
-            this.Supply = new HashSet<Supply>();
+            this.Product = new HashSet<Product>();
+            this.Delivery = new HashSet<Delivery>();
         }
     
-        public int invoiceID { get; set; }
-        public Nullable<int> providerID { get; set; }
-        public string deliveryReportNo { get; set; }
-        public Nullable<System.DateTime> deliveryDate { get; set; }
-        public string company { get; set; }
-        public string orderNumber { get; set; }
-        public Nullable<int> itemNumber { get; set; }
-        public string productCode { get; set; }
-        public string productName { get; set; }
-        public string serialNo { get; set; }
+        public int deliveryNoteID { get; set; }
+        public int providerID { get; set; }
+        public string deliveryNumber { get; set; }
+        public System.DateTime invoiceDate { get; set; }
+        public int numberOfItems { get; set; }
     
         public virtual Provider Provider { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PickUpDelivery> PickUpDelivery { get; set; }
+        public virtual ICollection<ProvenProduct> ProvenProduct { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Summary> Summary { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Supply> Supply { get; set; }
+        public virtual ICollection<Product> Product { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Delivery> Delivery { get; set; }
     }
 }

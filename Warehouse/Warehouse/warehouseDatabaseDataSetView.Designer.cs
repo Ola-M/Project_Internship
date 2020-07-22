@@ -20,17 +20,17 @@ namespace Warehouse {
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
     [global::System.ComponentModel.ToolboxItem(true)]
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema")]
-    [global::System.Xml.Serialization.XmlRootAttribute("warehouseDatabaseDataSet")]
+    [global::System.Xml.Serialization.XmlRootAttribute("warehouseDatabaseDataSetView")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
-    public partial class warehouseDatabaseDataSet : global::System.Data.DataSet {
+    public partial class warehouseDatabaseDataSetView : global::System.Data.DataSet {
         
-        private ProviderInvoiceDataTable tableProviderInvoice;
+        private DeliveryViewDataTable tableDeliveryView;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public warehouseDatabaseDataSet() {
+        public warehouseDatabaseDataSetView() {
             this.BeginInit();
             this.InitClass();
             global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
@@ -41,7 +41,7 @@ namespace Warehouse {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        protected warehouseDatabaseDataSet(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+        protected warehouseDatabaseDataSetView(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                 base(info, context, false) {
             if ((this.IsBinarySerialized(info, context) == true)) {
                 this.InitVars(false);
@@ -54,8 +54,8 @@ namespace Warehouse {
             if ((this.DetermineSchemaSerializationMode(info, context) == global::System.Data.SchemaSerializationMode.IncludeSchema)) {
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXmlSchema(new global::System.Xml.XmlTextReader(new global::System.IO.StringReader(strSchema)));
-                if ((ds.Tables["ProviderInvoice"] != null)) {
-                    base.Tables.Add(new ProviderInvoiceDataTable(ds.Tables["ProviderInvoice"]));
+                if ((ds.Tables["DeliveryView"] != null)) {
+                    base.Tables.Add(new DeliveryViewDataTable(ds.Tables["DeliveryView"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -79,9 +79,9 @@ namespace Warehouse {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public ProviderInvoiceDataTable ProviderInvoice {
+        public DeliveryViewDataTable DeliveryView {
             get {
-                return this.tableProviderInvoice;
+                return this.tableDeliveryView;
             }
         }
         
@@ -127,7 +127,7 @@ namespace Warehouse {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         public override global::System.Data.DataSet Clone() {
-            warehouseDatabaseDataSet cln = ((warehouseDatabaseDataSet)(base.Clone()));
+            warehouseDatabaseDataSetView cln = ((warehouseDatabaseDataSetView)(base.Clone()));
             cln.InitVars();
             cln.SchemaSerializationMode = this.SchemaSerializationMode;
             return cln;
@@ -152,8 +152,8 @@ namespace Warehouse {
                 this.Reset();
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXml(reader);
-                if ((ds.Tables["ProviderInvoice"] != null)) {
-                    base.Tables.Add(new ProviderInvoiceDataTable(ds.Tables["ProviderInvoice"]));
+                if ((ds.Tables["DeliveryView"] != null)) {
+                    base.Tables.Add(new DeliveryViewDataTable(ds.Tables["DeliveryView"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -188,10 +188,10 @@ namespace Warehouse {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         internal void InitVars(bool initTable) {
-            this.tableProviderInvoice = ((ProviderInvoiceDataTable)(base.Tables["ProviderInvoice"]));
+            this.tableDeliveryView = ((DeliveryViewDataTable)(base.Tables["DeliveryView"]));
             if ((initTable == true)) {
-                if ((this.tableProviderInvoice != null)) {
-                    this.tableProviderInvoice.InitVars();
+                if ((this.tableDeliveryView != null)) {
+                    this.tableDeliveryView.InitVars();
                 }
             }
         }
@@ -199,18 +199,18 @@ namespace Warehouse {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitClass() {
-            this.DataSetName = "warehouseDatabaseDataSet";
+            this.DataSetName = "warehouseDatabaseDataSetView";
             this.Prefix = "";
-            this.Namespace = "http://tempuri.org/warehouseDatabaseDataSet.xsd";
+            this.Namespace = "http://tempuri.org/warehouseDatabaseDataSetView.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
-            this.tableProviderInvoice = new ProviderInvoiceDataTable();
-            base.Tables.Add(this.tableProviderInvoice);
+            this.tableDeliveryView = new DeliveryViewDataTable();
+            base.Tables.Add(this.tableDeliveryView);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        private bool ShouldSerializeProviderInvoice() {
+        private bool ShouldSerializeDeliveryView() {
             return false;
         }
         
@@ -225,7 +225,7 @@ namespace Warehouse {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedDataSetSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-            warehouseDatabaseDataSet ds = new warehouseDatabaseDataSet();
+            warehouseDatabaseDataSetView ds = new warehouseDatabaseDataSetView();
             global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
             global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
             global::System.Xml.Schema.XmlSchemaAny any = new global::System.Xml.Schema.XmlSchemaAny();
@@ -270,31 +270,29 @@ namespace Warehouse {
         }
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public delegate void ProviderInvoiceRowChangeEventHandler(object sender, ProviderInvoiceRowChangeEvent e);
+        public delegate void DeliveryViewRowChangeEventHandler(object sender, DeliveryViewRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class ProviderInvoiceDataTable : global::System.Data.TypedTableBase<ProviderInvoiceRow> {
+        public partial class DeliveryViewDataTable : global::System.Data.TypedTableBase<DeliveryViewRow> {
             
-            private global::System.Data.DataColumn columndeliveryReportNo;
+            private global::System.Data.DataColumn columndeliveryNumber;
             
-            private global::System.Data.DataColumn columndeliveryDate;
-            
-            private global::System.Data.DataColumn columncompanyName;
+            private global::System.Data.DataColumn columninvoiceDate;
             
             private global::System.Data.DataColumn columnnumberOfItems;
             
-            private global::System.Data.DataColumn columnaddDate;
+            private global::System.Data.DataColumn columncompanyName;
             
-            private global::System.Data.DataColumn columndeliveryStatus;
+            private global::System.Data.DataColumn columnchecked;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public ProviderInvoiceDataTable() {
-                this.TableName = "ProviderInvoice";
+            public DeliveryViewDataTable() {
+                this.TableName = "DeliveryView";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
@@ -302,7 +300,7 @@ namespace Warehouse {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal ProviderInvoiceDataTable(global::System.Data.DataTable table) {
+            internal DeliveryViewDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -319,32 +317,24 @@ namespace Warehouse {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected ProviderInvoiceDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+            protected DeliveryViewDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn deliveryReportNoColumn {
+            public global::System.Data.DataColumn deliveryNumberColumn {
                 get {
-                    return this.columndeliveryReportNo;
+                    return this.columndeliveryNumber;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn deliveryDateColumn {
+            public global::System.Data.DataColumn invoiceDateColumn {
                 get {
-                    return this.columndeliveryDate;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn companyNameColumn {
-                get {
-                    return this.columncompanyName;
+                    return this.columninvoiceDate;
                 }
             }
             
@@ -358,17 +348,17 @@ namespace Warehouse {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn addDateColumn {
+            public global::System.Data.DataColumn companyNameColumn {
                 get {
-                    return this.columnaddDate;
+                    return this.columncompanyName;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn deliveryStatusColumn {
+            public global::System.Data.DataColumn checkedColumn {
                 get {
-                    return this.columndeliveryStatus;
+                    return this.columnchecked;
                 }
             }
             
@@ -383,50 +373,49 @@ namespace Warehouse {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public ProviderInvoiceRow this[int index] {
+            public DeliveryViewRow this[int index] {
                 get {
-                    return ((ProviderInvoiceRow)(this.Rows[index]));
+                    return ((DeliveryViewRow)(this.Rows[index]));
                 }
             }
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public event ProviderInvoiceRowChangeEventHandler ProviderInvoiceRowChanging;
+            public event DeliveryViewRowChangeEventHandler DeliveryViewRowChanging;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public event ProviderInvoiceRowChangeEventHandler ProviderInvoiceRowChanged;
+            public event DeliveryViewRowChangeEventHandler DeliveryViewRowChanged;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public event ProviderInvoiceRowChangeEventHandler ProviderInvoiceRowDeleting;
+            public event DeliveryViewRowChangeEventHandler DeliveryViewRowDeleting;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public event ProviderInvoiceRowChangeEventHandler ProviderInvoiceRowDeleted;
+            public event DeliveryViewRowChangeEventHandler DeliveryViewRowDeleted;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void AddProviderInvoiceRow(ProviderInvoiceRow row) {
+            public void AddDeliveryViewRow(DeliveryViewRow row) {
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public ProviderInvoiceRow AddProviderInvoiceRow(string deliveryReportNo, System.DateTime deliveryDate, string companyName, int numberOfItems, System.DateTime addDate, bool deliveryStatus) {
-                ProviderInvoiceRow rowProviderInvoiceRow = ((ProviderInvoiceRow)(this.NewRow()));
+            public DeliveryViewRow AddDeliveryViewRow(string deliveryNumber, System.DateTime invoiceDate, int numberOfItems, string companyName, bool _checked) {
+                DeliveryViewRow rowDeliveryViewRow = ((DeliveryViewRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        deliveryReportNo,
-                        deliveryDate,
-                        companyName,
+                        deliveryNumber,
+                        invoiceDate,
                         numberOfItems,
-                        addDate,
-                        deliveryStatus};
-                rowProviderInvoiceRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowProviderInvoiceRow);
-                return rowProviderInvoiceRow;
+                        companyName,
+                        _checked};
+                rowDeliveryViewRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowDeliveryViewRow);
+                return rowDeliveryViewRow;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public override global::System.Data.DataTable Clone() {
-                ProviderInvoiceDataTable cln = ((ProviderInvoiceDataTable)(base.Clone()));
+                DeliveryViewDataTable cln = ((DeliveryViewDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
@@ -434,66 +423,68 @@ namespace Warehouse {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override global::System.Data.DataTable CreateInstance() {
-                return new ProviderInvoiceDataTable();
+                return new DeliveryViewDataTable();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             internal void InitVars() {
-                this.columndeliveryReportNo = base.Columns["deliveryReportNo"];
-                this.columndeliveryDate = base.Columns["deliveryDate"];
-                this.columncompanyName = base.Columns["companyName"];
+                this.columndeliveryNumber = base.Columns["deliveryNumber"];
+                this.columninvoiceDate = base.Columns["invoiceDate"];
                 this.columnnumberOfItems = base.Columns["numberOfItems"];
-                this.columnaddDate = base.Columns["addDate"];
-                this.columndeliveryStatus = base.Columns["deliveryStatus"];
+                this.columncompanyName = base.Columns["companyName"];
+                this.columnchecked = base.Columns["checked"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             private void InitClass() {
-                this.columndeliveryReportNo = new global::System.Data.DataColumn("deliveryReportNo", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columndeliveryReportNo);
-                this.columndeliveryDate = new global::System.Data.DataColumn("deliveryDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columndeliveryDate);
-                this.columncompanyName = new global::System.Data.DataColumn("companyName", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columncompanyName);
+                this.columndeliveryNumber = new global::System.Data.DataColumn("deliveryNumber", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndeliveryNumber);
+                this.columninvoiceDate = new global::System.Data.DataColumn("invoiceDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columninvoiceDate);
                 this.columnnumberOfItems = new global::System.Data.DataColumn("numberOfItems", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnnumberOfItems);
-                this.columnaddDate = new global::System.Data.DataColumn("addDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnaddDate);
-                this.columndeliveryStatus = new global::System.Data.DataColumn("deliveryStatus", typeof(bool), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columndeliveryStatus);
-                this.columndeliveryReportNo.MaxLength = 50;
+                this.columncompanyName = new global::System.Data.DataColumn("companyName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncompanyName);
+                this.columnchecked = new global::System.Data.DataColumn("checked", typeof(bool), null, global::System.Data.MappingType.Element);
+                this.columnchecked.ExtendedProperties.Add("Generator_ColumnPropNameInTable", "checkedColumn");
+                this.columnchecked.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "columnchecked");
+                this.columnchecked.ExtendedProperties.Add("Generator_UserColumnName", "checked");
+                base.Columns.Add(this.columnchecked);
+                this.columndeliveryNumber.AllowDBNull = false;
+                this.columndeliveryNumber.MaxLength = 50;
+                this.columninvoiceDate.AllowDBNull = false;
+                this.columnnumberOfItems.AllowDBNull = false;
                 this.columncompanyName.AllowDBNull = false;
                 this.columncompanyName.MaxLength = 2147483647;
-                this.columnaddDate.AllowDBNull = false;
-                this.columndeliveryStatus.AllowDBNull = false;
+                this.columnchecked.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public ProviderInvoiceRow NewProviderInvoiceRow() {
-                return ((ProviderInvoiceRow)(this.NewRow()));
+            public DeliveryViewRow NewDeliveryViewRow() {
+                return ((DeliveryViewRow)(this.NewRow()));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new ProviderInvoiceRow(builder);
+                return new DeliveryViewRow(builder);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override global::System.Type GetRowType() {
-                return typeof(ProviderInvoiceRow);
+                return typeof(DeliveryViewRow);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.ProviderInvoiceRowChanged != null)) {
-                    this.ProviderInvoiceRowChanged(this, new ProviderInvoiceRowChangeEvent(((ProviderInvoiceRow)(e.Row)), e.Action));
+                if ((this.DeliveryViewRowChanged != null)) {
+                    this.DeliveryViewRowChanged(this, new DeliveryViewRowChangeEvent(((DeliveryViewRow)(e.Row)), e.Action));
                 }
             }
             
@@ -501,8 +492,8 @@ namespace Warehouse {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.ProviderInvoiceRowChanging != null)) {
-                    this.ProviderInvoiceRowChanging(this, new ProviderInvoiceRowChangeEvent(((ProviderInvoiceRow)(e.Row)), e.Action));
+                if ((this.DeliveryViewRowChanging != null)) {
+                    this.DeliveryViewRowChanging(this, new DeliveryViewRowChangeEvent(((DeliveryViewRow)(e.Row)), e.Action));
                 }
             }
             
@@ -510,8 +501,8 @@ namespace Warehouse {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.ProviderInvoiceRowDeleted != null)) {
-                    this.ProviderInvoiceRowDeleted(this, new ProviderInvoiceRowChangeEvent(((ProviderInvoiceRow)(e.Row)), e.Action));
+                if ((this.DeliveryViewRowDeleted != null)) {
+                    this.DeliveryViewRowDeleted(this, new DeliveryViewRowChangeEvent(((DeliveryViewRow)(e.Row)), e.Action));
                 }
             }
             
@@ -519,14 +510,14 @@ namespace Warehouse {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.ProviderInvoiceRowDeleting != null)) {
-                    this.ProviderInvoiceRowDeleting(this, new ProviderInvoiceRowChangeEvent(((ProviderInvoiceRow)(e.Row)), e.Action));
+                if ((this.DeliveryViewRowDeleting != null)) {
+                    this.DeliveryViewRowDeleting(this, new DeliveryViewRowChangeEvent(((DeliveryViewRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void RemoveProviderInvoiceRow(ProviderInvoiceRow row) {
+            public void RemoveDeliveryViewRow(DeliveryViewRow row) {
                 this.Rows.Remove(row);
             }
             
@@ -535,7 +526,7 @@ namespace Warehouse {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                warehouseDatabaseDataSet ds = new warehouseDatabaseDataSet();
+                warehouseDatabaseDataSetView ds = new warehouseDatabaseDataSetView();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -553,7 +544,7 @@ namespace Warehouse {
                 type.Attributes.Add(attribute1);
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "ProviderInvoiceDataTable";
+                attribute2.FixedValue = "DeliveryViewDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -597,57 +588,36 @@ namespace Warehouse {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class ProviderInvoiceRow : global::System.Data.DataRow {
+        public partial class DeliveryViewRow : global::System.Data.DataRow {
             
-            private ProviderInvoiceDataTable tableProviderInvoice;
+            private DeliveryViewDataTable tableDeliveryView;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal ProviderInvoiceRow(global::System.Data.DataRowBuilder rb) : 
+            internal DeliveryViewRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
-                this.tableProviderInvoice = ((ProviderInvoiceDataTable)(this.Table));
+                this.tableDeliveryView = ((DeliveryViewDataTable)(this.Table));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string deliveryReportNo {
+            public string deliveryNumber {
                 get {
-                    try {
-                        return ((string)(this[this.tableProviderInvoice.deliveryReportNoColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Wartość z kolumny \'deliveryReportNo\' w tabeli \'ProviderInvoice\' to DBNull.", e);
-                    }
+                    return ((string)(this[this.tableDeliveryView.deliveryNumberColumn]));
                 }
                 set {
-                    this[this.tableProviderInvoice.deliveryReportNoColumn] = value;
+                    this[this.tableDeliveryView.deliveryNumberColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public System.DateTime deliveryDate {
+            public System.DateTime invoiceDate {
                 get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tableProviderInvoice.deliveryDateColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Wartość z kolumny \'deliveryDate\' w tabeli \'ProviderInvoice\' to DBNull.", e);
-                    }
+                    return ((global::System.DateTime)(this[this.tableDeliveryView.invoiceDateColumn]));
                 }
                 set {
-                    this[this.tableProviderInvoice.deliveryDateColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string companyName {
-                get {
-                    return ((string)(this[this.tableProviderInvoice.companyNameColumn]));
-                }
-                set {
-                    this[this.tableProviderInvoice.companyNameColumn] = value;
+                    this[this.tableDeliveryView.invoiceDateColumn] = value;
                 }
             }
             
@@ -655,74 +625,33 @@ namespace Warehouse {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public int numberOfItems {
                 get {
-                    try {
-                        return ((int)(this[this.tableProviderInvoice.numberOfItemsColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Wartość z kolumny \'numberOfItems\' w tabeli \'ProviderInvoice\' to DBNull.", e);
-                    }
+                    return ((int)(this[this.tableDeliveryView.numberOfItemsColumn]));
                 }
                 set {
-                    this[this.tableProviderInvoice.numberOfItemsColumn] = value;
+                    this[this.tableDeliveryView.numberOfItemsColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public System.DateTime addDate {
+            public string companyName {
                 get {
-                    return ((global::System.DateTime)(this[this.tableProviderInvoice.addDateColumn]));
+                    return ((string)(this[this.tableDeliveryView.companyNameColumn]));
                 }
                 set {
-                    this[this.tableProviderInvoice.addDateColumn] = value;
+                    this[this.tableDeliveryView.companyNameColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool deliveryStatus {
+            public bool _checked {
                 get {
-                    return ((bool)(this[this.tableProviderInvoice.deliveryStatusColumn]));
+                    return ((bool)(this[this.tableDeliveryView.checkedColumn]));
                 }
                 set {
-                    this[this.tableProviderInvoice.deliveryStatusColumn] = value;
+                    this[this.tableDeliveryView.checkedColumn] = value;
                 }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsdeliveryReportNoNull() {
-                return this.IsNull(this.tableProviderInvoice.deliveryReportNoColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetdeliveryReportNoNull() {
-                this[this.tableProviderInvoice.deliveryReportNoColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsdeliveryDateNull() {
-                return this.IsNull(this.tableProviderInvoice.deliveryDateColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetdeliveryDateNull() {
-                this[this.tableProviderInvoice.deliveryDateColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsnumberOfItemsNull() {
-                return this.IsNull(this.tableProviderInvoice.numberOfItemsColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetnumberOfItemsNull() {
-                this[this.tableProviderInvoice.numberOfItemsColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -730,22 +659,22 @@ namespace Warehouse {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public class ProviderInvoiceRowChangeEvent : global::System.EventArgs {
+        public class DeliveryViewRowChangeEvent : global::System.EventArgs {
             
-            private ProviderInvoiceRow eventRow;
+            private DeliveryViewRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public ProviderInvoiceRowChangeEvent(ProviderInvoiceRow row, global::System.Data.DataRowAction action) {
+            public DeliveryViewRowChangeEvent(DeliveryViewRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public ProviderInvoiceRow Row {
+            public DeliveryViewRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -761,7 +690,7 @@ namespace Warehouse {
         }
     }
 }
-namespace Warehouse.warehouseDatabaseDataSetTableAdapters {
+namespace Warehouse.warehouseDatabaseDataSetViewTableAdapters {
     
     
     /// <summary>
@@ -773,7 +702,7 @@ namespace Warehouse.warehouseDatabaseDataSetTableAdapters {
     [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
         ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class ProviderInvoiceTableAdapter : global::System.ComponentModel.Component {
+    public partial class DeliveryViewTableAdapter : global::System.ComponentModel.Component {
         
         private global::System.Data.SqlClient.SqlDataAdapter _adapter;
         
@@ -787,7 +716,7 @@ namespace Warehouse.warehouseDatabaseDataSetTableAdapters {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public ProviderInvoiceTableAdapter() {
+        public DeliveryViewTableAdapter() {
             this.ClearBeforeFill = true;
         }
         
@@ -884,13 +813,12 @@ namespace Warehouse.warehouseDatabaseDataSetTableAdapters {
             this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "ProviderInvoice";
-            tableMapping.ColumnMappings.Add("deliveryReportNo", "deliveryReportNo");
-            tableMapping.ColumnMappings.Add("deliveryDate", "deliveryDate");
-            tableMapping.ColumnMappings.Add("companyName", "companyName");
+            tableMapping.DataSetTable = "DeliveryView";
+            tableMapping.ColumnMappings.Add("deliveryNumber", "deliveryNumber");
+            tableMapping.ColumnMappings.Add("invoiceDate", "invoiceDate");
             tableMapping.ColumnMappings.Add("numberOfItems", "numberOfItems");
-            tableMapping.ColumnMappings.Add("addDate", "addDate");
-            tableMapping.ColumnMappings.Add("deliveryStatus", "deliveryStatus");
+            tableMapping.ColumnMappings.Add("companyName", "companyName");
+            tableMapping.ColumnMappings.Add("checked", "checked");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -907,8 +835,8 @@ namespace Warehouse.warehouseDatabaseDataSetTableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT deliveryReportNo, deliveryDate, companyName, numberOfItems, addDate, deliv" +
-                "eryStatus FROM dbo.ProviderInvoice";
+            this._commandCollection[0].CommandText = "SELECT deliveryNumber, invoiceDate, numberOfItems, companyName, checked FROM dbo." +
+                "DeliveryView";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -916,7 +844,7 @@ namespace Warehouse.warehouseDatabaseDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(warehouseDatabaseDataSet.ProviderInvoiceDataTable dataTable) {
+        public virtual int Fill(warehouseDatabaseDataSetView.DeliveryViewDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -929,9 +857,9 @@ namespace Warehouse.warehouseDatabaseDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual warehouseDatabaseDataSet.ProviderInvoiceDataTable GetData() {
+        public virtual warehouseDatabaseDataSetView.DeliveryViewDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            warehouseDatabaseDataSet.ProviderInvoiceDataTable dataTable = new warehouseDatabaseDataSet.ProviderInvoiceDataTable();
+            warehouseDatabaseDataSetView.DeliveryViewDataTable dataTable = new warehouseDatabaseDataSetView.DeliveryViewDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -1005,7 +933,7 @@ namespace Warehouse.warehouseDatabaseDataSetTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        private int UpdateUpdatedRows(warehouseDatabaseDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        private int UpdateUpdatedRows(warehouseDatabaseDataSetView dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
             return result;
         }
@@ -1015,7 +943,7 @@ namespace Warehouse.warehouseDatabaseDataSetTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        private int UpdateInsertedRows(warehouseDatabaseDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        private int UpdateInsertedRows(warehouseDatabaseDataSetView dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
             return result;
         }
@@ -1025,7 +953,7 @@ namespace Warehouse.warehouseDatabaseDataSetTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        private int UpdateDeletedRows(warehouseDatabaseDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
+        private int UpdateDeletedRows(warehouseDatabaseDataSetView dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
             return result;
         }
@@ -1059,7 +987,7 @@ namespace Warehouse.warehouseDatabaseDataSetTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public virtual int UpdateAll(warehouseDatabaseDataSet dataSet) {
+        public virtual int UpdateAll(warehouseDatabaseDataSetView dataSet) {
             if ((dataSet == null)) {
                 throw new global::System.ArgumentNullException("dataSet");
             }

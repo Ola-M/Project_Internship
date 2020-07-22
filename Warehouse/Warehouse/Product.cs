@@ -12,13 +12,17 @@ namespace Warehouse
     using System;
     using System.Collections.Generic;
     
-    public partial class PickUpDelivery
+    public partial class Product
     {
-        public int pickUpDeliveryID { get; set; }
-        public int invoiceID { get; set; }
-        public int checkedInvoiceID { get; set; }
+        public int productID { get; set; }
+        public int deliveryNoteID { get; set; }
+        public string company { get; set; }
+        public string orderNumber { get; set; }
+        public int itemNumber { get; set; }
+        public string productCode { get; set; }
+        public string productName { get; set; }
+        public string serialNo { get; set; }
     
-        public virtual CheckedInvoice CheckedInvoice { get; set; }
-        public virtual Invoice Invoice { get; set; }
+        public virtual DeliveryNote DeliveryNote { get; set; }
     }
 }

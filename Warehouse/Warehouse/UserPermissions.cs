@@ -12,13 +12,13 @@ namespace Warehouse
     using System;
     using System.Collections.Generic;
     
-    public partial class ProviderInvoice
+    public partial class UserPermissions
     {
-        public string deliveryReportNo { get; set; }
-        public Nullable<System.DateTime> deliveryDate { get; set; }
-        public string companyName { get; set; }
-        public Nullable<int> numberOfItems { get; set; }
-        public System.DateTime addDate { get; set; }
-        public bool deliveryStatus { get; set; }
+        public int userPermissionsID { get; set; }
+        public int userID { get; set; }
+        public int permissionsID { get; set; }
+    
+        public virtual Permissions Permissions { get; set; }
+        public virtual Users Users { get; set; }
     }
 }

@@ -17,8 +17,7 @@ namespace Warehouse
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Provider()
         {
-            this.CheckedInvoice = new HashSet<CheckedInvoice>();
-            this.Invoice = new HashSet<Invoice>();
+            this.DeliveryNote = new HashSet<DeliveryNote>();
         }
     
         public int providerID { get; set; }
@@ -26,8 +25,6 @@ namespace Warehouse
         public string contact { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CheckedInvoice> CheckedInvoice { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Invoice> Invoice { get; set; }
+        public virtual ICollection<DeliveryNote> DeliveryNote { get; set; }
     }
 }

@@ -25,13 +25,15 @@ namespace Warehouse
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<CheckedInvoice> CheckedInvoice { get; set; }
-        public virtual DbSet<Invoice> Invoice { get; set; }
-        public virtual DbSet<PickUpDelivery> PickUpDelivery { get; set; }
+        public virtual DbSet<Delivery> Delivery { get; set; }
+        public virtual DbSet<DeliveryNote> DeliveryNote { get; set; }
+        public virtual DbSet<Permissions> Permissions { get; set; }
+        public virtual DbSet<Product> Product { get; set; }
+        public virtual DbSet<ProvenProduct> ProvenProduct { get; set; }
         public virtual DbSet<Provider> Provider { get; set; }
         public virtual DbSet<Summary> Summary { get; set; }
-        public virtual DbSet<Supply> Supply { get; set; }
+        public virtual DbSet<UserPermissions> UserPermissions { get; set; }
         public virtual DbSet<Users> Users { get; set; }
-        public virtual DbSet<ProviderInvoice> ProviderInvoice { get; set; }
+        public virtual DbSet<DeliveryView> DeliveryView { get; set; }
     }
 }

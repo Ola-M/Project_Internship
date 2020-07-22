@@ -12,17 +12,19 @@ namespace Warehouse
     using System;
     using System.Collections.Generic;
     
-    public partial class Summary
+    public partial class ProvenProduct
     {
-        public int summaryID { get; set; }
+        public int provenProductID { get; set; }
         public int deliveryNoteID { get; set; }
-        public int deliveryID { get; set; }
         public int usersID { get; set; }
-        public bool correct { get; set; }
-        public bool closed { get; set; }
-        public Nullable<System.DateTime> deliveryCloseDate { get; set; }
+        public System.DateTime checkDate { get; set; }
+        public string cCompany { get; set; }
+        public string cOrderNumber { get; set; }
+        public int cItemNumber { get; set; }
+        public string cProductCode { get; set; }
+        public string cProductName { get; set; }
+        public string cSerialNo { get; set; }
     
-        public virtual Delivery Delivery { get; set; }
         public virtual DeliveryNote DeliveryNote { get; set; }
         public virtual Users Users { get; set; }
     }
