@@ -104,6 +104,7 @@
     <EntitySetMapping Name="DeliveryView">
       <EntityTypeMapping TypeName="warehouseDatabaseModel.DeliveryView">
         <MappingFragment StoreEntitySet="DeliveryView">
+          <ScalarProperty Name="deliveryID" ColumnName="deliveryID" />
           <ScalarProperty Name="checked" ColumnName="checked" />
           <ScalarProperty Name="companyName" ColumnName="companyName" />
           <ScalarProperty Name="numberOfItems" ColumnName="numberOfItems" />

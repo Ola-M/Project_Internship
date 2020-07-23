@@ -17,6 +17,7 @@ namespace Warehouse
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FormZalogowany());
+          //  Application.Run(new FormCheckDelivery());
         }
     }
 }

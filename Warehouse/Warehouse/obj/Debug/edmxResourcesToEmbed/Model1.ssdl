@@ -100,12 +100,14 @@ warning 6002: The table/view 'warehouseDatabase.dbo.DeliveryView' does not have 
       <PropertyRef Name="numberOfItems" />
       <PropertyRef Name="companyName" />
       <PropertyRef Name="checked" />
+      <PropertyRef Name="deliveryID" />
     </Key>
     <Property Name="deliveryNumber" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="invoiceDate" Type="date" Nullable="false" />
     <Property Name="numberOfItems" Type="int" Nullable="false" />
     <Property Name="companyName" Type="varchar(max)" Nullable="false" />
     <Property Name="checked" Type="bit" Nullable="false" />
+    <Property Name="deliveryID" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="FK_Delivery_DeliveryNote">
     <End Role="DeliveryNote" Type="Self.DeliveryNote" Multiplicity="1" />
@@ -243,7 +245,8 @@ warning 6002: The table/view 'warehouseDatabase.dbo.DeliveryView' does not have 
     [DeliveryView].[invoiceDate] AS [invoiceDate], 
     [DeliveryView].[numberOfItems] AS [numberOfItems], 
     [DeliveryView].[companyName] AS [companyName], 
-    [DeliveryView].[checked] AS [checked]
+    [DeliveryView].[checked] AS [checked], 
+    [DeliveryView].[deliveryID] AS [deliveryID]
     FROM [dbo].[DeliveryView] AS [DeliveryView]</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK_Delivery_DeliveryNote" Association="Self.FK_Delivery_DeliveryNote">

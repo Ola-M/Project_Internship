@@ -19,5 +19,6 @@ namespace Warehouse
         public int numberOfItems { get; set; }
         public string companyName { get; set; }
         public bool @checked { get; set; }
+        public int deliveryID { get; set; }
     }
 }

@@ -105,12 +105,14 @@ warning 6002: The table/view 'warehouseDatabase.dbo.DeliveryView' does not have 
             <PropertyRef Name="numberOfItems" />
             <PropertyRef Name="companyName" />
             <PropertyRef Name="checked" />
+            <PropertyRef Name="deliveryID" />
           </Key>
           <Property Name="deliveryNumber" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="invoiceDate" Type="date" Nullable="false" />
           <Property Name="numberOfItems" Type="int" Nullable="false" />
           <Property Name="companyName" Type="varchar(max)" Nullable="false" />
           <Property Name="checked" Type="bit" Nullable="false" />
+          <Property Name="deliveryID" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_Delivery_DeliveryNote">
           <End Role="DeliveryNote" Type="Self.DeliveryNote" Multiplicity="1" />
@@ -248,7 +250,8 @@ warning 6002: The table/view 'warehouseDatabase.dbo.DeliveryView' does not have 
     [DeliveryView].[invoiceDate] AS [invoiceDate], 
     [DeliveryView].[numberOfItems] AS [numberOfItems], 
     [DeliveryView].[companyName] AS [companyName], 
-    [DeliveryView].[checked] AS [checked]
+    [DeliveryView].[checked] AS [checked], 
+    [DeliveryView].[deliveryID] AS [deliveryID]
     FROM [dbo].[DeliveryView] AS [DeliveryView]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_Delivery_DeliveryNote" Association="Self.FK_Delivery_DeliveryNote">
@@ -466,12 +469,14 @@ warning 6002: The table/view 'warehouseDatabase.dbo.DeliveryView' does not have 
             <PropertyRef Name="numberOfItems" />
             <PropertyRef Name="companyName" />
             <PropertyRef Name="checked" />
+            <PropertyRef Name="deliveryID" />
           </Key>
           <Property Name="deliveryNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="invoiceDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="numberOfItems" Type="Int32" Nullable="false" />
           <Property Name="companyName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="checked" Type="Boolean" Nullable="false" />
+          <Property Name="deliveryID" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="FK_Summary_Delivery">
           <End Type="warehouseDatabaseModel.Delivery" Role="Delivery" Multiplicity="1" />
@@ -702,6 +707,7 @@ warning 6002: The table/view 'warehouseDatabase.dbo.DeliveryView' does not have 
           <EntitySetMapping Name="DeliveryView">
             <EntityTypeMapping TypeName="warehouseDatabaseModel.DeliveryView">
               <MappingFragment StoreEntitySet="DeliveryView">
+                <ScalarProperty Name="deliveryID" ColumnName="deliveryID" />
                 <ScalarProperty Name="checked" ColumnName="checked" />
                 <ScalarProperty Name="companyName" ColumnName="companyName" />
                 <ScalarProperty Name="numberOfItems" ColumnName="numberOfItems" />

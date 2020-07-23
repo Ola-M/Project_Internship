@@ -170,12 +170,14 @@
       <PropertyRef Name="numberOfItems" />
       <PropertyRef Name="companyName" />
       <PropertyRef Name="checked" />
+      <PropertyRef Name="deliveryID" />
     </Key>
     <Property Name="deliveryNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="invoiceDate" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="numberOfItems" Type="Int32" Nullable="false" />
     <Property Name="companyName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="checked" Type="Boolean" Nullable="false" />
+    <Property Name="deliveryID" Type="Int32" Nullable="false" />
   </EntityType>
   <Association Name="FK_Summary_Delivery">
     <End Type="warehouseDatabaseModel.Delivery" Role="Delivery" Multiplicity="1" />

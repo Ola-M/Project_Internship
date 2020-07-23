@@ -92,3 +92,4 @@ C:\Users\BartoszSkrabka\Desktop\Apka\Warehouse\Warehouse\bin\Debug\Z.Dapper.Plus
 C:\Users\BartoszSkrabka\Desktop\Apka\Warehouse\Warehouse\bin\Debug\Z.Dapper.Plus.xml
 D:\Project_Internship\Warehouse\Warehouse\bin\Debug\Z.Dapper.Plus.dll
 D:\Project_Internship\Warehouse\Warehouse\bin\Debug\Z.Dapper.Plus.xml
+C:\Users\BartoszSkrabka\Desktop\Apka\Warehouse\Warehouse\obj\Debug\Warehouse.FormCheckDelivery.resources

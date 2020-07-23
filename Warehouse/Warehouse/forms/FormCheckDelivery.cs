@@ -1,0 +1,39 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using Warehouse.deliveryAddDataBase;
+using Warehouse.warehouseDatabaseDeliveryView1TableAdapters;
+
+namespace Warehouse
+{
+    public partial class FormCheckDelivery : Form
+    {
+        warehouseDatabaseEntities1 context = new warehouseDatabaseEntities1();
+
+        int cos;
+        public FormCheckDelivery(int cos)
+        {
+            InitializeComponent();
+            this.cos = cos;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void FormCheckDelivery_Load(object sender, EventArgs e)
+        {
+
+            var data = (from c in context.Product where c.deliveryNoteID == cos select c);
+            dataGridViewProducts.DataSource = data.ToList();
+        }
+
+    }
+}
