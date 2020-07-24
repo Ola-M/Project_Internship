@@ -25,6 +25,7 @@
         <AssociationConnector Association="warehouseDatabaseModel.FK_UserPermissions_Users" />
         <AssociationConnector Association="warehouseDatabaseModel.FK_Product_DeliveryNote" />
         <AssociationConnector Association="warehouseDatabaseModel.FK_Delivery_DeliveryNote" />
+        <EntityTypeShape EntityType="warehouseDatabaseModel.OwnedProductView" Width="1.5" PointX="12.75" PointY="2.125" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

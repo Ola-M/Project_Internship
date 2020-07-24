@@ -36,6 +36,15 @@
             this.labelTest = new System.Windows.Forms.Label();
             this.dataGridViewInvoice = new System.Windows.Forms.DataGridView();
             this.dataGridViewProviderInvoice = new System.Windows.Forms.DataGridView();
+            this.deliveryID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.deliveryNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.invoiceDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.numberOfItemsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.companyNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.checkedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.deliveryIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.deliveryViewBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.warehouseDatabaseDeliveryView1 = new Warehouse.warehouseDatabaseDeliveryView1();
             this.deliveryViewBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.warehouseDatabaseDataSetView = new Warehouse.warehouseDatabaseDataSetView();
             this.buttonDodajExcelDoBazy = new System.Windows.Forms.Button();
@@ -46,26 +55,17 @@
             this.warehouseDatabaseDataSet = new Warehouse.warehouseDatabaseDataSet();
             this.deliveryBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.deliveryTableAdapter = new Warehouse.warehouseDatabaseDataSetTableAdapters.DeliveryTableAdapter();
-            this.deliveryViewBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.warehouseDatabaseDeliveryView1 = new Warehouse.warehouseDatabaseDeliveryView1();
             this.deliveryViewTableAdapter1 = new Warehouse.warehouseDatabaseDeliveryView1TableAdapters.DeliveryViewTableAdapter();
-            this.deliveryID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.deliveryNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.invoiceDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.numberOfItemsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.companyNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.checkedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.deliveryIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInvoice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProviderInvoice)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deliveryViewBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.warehouseDatabaseDeliveryView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.deliveryViewBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.warehouseDatabaseDataSetView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.warehouseDatabaseDataSetProduct)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.warehouseDatabaseDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.deliveryBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deliveryViewBindingSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.warehouseDatabaseDeliveryView1)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonWyloguj
@@ -150,6 +150,67 @@
             this.dataGridViewProviderInvoice.TabIndex = 7;
             this.dataGridViewProviderInvoice.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewProviderInvoice_CellDoubleClick);
             // 
+            // deliveryID
+            // 
+            this.deliveryID.DataPropertyName = "deliveryID";
+            this.deliveryID.HeaderText = "deliveryID";
+            this.deliveryID.Name = "deliveryID";
+            this.deliveryID.ReadOnly = true;
+            this.deliveryID.Visible = false;
+            // 
+            // deliveryNumberDataGridViewTextBoxColumn
+            // 
+            this.deliveryNumberDataGridViewTextBoxColumn.DataPropertyName = "deliveryNumber";
+            this.deliveryNumberDataGridViewTextBoxColumn.HeaderText = "deliveryNumber";
+            this.deliveryNumberDataGridViewTextBoxColumn.Name = "deliveryNumberDataGridViewTextBoxColumn";
+            this.deliveryNumberDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // invoiceDateDataGridViewTextBoxColumn
+            // 
+            this.invoiceDateDataGridViewTextBoxColumn.DataPropertyName = "invoiceDate";
+            this.invoiceDateDataGridViewTextBoxColumn.HeaderText = "invoiceDate";
+            this.invoiceDateDataGridViewTextBoxColumn.Name = "invoiceDateDataGridViewTextBoxColumn";
+            this.invoiceDateDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // numberOfItemsDataGridViewTextBoxColumn
+            // 
+            this.numberOfItemsDataGridViewTextBoxColumn.DataPropertyName = "numberOfItems";
+            this.numberOfItemsDataGridViewTextBoxColumn.HeaderText = "numberOfItems";
+            this.numberOfItemsDataGridViewTextBoxColumn.Name = "numberOfItemsDataGridViewTextBoxColumn";
+            this.numberOfItemsDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // companyNameDataGridViewTextBoxColumn
+            // 
+            this.companyNameDataGridViewTextBoxColumn.DataPropertyName = "companyName";
+            this.companyNameDataGridViewTextBoxColumn.HeaderText = "companyName";
+            this.companyNameDataGridViewTextBoxColumn.Name = "companyNameDataGridViewTextBoxColumn";
+            this.companyNameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // checkedDataGridViewCheckBoxColumn
+            // 
+            this.checkedDataGridViewCheckBoxColumn.DataPropertyName = "checked";
+            this.checkedDataGridViewCheckBoxColumn.HeaderText = "checked";
+            this.checkedDataGridViewCheckBoxColumn.Name = "checkedDataGridViewCheckBoxColumn";
+            this.checkedDataGridViewCheckBoxColumn.ReadOnly = true;
+            // 
+            // deliveryIDDataGridViewTextBoxColumn
+            // 
+            this.deliveryIDDataGridViewTextBoxColumn.DataPropertyName = "deliveryID";
+            this.deliveryIDDataGridViewTextBoxColumn.HeaderText = "deliveryID";
+            this.deliveryIDDataGridViewTextBoxColumn.Name = "deliveryIDDataGridViewTextBoxColumn";
+            this.deliveryIDDataGridViewTextBoxColumn.ReadOnly = true;
+            this.deliveryIDDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // deliveryViewBindingSource1
+            // 
+            this.deliveryViewBindingSource1.DataMember = "DeliveryView";
+            this.deliveryViewBindingSource1.DataSource = this.warehouseDatabaseDeliveryView1;
+            // 
+            // warehouseDatabaseDeliveryView1
+            // 
+            this.warehouseDatabaseDeliveryView1.DataSetName = "warehouseDatabaseDeliveryView1";
+            this.warehouseDatabaseDeliveryView1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // deliveryViewBindingSource
             // 
             this.deliveryViewBindingSource.DataMember = "DeliveryView";
@@ -202,70 +263,9 @@
             // 
             this.deliveryTableAdapter.ClearBeforeFill = true;
             // 
-            // deliveryViewBindingSource1
-            // 
-            this.deliveryViewBindingSource1.DataMember = "DeliveryView";
-            this.deliveryViewBindingSource1.DataSource = this.warehouseDatabaseDeliveryView1;
-            // 
-            // warehouseDatabaseDeliveryView1
-            // 
-            this.warehouseDatabaseDeliveryView1.DataSetName = "warehouseDatabaseDeliveryView1";
-            this.warehouseDatabaseDeliveryView1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
             // deliveryViewTableAdapter1
             // 
             this.deliveryViewTableAdapter1.ClearBeforeFill = true;
-            // 
-            // deliveryID
-            // 
-            this.deliveryID.DataPropertyName = "deliveryID";
-            this.deliveryID.HeaderText = "deliveryID";
-            this.deliveryID.Name = "deliveryID";
-            this.deliveryID.ReadOnly = true;
-            this.deliveryID.Visible = false;
-            // 
-            // deliveryNumberDataGridViewTextBoxColumn
-            // 
-            this.deliveryNumberDataGridViewTextBoxColumn.DataPropertyName = "deliveryNumber";
-            this.deliveryNumberDataGridViewTextBoxColumn.HeaderText = "deliveryNumber";
-            this.deliveryNumberDataGridViewTextBoxColumn.Name = "deliveryNumberDataGridViewTextBoxColumn";
-            this.deliveryNumberDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // invoiceDateDataGridViewTextBoxColumn
-            // 
-            this.invoiceDateDataGridViewTextBoxColumn.DataPropertyName = "invoiceDate";
-            this.invoiceDateDataGridViewTextBoxColumn.HeaderText = "invoiceDate";
-            this.invoiceDateDataGridViewTextBoxColumn.Name = "invoiceDateDataGridViewTextBoxColumn";
-            this.invoiceDateDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // numberOfItemsDataGridViewTextBoxColumn
-            // 
-            this.numberOfItemsDataGridViewTextBoxColumn.DataPropertyName = "numberOfItems";
-            this.numberOfItemsDataGridViewTextBoxColumn.HeaderText = "numberOfItems";
-            this.numberOfItemsDataGridViewTextBoxColumn.Name = "numberOfItemsDataGridViewTextBoxColumn";
-            this.numberOfItemsDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // companyNameDataGridViewTextBoxColumn
-            // 
-            this.companyNameDataGridViewTextBoxColumn.DataPropertyName = "companyName";
-            this.companyNameDataGridViewTextBoxColumn.HeaderText = "companyName";
-            this.companyNameDataGridViewTextBoxColumn.Name = "companyNameDataGridViewTextBoxColumn";
-            this.companyNameDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // checkedDataGridViewCheckBoxColumn
-            // 
-            this.checkedDataGridViewCheckBoxColumn.DataPropertyName = "checked";
-            this.checkedDataGridViewCheckBoxColumn.HeaderText = "checked";
-            this.checkedDataGridViewCheckBoxColumn.Name = "checkedDataGridViewCheckBoxColumn";
-            this.checkedDataGridViewCheckBoxColumn.ReadOnly = true;
-            // 
-            // deliveryIDDataGridViewTextBoxColumn
-            // 
-            this.deliveryIDDataGridViewTextBoxColumn.DataPropertyName = "deliveryID";
-            this.deliveryIDDataGridViewTextBoxColumn.HeaderText = "deliveryID";
-            this.deliveryIDDataGridViewTextBoxColumn.Name = "deliveryIDDataGridViewTextBoxColumn";
-            this.deliveryIDDataGridViewTextBoxColumn.ReadOnly = true;
-            this.deliveryIDDataGridViewTextBoxColumn.Visible = false;
             // 
             // FormZalogowany
             // 
@@ -288,14 +288,14 @@
             this.Load += new System.EventHandler(this.FormZalogowany_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInvoice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProviderInvoice)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deliveryViewBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.warehouseDatabaseDeliveryView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.deliveryViewBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.warehouseDatabaseDataSetView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.warehouseDatabaseDataSetProduct)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.warehouseDatabaseDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.deliveryBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deliveryViewBindingSource1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.warehouseDatabaseDeliveryView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

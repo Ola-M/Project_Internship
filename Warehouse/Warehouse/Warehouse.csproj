@@ -134,6 +134,7 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="deliveryAddDataBase\DeliveryQuery.cs" />
+    <Compile Include="deliveryCheck\LoadOwnedProduct.cs" />
     <Compile Include="DeliveryNote.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -176,6 +177,9 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
     <Compile Include="ObservableListSource.cs" />
+    <Compile Include="OwnedProductView.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Permissions.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

@@ -106,13 +106,13 @@ namespace Warehouse
         private void dataGridViewProviderInvoice_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             DeliveryQuery deliveryQuery = new DeliveryQuery();
-            int xxx = 0;
+            int goToDelivery = 0;
             foreach (DataGridViewRow row in dataGridViewProviderInvoice.SelectedRows)
             {
-                xxx = int.Parse(row.Cells[6].Value.ToString());
+                goToDelivery = int.Parse(row.Cells[6].Value.ToString());
 
             }
-            if (xxx != 0) {
+            if (goToDelivery != 0) {
                 const string message =
                     "Czy chcesz przejść do dostawy";
                 const string caption = "Edycja";
@@ -123,7 +123,7 @@ namespace Warehouse
                 // If the no button was pressed ...
                 if (result == DialogResult.OK)
                 {
-                    var cos = context.Delivery.FirstOrDefault(d => d.deliveryID == xxx);
+                    var cos = context.Delivery.FirstOrDefault(d => d.deliveryID == goToDelivery);
                     deliveryQuery.delivery = cos.deliveryNoteID;
                     FormCheckDelivery formCheckDelivery = new FormCheckDelivery(cos.deliveryNoteID);
                     formCheckDelivery.Show();
