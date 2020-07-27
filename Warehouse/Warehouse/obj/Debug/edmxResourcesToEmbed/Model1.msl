@@ -123,5 +123,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ProductView">
+      <EntityTypeMapping TypeName="warehouseDatabaseModel.ProductView">
+        <MappingFragment StoreEntitySet="ProductView">
+          <ScalarProperty Name="deliveryNoteID" ColumnName="deliveryNoteID" />
+          <ScalarProperty Name="Company" ColumnName="Company" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="Serial" ColumnName="Serial" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -123,6 +123,20 @@ warning 6002: The table/view 'warehouseDatabase.dbo.OwnedProductView' does not h
     <Property Name="Company" Type="varchar(max)" Nullable="false" />
     <Property Name="deliveryNoteID" Type="int" Nullable="false" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'warehouseDatabase.dbo.ProductView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="ProductView">
+    <Key>
+      <PropertyRef Name="Serial" />
+      <PropertyRef Name="ProductName" />
+      <PropertyRef Name="Company" />
+      <PropertyRef Name="deliveryNoteID" />
+    </Key>
+    <Property Name="Serial" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ProductName" Type="varchar(max)" Nullable="false" />
+    <Property Name="Company" Type="varchar(max)" Nullable="false" />
+    <Property Name="deliveryNoteID" Type="int" Nullable="false" />
+  </EntityType>
   <Association Name="FK_Delivery_DeliveryNote">
     <End Role="DeliveryNote" Type="Self.DeliveryNote" Multiplicity="1" />
     <End Role="Delivery" Type="Self.Delivery" Multiplicity="*" />
@@ -270,6 +284,14 @@ warning 6002: The table/view 'warehouseDatabase.dbo.OwnedProductView' does not h
     [OwnedProductView].[Company] AS [Company], 
     [OwnedProductView].[deliveryNoteID] AS [deliveryNoteID]
     FROM [dbo].[OwnedProductView] AS [OwnedProductView]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ProductView" EntityType="Self.ProductView" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ProductView].[Serial] AS [Serial], 
+    [ProductView].[ProductName] AS [ProductName], 
+    [ProductView].[Company] AS [Company], 
+    [ProductView].[deliveryNoteID] AS [deliveryNoteID]
+    FROM [dbo].[ProductView] AS [ProductView]</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK_Delivery_DeliveryNote" Association="Self.FK_Delivery_DeliveryNote">
       <End Role="DeliveryNote" EntitySet="DeliveryNote" />

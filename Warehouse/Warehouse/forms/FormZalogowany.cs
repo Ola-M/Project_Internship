@@ -22,10 +22,11 @@ namespace Warehouse
     {
        warehouseDatabaseEntities1 context = new warehouseDatabaseEntities1();
 
-
-        public FormZalogowany()
+        int id;
+        public FormZalogowany(int id)
         {
             InitializeComponent();
+            this.id = id;
 
         }
 
@@ -74,28 +75,33 @@ namespace Warehouse
 
         private void buttonDodajExcelDoBazy_Click(object sender, EventArgs e)
         {
-            try
+            if (dataTable != null)
             {
-                String deliveryNumberString = dataTable.Columns[4].ToString();
-                var isAdded = context.DeliveryNote.FirstOrDefault(d => d.deliveryNumber == deliveryNumberString);
-                if (isAdded == null )
+                try
                 {
-                    LoadDeliveryNote loadDeliveryNote = new LoadDeliveryNote();
-                    loadDeliveryNote.addDeliveryNote(comboBoxWidok, dataTable);
-                    LoadProduct loadProduct = new LoadProduct();
-                    loadProduct.addProduct(dataTable, productBindingSource);
-                    FormZalogowany_Load(sender, e);
+
+                    String deliveryNumberString = dataTable.Columns[4].ToString();
+                    var isAdded = context.DeliveryNote.FirstOrDefault(d => d.deliveryNumber == deliveryNumberString);
+                    if (isAdded == null)
+                    {
+                        LoadDeliveryNote loadDeliveryNote = new LoadDeliveryNote();
+                        loadDeliveryNote.addDeliveryNote(comboBoxWidok, dataTable);
+                        LoadProduct loadProduct = new LoadProduct();
+                        loadProduct.addProduct(dataTable, productBindingSource);
+                        FormZalogowany_Load(sender, e);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Wybrana faktura została już dodana");
+                    }
+
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Wybrana faktura została już dodana");
+                    MessageBox.Show(ex.Message);
                 }
-                
             }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            
             
         }
 
@@ -125,7 +131,7 @@ namespace Warehouse
                 {
                     var cos = context.Delivery.FirstOrDefault(d => d.deliveryID == goToDelivery);
                     deliveryQuery.delivery = cos.deliveryNoteID;
-                    FormCheckDelivery formCheckDelivery = new FormCheckDelivery(cos.deliveryNoteID);
+                    FormCheckDelivery formCheckDelivery = new FormCheckDelivery(cos.deliveryNoteID, id);
                     formCheckDelivery.Show();
                     this.Hide();
                 } 

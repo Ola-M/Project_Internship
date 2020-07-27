@@ -36,5 +36,6 @@ namespace Warehouse
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<DeliveryView> DeliveryView { get; set; }
         public virtual DbSet<OwnedProductView> OwnedProductView { get; set; }
+        public virtual DbSet<ProductView> ProductView { get; set; }
     }
 }

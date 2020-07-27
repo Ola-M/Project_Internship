@@ -12,13 +12,26 @@ namespace Warehouse.deliveryCheck
 {
     public class LoadOwnedProduct
     {
+        ProvenProduct pProduct;
         warehouseDatabaseEntities1 context = new warehouseDatabaseEntities1();
         List<OwnedProductView> data = new List<OwnedProductView>();
-        public void loadProducts(DataGridView dataGridView, int cos)
+        public void loadProducts(DataGridView dataGridView, int cos, DataGridView dataGridView1)
         {
              this.data = (from c in context.OwnedProductView where c.deliveryNoteID == cos select c).ToList();
             dataGridView.DataSource = data;
-           // dataGridView.Columns["deliveryNoteID"].Visible = false;
+            dataGridView.Columns["deliveryNoteID"].Visible = false;
+            foreach(DataGridViewRow row in dataGridView1.Rows)
+            {
+                var x = row.Cells[0].Value.ToString().Trim();
+                pProduct = context.ProvenProduct.FirstOrDefault(c => c.cSerialNo == x);
+                if ((pProduct != null)&&(pProduct.cSerialNo.Trim().Equals(x)))
+                {
+                    row.DefaultCellStyle.BackColor = Color.Purple;
+                    
+                }
+            }
+            
+
 
         }
         public void addSerial(DataGridView dataGridView, DataGridView dataGridView1, TextBox textBox)
@@ -27,16 +40,12 @@ namespace Warehouse.deliveryCheck
             if (serialExist(textBox))
             {
                 if (serialRepeat(dataGridView, textBox)) {
-                    this.data.Add(new OwnedProductView() { Serial = textBox.Text });
+                    this.data.Add(new OwnedProductView() { Serial = textBox.Text.Trim() });
                     dataGridView.DataSource = null;
 
                     dataGridView.DataSource = data;
-                         foreach (DataGridViewRow row in dataGridView1.Rows)
-                    {
-                      
-                        row.DefaultCellStyle.BackColor = Color.Green;
-                    }
-                    //  dataGridView.Columns["deliveryNoteID"].Visible = false;
+                    rowsColor(dataGridView1, textBox);
+                    dataGridView.Columns["deliveryNoteID"].Visible = false;
                     textBox.Clear();
                 } 
             }
@@ -62,7 +71,7 @@ namespace Warehouse.deliveryCheck
             
             foreach (DataGridViewRow row in dataGridView.Rows)
             {
-                if (row.Cells[0].Value.ToString().Equals(searchValue))
+                if (row.Cells[0].Value.ToString().Equals(searchValue.Trim()))
                 {
                    
                     return false;
@@ -72,21 +81,21 @@ namespace Warehouse.deliveryCheck
             
 
         }
-        private int m1(DataGridView dataGridView, TextBox textBox)
+        private void rowsColor(DataGridView dataGridView1, TextBox textBox)
         {
-            String searchValue = textBox.Text;
-
-            foreach (DataGridViewRow row in dataGridView.Rows)
+            foreach (DataGridViewRow row in dataGridView1.Rows)
             {
-                if (row.Cells[8].Value.ToString().Equals(searchValue))
+                var tableValue = row.Cells[0].Value.ToString().Trim();
+                if (tableValue.Equals(textBox.Text.Trim()))
                 {
 
-                    return row.Index ;
+                    row.DefaultCellStyle.BackColor = Color.LemonChiffon;
                 }
+
             }
-            return 0;
 
         }
+
 
     }
 }

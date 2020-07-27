@@ -11,7 +11,7 @@ namespace Warehouse
 {
     public class AddExcelToDatabase
     {
-        FormZalogowany formZalogowany = new FormZalogowany();
+        FormZalogowany formZalogowany = new FormZalogowany(1);
         warehouseDatabaseEntities1 context = new warehouseDatabaseEntities1();
 
         public void addExcel(List<Product> prod)
