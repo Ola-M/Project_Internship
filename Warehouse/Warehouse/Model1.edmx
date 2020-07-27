@@ -114,6 +114,34 @@ warning 6002: The table/view 'warehouseDatabase.dbo.DeliveryView' does not have 
           <Property Name="checked" Type="bit" Nullable="false" />
           <Property Name="deliveryID" Type="int" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'warehouseDatabase.dbo.OwnedProductView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="OwnedProductView">
+          <Key>
+            <PropertyRef Name="Serial" />
+            <PropertyRef Name="ProductName" />
+            <PropertyRef Name="Company" />
+            <PropertyRef Name="deliveryNoteID" />
+          </Key>
+          <Property Name="Serial" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProductName" Type="varchar(max)" Nullable="false" />
+          <Property Name="Company" Type="varchar(max)" Nullable="false" />
+          <Property Name="deliveryNoteID" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'warehouseDatabase.dbo.ProductView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ProductView">
+          <Key>
+            <PropertyRef Name="Serial" />
+            <PropertyRef Name="ProductName" />
+            <PropertyRef Name="Company" />
+            <PropertyRef Name="deliveryNoteID" />
+          </Key>
+          <Property Name="Serial" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProductName" Type="varchar(max)" Nullable="false" />
+          <Property Name="Company" Type="varchar(max)" Nullable="false" />
+          <Property Name="deliveryNoteID" Type="int" Nullable="false" />
+        </EntityType>
         <Association Name="FK_Delivery_DeliveryNote">
           <End Role="DeliveryNote" Type="Self.DeliveryNote" Multiplicity="1" />
           <End Role="Delivery" Type="Self.Delivery" Multiplicity="*" />
@@ -254,6 +282,22 @@ warning 6002: The table/view 'warehouseDatabase.dbo.DeliveryView' does not have 
     [DeliveryView].[deliveryID] AS [deliveryID]
     FROM [dbo].[DeliveryView] AS [DeliveryView]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="OwnedProductView" EntityType="Self.OwnedProductView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [OwnedProductView].[Serial] AS [Serial], 
+    [OwnedProductView].[ProductName] AS [ProductName], 
+    [OwnedProductView].[Company] AS [Company], 
+    [OwnedProductView].[deliveryNoteID] AS [deliveryNoteID]
+    FROM [dbo].[OwnedProductView] AS [OwnedProductView]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ProductView" EntityType="Self.ProductView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ProductView].[Serial] AS [Serial], 
+    [ProductView].[ProductName] AS [ProductName], 
+    [ProductView].[Company] AS [Company], 
+    [ProductView].[deliveryNoteID] AS [deliveryNoteID]
+    FROM [dbo].[ProductView] AS [ProductView]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Delivery_DeliveryNote" Association="Self.FK_Delivery_DeliveryNote">
             <End Role="DeliveryNote" EntitySet="DeliveryNote" />
             <End Role="Delivery" EntitySet="Delivery" />
@@ -350,6 +394,8 @@ warning 6002: The table/view 'warehouseDatabase.dbo.DeliveryView' does not have 
             <End Role="DeliveryNote" EntitySet="DeliveryNote" />
             <End Role="Delivery" EntitySet="Delivery" />
           </AssociationSet>
+          <EntitySet Name="OwnedProductView" EntityType="warehouseDatabaseModel.OwnedProductView" />
+          <EntitySet Name="ProductView" EntityType="warehouseDatabaseModel.ProductView" />
         </EntityContainer>
         <EntityType Name="Delivery">
           <Key>
@@ -598,6 +644,30 @@ warning 6002: The table/view 'warehouseDatabase.dbo.DeliveryView' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="OwnedProductView">
+          <Key>
+            <PropertyRef Name="Serial" />
+            <PropertyRef Name="ProductName" />
+            <PropertyRef Name="Company" />
+            <PropertyRef Name="deliveryNoteID" />
+          </Key>
+          <Property Name="Serial" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Company" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="deliveryNoteID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProductView">
+          <Key>
+            <PropertyRef Name="Serial" />
+            <PropertyRef Name="ProductName" />
+            <PropertyRef Name="Company" />
+            <PropertyRef Name="deliveryNoteID" />
+          </Key>
+          <Property Name="Serial" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Company" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="deliveryNoteID" Type="Int32" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -713,6 +783,26 @@ warning 6002: The table/view 'warehouseDatabase.dbo.DeliveryView' does not have 
                 <ScalarProperty Name="numberOfItems" ColumnName="numberOfItems" />
                 <ScalarProperty Name="invoiceDate" ColumnName="invoiceDate" />
                 <ScalarProperty Name="deliveryNumber" ColumnName="deliveryNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OwnedProductView">
+            <EntityTypeMapping TypeName="warehouseDatabaseModel.OwnedProductView">
+              <MappingFragment StoreEntitySet="OwnedProductView">
+                <ScalarProperty Name="deliveryNoteID" ColumnName="deliveryNoteID" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="Serial" ColumnName="Serial" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductView">
+            <EntityTypeMapping TypeName="warehouseDatabaseModel.ProductView">
+              <MappingFragment StoreEntitySet="ProductView">
+                <ScalarProperty Name="deliveryNoteID" ColumnName="deliveryNoteID" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="Serial" ColumnName="Serial" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

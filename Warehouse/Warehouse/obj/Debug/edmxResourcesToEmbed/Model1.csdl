@@ -51,6 +51,8 @@
       <End Role="DeliveryNote" EntitySet="DeliveryNote" />
       <End Role="Delivery" EntitySet="Delivery" />
     </AssociationSet>
+    <EntitySet Name="OwnedProductView" EntityType="warehouseDatabaseModel.OwnedProductView" />
+    <EntitySet Name="ProductView" EntityType="warehouseDatabaseModel.ProductView" />
   </EntityContainer>
   <EntityType Name="Delivery">
     <Key>
@@ -299,4 +301,28 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="OwnedProductView">
+    <Key>
+      <PropertyRef Name="Serial" />
+      <PropertyRef Name="ProductName" />
+      <PropertyRef Name="Company" />
+      <PropertyRef Name="deliveryNoteID" />
+    </Key>
+    <Property Name="Serial" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ProductName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Company" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="deliveryNoteID" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProductView">
+    <Key>
+      <PropertyRef Name="Serial" />
+      <PropertyRef Name="ProductName" />
+      <PropertyRef Name="Company" />
+      <PropertyRef Name="deliveryNoteID" />
+    </Key>
+    <Property Name="Serial" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ProductName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Company" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="deliveryNoteID" Type="Int32" Nullable="false" />
+  </EntityType>
 </Schema>

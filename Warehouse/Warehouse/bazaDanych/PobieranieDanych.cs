@@ -8,6 +8,8 @@ namespace Warehouse.bazaDanych
 {
     public class PobieranieDanych
     {
+        
+        public PobieranieDanych() { }
         public int userID { get; set; }
 
 

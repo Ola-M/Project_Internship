@@ -14,14 +14,16 @@ namespace Warehouse
 {
     public partial class FormLogin : Form
     {
+        PobieranieDanych pobieranie = new PobieranieDanych();
+        int id = 0;
         public FormLogin()
         {
             InitializeComponent();
         }
         private void buttonLogin_Click(object sender, EventArgs e)
         {
+             
             warehouseDatabaseEntities1 context = new warehouseDatabaseEntities1();
-            PobieranieDanych pobieranie = new PobieranieDanych();
             if (textBoxLogin.Text != string.Empty || textBoxHaslo.Text != string.Empty)
             {
                 var user = context.Users.Where(u => u.login.Equals(textBoxLogin.Text)).FirstOrDefault();
@@ -29,8 +31,8 @@ namespace Warehouse
                 {
                     if (user.password.Equals(textBoxHaslo.Text))
                     {
-                        pobieranie.userID = user.usersID;
-                        FormZalogowany success = new FormZalogowany();
+                        this.id = user.usersID;
+                        FormZalogowany success = new FormZalogowany(this.id);
                         success.Show();
                         this.Hide();
                     }
@@ -59,6 +61,7 @@ namespace Warehouse
                 buttonLogin.PerformClick();
             }
         }
+
     }
 }
 

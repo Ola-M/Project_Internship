@@ -1,4 +1,5 @@
-﻿using ExcelDataReader;
+﻿
+using ExcelDataReader;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,10 +13,7 @@ namespace Warehouse
 {
     public class LoadExcel
     {
-        FormZalogowany formZalogowany = new FormZalogowany();
-
-      //  DataTableCollection tableCollection;
-
+        FormZalogowany formZalogowany = new FormZalogowany(1);
 
         
         public DataTableCollection getFile(ComboBox comboBox, TextBox textBox, DataTable dataTable, DataGridView dataGrid)

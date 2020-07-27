@@ -15,20 +15,16 @@ namespace Warehouse
 using System;
     using System.Collections.Generic;
     
-public partial class DeliveryView
+public partial class ProductView
 {
 
-    public string deliveryNumber { get; set; }
+    public string Serial { get; set; }
 
-    public System.DateTime invoiceDate { get; set; }
+    public string ProductName { get; set; }
 
-    public int numberOfItems { get; set; }
+    public string Company { get; set; }
 
-    public string companyName { get; set; }
-
-    public bool @checked { get; set; }
-
-    public int deliveryID { get; set; }
+    public int deliveryNoteID { get; set; }
 
 }
 
