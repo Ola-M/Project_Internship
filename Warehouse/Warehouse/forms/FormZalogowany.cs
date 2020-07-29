@@ -129,9 +129,9 @@ namespace Warehouse
                 // If the no button was pressed ...
                 if (result == DialogResult.OK)
                 {
-                    var cos = context.Delivery.FirstOrDefault(d => d.deliveryID == goToDelivery);
-                    deliveryQuery.delivery = cos.deliveryNoteID;
-                    FormCheckDelivery formCheckDelivery = new FormCheckDelivery(cos.deliveryNoteID, id);
+                    var delivery = context.Delivery.FirstOrDefault(d => d.deliveryID == goToDelivery);
+                    deliveryQuery.delivery = delivery.deliveryNoteID;
+                    FormCheckDelivery formCheckDelivery = new FormCheckDelivery(delivery.deliveryNoteID, id);
                     formCheckDelivery.Show();
                     this.Hide();
                 } 

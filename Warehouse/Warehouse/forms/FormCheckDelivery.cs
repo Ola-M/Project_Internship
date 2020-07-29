@@ -18,43 +18,46 @@ namespace Warehouse
     {
         public FormLogin formLogin;
         warehouseDatabaseEntities1 context = new warehouseDatabaseEntities1();
-        LoadOwnedProduct loadOwned = new LoadOwnedProduct();
+        List<OwnedProductView> dataOwnedProducts = new List<OwnedProductView>();
         List<string> list = new List<string>();
+        LoadOwnedProduct loadOwned;
+        AddProvenProductDB addProvenProductDB;
+        //RemoveProvenProduct removeProvenProduct;
 
-        int cos;
+
+        int deliveryNoteID;
         int id;
-        public FormCheckDelivery(int cos, int id)
+        public FormCheckDelivery(int deliveryNoteID, int id)
         {
             InitializeComponent();
             this.ActiveControl = textBoxAddSerial;
-            this.cos = cos;
+            this.deliveryNoteID = deliveryNoteID;
             this.id = id;
+            this.loadOwned = new LoadOwnedProduct(dataOwnedProducts, textBoxAddSerial);
+            this.addProvenProductDB = new AddProvenProductDB();
+            //this.removeProvenProduct = new RemoveProvenProduct(dataOwnedProducts);
         }
+
 
         private void button1_Click(object sender, EventArgs e)
         {
+
             list.Add(textBoxAddSerial.Text.Trim());
-            loadOwned.addSerial(dataGridViewProvenProduct, dataGridViewProducts, textBoxAddSerial);
+            loadOwned.addSerial(dataGridViewProvenProduct, dataGridViewProducts);
             this.ActiveControl = textBoxAddSerial;
         }
 
         private void FormCheckDelivery_Load(object sender, EventArgs e)
         {
-
-            var data = (from c in context.ProductView where c.deliveryNoteID == cos select c);
-
+            var data = (from c in context.ProductView where c.deliveryNoteID == deliveryNoteID select c);
             dataGridViewProducts.DataSource = data.ToList();
-            loadOwned.loadProducts(dataGridViewProvenProduct, cos, dataGridViewProducts);
+            loadOwned.loadProducts(dataGridViewProvenProduct, deliveryNoteID, dataGridViewProducts);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            AddProvenProductDB addProvenProduct = new AddProvenProductDB();
-            addProvenProduct.addProven(list, id);
-            dataGridViewProducts.DataSource = data.ToList();
-
+            addProvenProductDB.addProven(list, id, dataOwnedProducts, dataGridViewProvenProduct, deliveryNoteID);
             list.Clear();
-            //FormCheckDelivery_Load(sender, e);
         }
 
         private void textBoxAddSerial_TextChanged(object sender, EventArgs e)
@@ -71,6 +74,9 @@ namespace Warehouse
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
+            //removeProvenProduct.removeProduct(this.dataGridViewProvenProduct, list);
+            loadOwned.removeProduct(this.dataGridViewProvenProduct, list, dataGridViewProducts);
+           
         }
     }
     
