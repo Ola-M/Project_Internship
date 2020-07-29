@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Google.Protobuf.WellKnownTypes;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -14,19 +15,26 @@ namespace Warehouse.deliveryCheck
     {
         ProvenProduct pProduct;
         warehouseDatabaseEntities1 context = new warehouseDatabaseEntities1();
-        List<OwnedProductView> data = new List<OwnedProductView>();
-        public void loadProducts(DataGridView dataGridView, int cos, DataGridView dataGridView1)
+        List<OwnedProductView> dataOwnedProduct;
+        TextBox textBox;
+        public LoadOwnedProduct(List<OwnedProductView> dataOwnedProduct, TextBox textBox)
         {
-             this.data = (from c in context.OwnedProductView where c.deliveryNoteID == cos select c).ToList();
-            dataGridView.DataSource = data;
+            this.dataOwnedProduct = dataOwnedProduct;
+            this.textBox = textBox;
+
+        }
+        public void loadProducts(DataGridView dataGridView, int deliveryNoteID, DataGridView dataGridView1)
+        {
+            this.dataOwnedProduct = (from c in context.OwnedProductView where c.deliveryNoteID == deliveryNoteID select c).ToList();
+            dataGridView.DataSource = this.dataOwnedProduct;
             dataGridView.Columns["deliveryNoteID"].Visible = false;
             foreach(DataGridViewRow row in dataGridView1.Rows)
             {
-                var x = row.Cells[0].Value.ToString().Trim();
-                pProduct = context.ProvenProduct.FirstOrDefault(c => c.cSerialNo == x);
-                if ((pProduct != null)&&(pProduct.cSerialNo.Trim().Equals(x)))
+                var dataGridViewProductCell = row.Cells[0].Value.ToString().Trim();
+                pProduct = context.ProvenProduct.FirstOrDefault(c => c.cSerialNo == dataGridViewProductCell);
+                if ((pProduct != null)&&(pProduct.cSerialNo.Trim().Equals(dataGridViewProductCell)))
                 {
-                    row.DefaultCellStyle.BackColor = Color.Purple;
+                    row.DefaultCellStyle.BackColor = Color.Green;
                     
                 }
             }
@@ -34,28 +42,30 @@ namespace Warehouse.deliveryCheck
 
 
         }
-        public void addSerial(DataGridView dataGridView, DataGridView dataGridView1, TextBox textBox)
+        public void addSerial(DataGridView dataGridView, DataGridView dataGridView1)
         {
             
-            if (serialExist(textBox))
+            if (serialRepeat(dataGridView))
             {
-                if (serialRepeat(dataGridView, textBox)) {
-                    this.data.Add(new OwnedProductView() { Serial = textBox.Text.Trim() });
-                    dataGridView.DataSource = null;
-
-                    dataGridView.DataSource = data;
-                    rowsColor(dataGridView1, textBox);
-                    dataGridView.Columns["deliveryNoteID"].Visible = false;
-                    textBox.Clear();
-                } 
+                
+                if (serialExist()) {
+                    addSerialToDbAndList(dataGridView, dataGridView1);
+                }
             }
-            
-        
-
         }
-        private bool serialExist(TextBox textBox)
+        private void addSerialToDbAndList(DataGridView dataGridView, DataGridView dataGridView1)
         {
-            Product product = context.Product.FirstOrDefault(c => c.serialNo == textBox.Text);
+            this.dataOwnedProduct.Add(new OwnedProductView() { Serial = this.textBox.Text.Trim() });
+            dataGridView.DataSource = null;
+
+            dataGridView.DataSource = dataOwnedProduct;
+            rowsColor(dataGridView1);
+            dataGridView.Columns["deliveryNoteID"].Visible = false;
+            this.textBox.Clear();
+        }
+        private bool serialExist()
+        {
+            Product product = context.Product.FirstOrDefault(c => c.serialNo == this.textBox.Text);
             if (product != null){
                 return true;
             }
@@ -65,9 +75,9 @@ namespace Warehouse.deliveryCheck
             }
 
         }
-        private bool serialRepeat(DataGridView dataGridView, TextBox textBox)
+        private bool serialRepeat(DataGridView dataGridView)
         {
-            String searchValue = textBox.Text;
+            String searchValue = this.textBox.Text;
             
             foreach (DataGridViewRow row in dataGridView.Rows)
             {
@@ -81,20 +91,63 @@ namespace Warehouse.deliveryCheck
             
 
         }
-        private void rowsColor(DataGridView dataGridView1, TextBox textBox)
+        private void rowsColor(DataGridView dataGridView1)
         {
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
                 var tableValue = row.Cells[0].Value.ToString().Trim();
-                if (tableValue.Equals(textBox.Text.Trim()))
+                if (tableValue.Equals(this.textBox.Text.Trim()))
                 {
 
-                    row.DefaultCellStyle.BackColor = Color.LemonChiffon;
+                    row.DefaultCellStyle.BackColor = Color.Green;
                 }
 
             }
 
         }
+        public void removeProduct(DataGridView dataGridView, List<string> list, DataGridView dataGridViewProduct)
+        {
+            try
+            {
+                ProvenProduct provenProduct;
+                String delId;
+                foreach (DataGridViewRow item in dataGridView.SelectedRows)
+                {
+                    if (item.Cells[1].Value != null)
+                    {
+
+                        delId = item.Cells[0].Value.ToString();
+                        provenProduct = context.ProvenProduct.First(c => c.cSerialNo == delId);
+                        context.ProvenProduct.Remove(provenProduct);
+                    }
+                    else
+                    {
+
+                        list.Remove(item.Cells[0].Value.ToString());
+                    }
+                    foreach (DataGridViewRow row in dataGridViewProduct.Rows)
+                    {
+                        var xxx = row.Cells[0].Value.ToString().Trim();
+                        if ((xxx != null) && (xxx.Equals(item.Cells[0].Value.ToString())))
+                        {
+                            row.DefaultCellStyle.BackColor = Color.Empty;
+                        }
+                    }
+
+                    this.dataOwnedProduct.RemoveAt(item.Index);
+
+                }
+                context.SaveChanges();
+                dataGridView.DataSource = null;
+                dataGridView.DataSource = this.dataOwnedProduct;
+                dataGridView.Columns["deliveryNoteID"].Visible = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
 
 
     }

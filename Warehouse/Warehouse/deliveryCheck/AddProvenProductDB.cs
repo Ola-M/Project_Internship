@@ -12,12 +12,12 @@ namespace Warehouse.deliveryCheck
     class AddProvenProductDB
     {
         warehouseDatabaseEntities1 context = new warehouseDatabaseEntities1();
-
-        public void addProven(List<string> lista, int id)
+        public AddProvenProductDB() { 
+        }
+        public void addProven(List<string> lista, int id, List<OwnedProductView> dataOwnedProduct, DataGridView dataGridView, int deliveryNoteID)
         {
             DataTable dataTable = new DataTable();
             ProvenProduct provenProduct = new ProvenProduct();
-            PobieranieDanych pobieranie = new PobieranieDanych();
             Product product = new Product();
             foreach (string e in lista)
             {
@@ -38,6 +38,9 @@ namespace Warehouse.deliveryCheck
 
                     context.ProvenProduct.Add(provenProduct);
                     context.SaveChanges();
+                    dataGridView.DataSource = null;
+                    dataGridView.DataSource = (from c in context.OwnedProductView where c.deliveryNoteID == deliveryNoteID select c).ToList();
+                    dataGridView.Columns["deliveryNoteID"].Visible = false;
                 }
                 
                   
