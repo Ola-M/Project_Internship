@@ -31,11 +31,12 @@
             this.dataGridViewProducts = new System.Windows.Forms.DataGridView();
             this.dataGridViewProvenProduct = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.buttonSave = new System.Windows.Forms.Button();
             this.textBoxAddSerial = new System.Windows.Forms.TextBox();
             this.buttonDelete = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.buttonFinishChecking = new System.Windows.Forms.Button();
             this.buttonBack = new System.Windows.Forms.Button();
+            this.buttonSummary = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProducts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProvenProduct)).BeginInit();
             this.SuspendLayout();
@@ -75,15 +76,16 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button2
+            // buttonSave
             // 
-            this.button2.Location = new System.Drawing.Point(892, 557);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(106, 56);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "Zapisz dostawę";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.buttonSave.Location = new System.Drawing.Point(892, 557);
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.Size = new System.Drawing.Size(106, 56);
+            this.buttonSave.TabIndex = 3;
+            this.buttonSave.Text = "Zapisz dostawę";
+            this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Visible = false;
+            this.buttonSave.Click += new System.EventHandler(this.button2_Click);
             // 
             // textBoxAddSerial
             // 
@@ -101,16 +103,19 @@
             this.buttonDelete.TabIndex = 5;
             this.buttonDelete.Text = "Usuń";
             this.buttonDelete.UseVisualStyleBackColor = true;
+            this.buttonDelete.Visible = false;
             this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
-            // button4
+            // buttonFinishChecking
             // 
-            this.button4.Location = new System.Drawing.Point(758, 557);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(128, 55);
-            this.button4.TabIndex = 6;
-            this.button4.Text = "Zakończ sprawdzanie";
-            this.button4.UseVisualStyleBackColor = true;
+            this.buttonFinishChecking.Location = new System.Drawing.Point(758, 557);
+            this.buttonFinishChecking.Name = "buttonFinishChecking";
+            this.buttonFinishChecking.Size = new System.Drawing.Size(128, 55);
+            this.buttonFinishChecking.TabIndex = 6;
+            this.buttonFinishChecking.Text = "Zakończ sprawdzanie";
+            this.buttonFinishChecking.UseVisualStyleBackColor = true;
+            this.buttonFinishChecking.Visible = false;
+            this.buttonFinishChecking.Click += new System.EventHandler(this.buttonFinishChecking_Click);
             // 
             // buttonBack
             // 
@@ -122,16 +127,28 @@
             this.buttonBack.UseVisualStyleBackColor = true;
             this.buttonBack.Click += new System.EventHandler(this.buttonBack_Click);
             // 
+            // buttonSummary
+            // 
+            this.buttonSummary.Location = new System.Drawing.Point(655, 558);
+            this.buttonSummary.Name = "buttonSummary";
+            this.buttonSummary.Size = new System.Drawing.Size(97, 55);
+            this.buttonSummary.TabIndex = 8;
+            this.buttonSummary.Text = "Podsumuj";
+            this.buttonSummary.UseVisualStyleBackColor = true;
+            this.buttonSummary.Visible = false;
+            this.buttonSummary.Click += new System.EventHandler(this.buttonSummary_Click);
+            // 
             // FormCheckDelivery
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1417, 641);
+            this.Controls.Add(this.buttonSummary);
             this.Controls.Add(this.buttonBack);
-            this.Controls.Add(this.button4);
+            this.Controls.Add(this.buttonFinishChecking);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.textBoxAddSerial);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dataGridViewProvenProduct);
             this.Controls.Add(this.dataGridViewProducts);
@@ -150,10 +167,11 @@
         private System.Windows.Forms.DataGridView dataGridViewProducts;
         private System.Windows.Forms.DataGridView dataGridViewProvenProduct;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.TextBox textBoxAddSerial;
         private System.Windows.Forms.Button buttonDelete;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button buttonFinishChecking;
         private System.Windows.Forms.Button buttonBack;
+        private System.Windows.Forms.Button buttonSummary;
     }
 }

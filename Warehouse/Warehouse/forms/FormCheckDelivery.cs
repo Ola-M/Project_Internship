@@ -22,7 +22,8 @@ namespace Warehouse
         List<string> list = new List<string>();
         LoadOwnedProduct loadOwned;
         AddProvenProductDB addProvenProductDB;
-        //RemoveProvenProduct removeProvenProduct;
+        CheckPermissionsProvenProduct checkPermissionsProvenProduct;
+
 
 
         int deliveryNoteID;
@@ -35,7 +36,11 @@ namespace Warehouse
             this.id = id;
             this.loadOwned = new LoadOwnedProduct(dataOwnedProducts, textBoxAddSerial);
             this.addProvenProductDB = new AddProvenProductDB();
-            //this.removeProvenProduct = new RemoveProvenProduct(dataOwnedProducts);
+            this.checkPermissionsProvenProduct = new CheckPermissionsProvenProduct(id, buttonDelete, buttonSave, buttonFinishChecking, buttonSummary);
+            checkPermissionsProvenProduct.provenProductButtons();
+
+
+
         }
 
 
@@ -77,6 +82,28 @@ namespace Warehouse
             //removeProvenProduct.removeProduct(this.dataGridViewProvenProduct, list);
             loadOwned.removeProduct(this.dataGridViewProvenProduct, list, dataGridViewProducts);
            
+        }
+
+        private void buttonFinishChecking_Click(object sender, EventArgs e)
+        {
+            const string message =
+                    "Czy chcesz zakończyć dostawę";
+            const string caption = "Edycja";
+            var result = MessageBox.Show(message, caption,
+                                         MessageBoxButtons.OKCancel,
+                                         MessageBoxIcon.Question);
+            if (result == DialogResult.OK)
+            {
+                FinishDelivery finishDelivery = new FinishDelivery(deliveryNoteID);
+                finishDelivery.changeChecked(buttonSummary);
+            }
+        }
+
+        private void buttonSummary_Click(object sender, EventArgs e)
+        {
+            
+            SummarizeDelivery summarizeDelivery = new SummarizeDelivery(id, deliveryNoteID, dataGridViewProducts, this.dataGridViewProvenProduct);
+            summarizeDelivery.summaryDelivery();
         }
     }
     

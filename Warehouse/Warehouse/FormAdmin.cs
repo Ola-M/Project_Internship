@@ -16,6 +16,8 @@ namespace Warehouse
         warehouseDatabaseEntities1 context = new warehouseDatabaseEntities1();
         List<string> textBoxList = new List<string>();
         AddingUser addingUser;
+        
+        
         public FormAdmin()
         {
             InitializeComponent();
@@ -40,9 +42,25 @@ namespace Warehouse
 
         private void buttonAddUser_Click(object sender, EventArgs e)
         {
-            this.addingUser.permission("admin");
-            sss();
-            this.addingUser.addingNewUser(dataGridViewUsers);
+            //this.addingUser.permission("admin");
+            // sss();
+            // this.addingUser.addingNewUser(dataGridViewUsers);
+            Permissions permissions;
+            UserPermissions userPermissions = new UserPermissions();
+            for (int i = 0; i < checkedListBoxPermissions.Items.Count; i++)
+            {
+                if (checkedListBoxPermissions.GetItemChecked(i))
+                {
+                    var blabla = checkedListBoxPermissions.Items[i].ToString();
+                    permissions = context.Permissions.FirstOrDefault(c => c.permissionName == blabla);
+                    userPermissions.permissionsID = permissions.permissionID;
+                    userPermissions.userID = 6;
+                    context.UserPermissions.Add(userPermissions);
+                    context.SaveChanges();
+                }
+            }
+            
+            
 
         }
 

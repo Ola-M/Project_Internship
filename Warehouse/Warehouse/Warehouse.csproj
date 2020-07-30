@@ -136,8 +136,12 @@
     </Compile>
     <Compile Include="deliveryAddDataBase\DeliveryQuery.cs" />
     <Compile Include="deliveryCheck\AddProvenProductDB.cs" />
+    <Compile Include="CheckPermissions.cs" />
+    <Compile Include="deliveryCheck\CheckPermissionsProvenProduct.cs" />
+    <Compile Include="deliveryCheck\FinishDelivery.cs" />
     <Compile Include="deliveryCheck\LoadOwnedProduct.cs" />
     <Compile Include="deliveryCheck\RemoveProvenProduct.cs" />
+    <Compile Include="deliveryCheck\SummarizeDelivery.cs" />
     <Compile Include="DeliveryNote.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

@@ -24,7 +24,7 @@ namespace Warehouse.deliveryCheck
                 
                 product = context.Product.FirstOrDefault(c => c.serialNo == e);
                
-                   if(product != null)
+                   //if(product != null)
                 {
                     provenProduct.usersID = id;
                     provenProduct.checkDate = DateTime.Now;
