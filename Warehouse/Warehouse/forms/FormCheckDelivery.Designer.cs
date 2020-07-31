@@ -30,13 +30,13 @@
         {
             this.dataGridViewProducts = new System.Windows.Forms.DataGridView();
             this.dataGridViewProvenProduct = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
             this.textBoxAddSerial = new System.Windows.Forms.TextBox();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonFinishChecking = new System.Windows.Forms.Button();
             this.buttonBack = new System.Windows.Forms.Button();
             this.buttonSummary = new System.Windows.Forms.Button();
+            this.labelNumberOfItems = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProducts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProvenProduct)).BeginInit();
             this.SuspendLayout();
@@ -66,21 +66,12 @@
             this.dataGridViewProvenProduct.Size = new System.Drawing.Size(521, 477);
             this.dataGridViewProvenProduct.TabIndex = 1;
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(991, 530);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(106, 21);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Dodaj";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(892, 557);
+            this.buttonSave.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold);
+            this.buttonSave.Location = new System.Drawing.Point(969, 558);
             this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(106, 56);
+            this.buttonSave.Size = new System.Drawing.Size(101, 56);
             this.buttonSave.TabIndex = 3;
             this.buttonSave.Text = "Zapisz dostawę";
             this.buttonSave.UseVisualStyleBackColor = true;
@@ -97,7 +88,8 @@
             // 
             // buttonDelete
             // 
-            this.buttonDelete.Location = new System.Drawing.Point(1004, 557);
+            this.buttonDelete.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold);
+            this.buttonDelete.Location = new System.Drawing.Point(1076, 558);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(101, 56);
             this.buttonDelete.TabIndex = 5;
@@ -108,20 +100,23 @@
             // 
             // buttonFinishChecking
             // 
-            this.buttonFinishChecking.Location = new System.Drawing.Point(758, 557);
+            this.buttonFinishChecking.BackColor = System.Drawing.Color.Transparent;
+            this.buttonFinishChecking.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold);
+            this.buttonFinishChecking.Location = new System.Drawing.Point(832, 558);
             this.buttonFinishChecking.Name = "buttonFinishChecking";
-            this.buttonFinishChecking.Size = new System.Drawing.Size(128, 55);
+            this.buttonFinishChecking.Size = new System.Drawing.Size(131, 56);
             this.buttonFinishChecking.TabIndex = 6;
             this.buttonFinishChecking.Text = "Zakończ sprawdzanie";
-            this.buttonFinishChecking.UseVisualStyleBackColor = true;
+            this.buttonFinishChecking.UseVisualStyleBackColor = false;
             this.buttonFinishChecking.Visible = false;
             this.buttonFinishChecking.Click += new System.EventHandler(this.buttonFinishChecking_Click);
             // 
             // buttonBack
             // 
-            this.buttonBack.Location = new System.Drawing.Point(1130, 557);
+            this.buttonBack.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold);
+            this.buttonBack.Location = new System.Drawing.Point(1183, 557);
             this.buttonBack.Name = "buttonBack";
-            this.buttonBack.Size = new System.Drawing.Size(87, 55);
+            this.buttonBack.Size = new System.Drawing.Size(101, 56);
             this.buttonBack.TabIndex = 7;
             this.buttonBack.Text = "Powrót";
             this.buttonBack.UseVisualStyleBackColor = true;
@@ -129,27 +124,37 @@
             // 
             // buttonSummary
             // 
-            this.buttonSummary.Location = new System.Drawing.Point(655, 558);
+            this.buttonSummary.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold);
+            this.buttonSummary.Location = new System.Drawing.Point(716, 558);
             this.buttonSummary.Name = "buttonSummary";
-            this.buttonSummary.Size = new System.Drawing.Size(97, 55);
+            this.buttonSummary.Size = new System.Drawing.Size(110, 56);
             this.buttonSummary.TabIndex = 8;
             this.buttonSummary.Text = "Podsumuj";
             this.buttonSummary.UseVisualStyleBackColor = true;
             this.buttonSummary.Visible = false;
             this.buttonSummary.Click += new System.EventHandler(this.buttonSummary_Click);
             // 
+            // labelNumberOfItems
+            // 
+            this.labelNumberOfItems.AutoSize = true;
+            this.labelNumberOfItems.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold);
+            this.labelNumberOfItems.Location = new System.Drawing.Point(75, 575);
+            this.labelNumberOfItems.Name = "labelNumberOfItems";
+            this.labelNumberOfItems.Size = new System.Drawing.Size(0, 23);
+            this.labelNumberOfItems.TabIndex = 9;
+            // 
             // FormCheckDelivery
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1417, 641);
+            this.Controls.Add(this.labelNumberOfItems);
             this.Controls.Add(this.buttonSummary);
             this.Controls.Add(this.buttonBack);
             this.Controls.Add(this.buttonFinishChecking);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.textBoxAddSerial);
             this.Controls.Add(this.buttonSave);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.dataGridViewProvenProduct);
             this.Controls.Add(this.dataGridViewProducts);
             this.Name = "FormCheckDelivery";
@@ -166,12 +171,12 @@
 
         private System.Windows.Forms.DataGridView dataGridViewProducts;
         private System.Windows.Forms.DataGridView dataGridViewProvenProduct;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.TextBox textBoxAddSerial;
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Button buttonFinishChecking;
         private System.Windows.Forms.Button buttonBack;
         private System.Windows.Forms.Button buttonSummary;
+        private System.Windows.Forms.Label labelNumberOfItems;
     }
 }

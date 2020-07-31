@@ -33,16 +33,9 @@
             this.buttonDodajPDF = new System.Windows.Forms.Button();
             this.textBoxLokalizacjaPliku = new System.Windows.Forms.TextBox();
             this.comboBoxWidok = new System.Windows.Forms.ComboBox();
-            this.labelTest = new System.Windows.Forms.Label();
+            this.labelSheet = new System.Windows.Forms.Label();
             this.dataGridViewInvoice = new System.Windows.Forms.DataGridView();
             this.dataGridViewProviderInvoice = new System.Windows.Forms.DataGridView();
-            this.deliveryID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.deliveryNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.invoiceDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.numberOfItemsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.companyNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.checkedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.deliveryIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.deliveryViewBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.warehouseDatabaseDeliveryView1 = new Warehouse.warehouseDatabaseDeliveryView1();
             this.deliveryViewBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -56,6 +49,13 @@
             this.deliveryBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.deliveryTableAdapter = new Warehouse.warehouseDatabaseDataSetTableAdapters.DeliveryTableAdapter();
             this.deliveryViewTableAdapter1 = new Warehouse.warehouseDatabaseDeliveryView1TableAdapters.DeliveryViewTableAdapter();
+            this.deliveryID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.deliveryNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.invoiceDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.numberOfItemsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.companyNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.checkedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.deliveryIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInvoice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProviderInvoice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.deliveryViewBindingSource1)).BeginInit();
@@ -70,6 +70,7 @@
             // 
             // buttonWyloguj
             // 
+            this.buttonWyloguj.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold);
             this.buttonWyloguj.Location = new System.Drawing.Point(809, 598);
             this.buttonWyloguj.Name = "buttonWyloguj";
             this.buttonWyloguj.Size = new System.Drawing.Size(179, 42);
@@ -107,15 +108,16 @@
             this.comboBoxWidok.TabIndex = 4;
             this.comboBoxWidok.SelectedIndexChanged += new System.EventHandler(this.comboBoxWidok_SelectedIndexChanged);
             // 
-            // labelTest
+            // labelSheet
             // 
-            this.labelTest.AutoSize = true;
-            this.labelTest.Location = new System.Drawing.Point(45, 420);
-            this.labelTest.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelTest.Name = "labelTest";
-            this.labelTest.Size = new System.Drawing.Size(35, 13);
-            this.labelTest.TabIndex = 5;
-            this.labelTest.Text = "label1";
+            this.labelSheet.AutoSize = true;
+            this.labelSheet.Font = new System.Drawing.Font("Arial Black", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelSheet.Location = new System.Drawing.Point(63, 415);
+            this.labelSheet.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelSheet.Name = "labelSheet";
+            this.labelSheet.Size = new System.Drawing.Size(50, 18);
+            this.labelSheet.TabIndex = 5;
+            this.labelSheet.Text = "Sheet";
             // 
             // dataGridViewInvoice
             // 
@@ -125,7 +127,7 @@
             this.dataGridViewInvoice.Location = new System.Drawing.Point(26, 29);
             this.dataGridViewInvoice.Name = "dataGridViewInvoice";
             this.dataGridViewInvoice.ReadOnly = true;
-            this.dataGridViewInvoice.Size = new System.Drawing.Size(709, 150);
+            this.dataGridViewInvoice.Size = new System.Drawing.Size(962, 293);
             this.dataGridViewInvoice.TabIndex = 6;
             // 
             // dataGridViewProviderInvoice
@@ -146,60 +148,9 @@
             this.dataGridViewProviderInvoice.Location = new System.Drawing.Point(26, 505);
             this.dataGridViewProviderInvoice.Name = "dataGridViewProviderInvoice";
             this.dataGridViewProviderInvoice.ReadOnly = true;
-            this.dataGridViewProviderInvoice.Size = new System.Drawing.Size(709, 150);
+            this.dataGridViewProviderInvoice.Size = new System.Drawing.Size(654, 150);
             this.dataGridViewProviderInvoice.TabIndex = 7;
             this.dataGridViewProviderInvoice.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewProviderInvoice_CellDoubleClick);
-            // 
-            // deliveryID
-            // 
-            this.deliveryID.DataPropertyName = "deliveryID";
-            this.deliveryID.HeaderText = "deliveryID";
-            this.deliveryID.Name = "deliveryID";
-            this.deliveryID.ReadOnly = true;
-            this.deliveryID.Visible = false;
-            // 
-            // deliveryNumberDataGridViewTextBoxColumn
-            // 
-            this.deliveryNumberDataGridViewTextBoxColumn.DataPropertyName = "deliveryNumber";
-            this.deliveryNumberDataGridViewTextBoxColumn.HeaderText = "deliveryNumber";
-            this.deliveryNumberDataGridViewTextBoxColumn.Name = "deliveryNumberDataGridViewTextBoxColumn";
-            this.deliveryNumberDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // invoiceDateDataGridViewTextBoxColumn
-            // 
-            this.invoiceDateDataGridViewTextBoxColumn.DataPropertyName = "invoiceDate";
-            this.invoiceDateDataGridViewTextBoxColumn.HeaderText = "invoiceDate";
-            this.invoiceDateDataGridViewTextBoxColumn.Name = "invoiceDateDataGridViewTextBoxColumn";
-            this.invoiceDateDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // numberOfItemsDataGridViewTextBoxColumn
-            // 
-            this.numberOfItemsDataGridViewTextBoxColumn.DataPropertyName = "numberOfItems";
-            this.numberOfItemsDataGridViewTextBoxColumn.HeaderText = "numberOfItems";
-            this.numberOfItemsDataGridViewTextBoxColumn.Name = "numberOfItemsDataGridViewTextBoxColumn";
-            this.numberOfItemsDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // companyNameDataGridViewTextBoxColumn
-            // 
-            this.companyNameDataGridViewTextBoxColumn.DataPropertyName = "companyName";
-            this.companyNameDataGridViewTextBoxColumn.HeaderText = "companyName";
-            this.companyNameDataGridViewTextBoxColumn.Name = "companyNameDataGridViewTextBoxColumn";
-            this.companyNameDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // checkedDataGridViewCheckBoxColumn
-            // 
-            this.checkedDataGridViewCheckBoxColumn.DataPropertyName = "checked";
-            this.checkedDataGridViewCheckBoxColumn.HeaderText = "checked";
-            this.checkedDataGridViewCheckBoxColumn.Name = "checkedDataGridViewCheckBoxColumn";
-            this.checkedDataGridViewCheckBoxColumn.ReadOnly = true;
-            // 
-            // deliveryIDDataGridViewTextBoxColumn
-            // 
-            this.deliveryIDDataGridViewTextBoxColumn.DataPropertyName = "deliveryID";
-            this.deliveryIDDataGridViewTextBoxColumn.HeaderText = "deliveryID";
-            this.deliveryIDDataGridViewTextBoxColumn.Name = "deliveryIDDataGridViewTextBoxColumn";
-            this.deliveryIDDataGridViewTextBoxColumn.ReadOnly = true;
-            this.deliveryIDDataGridViewTextBoxColumn.Visible = false;
             // 
             // deliveryViewBindingSource1
             // 
@@ -267,6 +218,59 @@
             // 
             this.deliveryViewTableAdapter1.ClearBeforeFill = true;
             // 
+            // deliveryID
+            // 
+            this.deliveryID.DataPropertyName = "deliveryID";
+            this.deliveryID.HeaderText = "deliveryID";
+            this.deliveryID.Name = "deliveryID";
+            this.deliveryID.ReadOnly = true;
+            this.deliveryID.Visible = false;
+            // 
+            // deliveryNumberDataGridViewTextBoxColumn
+            // 
+            this.deliveryNumberDataGridViewTextBoxColumn.DataPropertyName = "deliveryNumber";
+            this.deliveryNumberDataGridViewTextBoxColumn.HeaderText = "Numer dostawy";
+            this.deliveryNumberDataGridViewTextBoxColumn.Name = "deliveryNumberDataGridViewTextBoxColumn";
+            this.deliveryNumberDataGridViewTextBoxColumn.ReadOnly = true;
+            this.deliveryNumberDataGridViewTextBoxColumn.Width = 180;
+            // 
+            // invoiceDateDataGridViewTextBoxColumn
+            // 
+            this.invoiceDateDataGridViewTextBoxColumn.DataPropertyName = "invoiceDate";
+            this.invoiceDateDataGridViewTextBoxColumn.HeaderText = "Data dostawy";
+            this.invoiceDateDataGridViewTextBoxColumn.Name = "invoiceDateDataGridViewTextBoxColumn";
+            this.invoiceDateDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // numberOfItemsDataGridViewTextBoxColumn
+            // 
+            this.numberOfItemsDataGridViewTextBoxColumn.DataPropertyName = "numberOfItems";
+            this.numberOfItemsDataGridViewTextBoxColumn.HeaderText = "Ilość przedmiotów";
+            this.numberOfItemsDataGridViewTextBoxColumn.Name = "numberOfItemsDataGridViewTextBoxColumn";
+            this.numberOfItemsDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // companyNameDataGridViewTextBoxColumn
+            // 
+            this.companyNameDataGridViewTextBoxColumn.DataPropertyName = "companyName";
+            this.companyNameDataGridViewTextBoxColumn.HeaderText = "Dostawca";
+            this.companyNameDataGridViewTextBoxColumn.Name = "companyNameDataGridViewTextBoxColumn";
+            this.companyNameDataGridViewTextBoxColumn.ReadOnly = true;
+            this.companyNameDataGridViewTextBoxColumn.Width = 130;
+            // 
+            // checkedDataGridViewCheckBoxColumn
+            // 
+            this.checkedDataGridViewCheckBoxColumn.DataPropertyName = "checked";
+            this.checkedDataGridViewCheckBoxColumn.HeaderText = "Sprawdzone";
+            this.checkedDataGridViewCheckBoxColumn.Name = "checkedDataGridViewCheckBoxColumn";
+            this.checkedDataGridViewCheckBoxColumn.ReadOnly = true;
+            // 
+            // deliveryIDDataGridViewTextBoxColumn
+            // 
+            this.deliveryIDDataGridViewTextBoxColumn.DataPropertyName = "deliveryID";
+            this.deliveryIDDataGridViewTextBoxColumn.HeaderText = "deliveryID";
+            this.deliveryIDDataGridViewTextBoxColumn.Name = "deliveryIDDataGridViewTextBoxColumn";
+            this.deliveryIDDataGridViewTextBoxColumn.ReadOnly = true;
+            this.deliveryIDDataGridViewTextBoxColumn.Visible = false;
+            // 
             // FormZalogowany
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -276,15 +280,14 @@
             this.Controls.Add(this.buttonDodajExcelDoBazy);
             this.Controls.Add(this.dataGridViewProviderInvoice);
             this.Controls.Add(this.dataGridViewInvoice);
-            this.Controls.Add(this.labelTest);
+            this.Controls.Add(this.labelSheet);
             this.Controls.Add(this.comboBoxWidok);
             this.Controls.Add(this.textBoxLokalizacjaPliku);
             this.Controls.Add(this.buttonDodajPDF);
             this.Controls.Add(this.buttonWyloguj);
             this.Name = "FormZalogowany";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Text = "Delivery";
             this.Load += new System.EventHandler(this.FormZalogowany_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInvoice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProviderInvoice)).EndInit();
@@ -313,7 +316,7 @@
         public System.Windows.Forms.BindingSource productBindingSource;
         private warehouseDatabaseDataSetProductTableAdapters.ProductTableAdapter productTableAdapter;
         public System.Windows.Forms.TextBox textBoxLokalizacjaPliku;
-        public System.Windows.Forms.Label labelTest;
+        public System.Windows.Forms.Label labelSheet;
         public System.Windows.Forms.Button buttonDodajExcelDoBazy;
         private System.Windows.Forms.Button buttonDodajPDF;
         private warehouseDatabaseDeliveryView1 warehouseDatabaseDeliveryView1;

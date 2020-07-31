@@ -12,15 +12,25 @@ namespace Warehouse.forms
 {
     public partial class FormSummary : Form
     {
-        public FormSummary()
+        List<Product> incorrectProducts;
+        public FormSummary(List<Product> products)
         {
             InitializeComponent();
+            this.incorrectProducts = products;
         }
 
         private void FormSummary_Load(object sender, EventArgs e)
         {
+            if(incorrectProducts.Count != 0)
+            {
+                dataGridViewSummary.Visible = true;
+                dataGridViewSummary.DataSource = incorrectProducts;
+            }
+            
+        }
+        private void products()
+        {
 
-            //dataGridViewSummary.DataSource = ;
         }
     }
 }

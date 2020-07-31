@@ -47,19 +47,6 @@ namespace Warehouse.admin
         {
             var id = context.Users.FirstOrDefault(c => c.login == eee);
             userPermissions.userID = id.usersID;
-            var sss = checkedListBoxPermissions.CheckedIndices;
-            var w = sss;
-           /* if ()
-            {
-                var x = 1;
-            }
-
-            if (checkedListBoxPermissions.SelectedItem.Equals("Magazynier") == true)
-            {
-                var x = 1;
-            }*/
-
-
             userPermissions.permissionsID = 1;
             context.UserPermissions.Add(userPermissions);
             context.SaveChanges();
@@ -70,11 +57,6 @@ namespace Warehouse.admin
             context.UserPermissions.Add(userPermissions);
             context.SaveChanges();
 
-        }
-
-        private void addingToDB()
-        {
-            
         }
 
         

@@ -5,11 +5,13 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Warehouse.bazaDanych;
 using Warehouse.deliveryAddDataBase;
 using Warehouse.deliveryCheck;
+using Warehouse.forms;
 using Warehouse.warehouseDatabaseDeliveryView1TableAdapters;
 
 namespace Warehouse
@@ -23,11 +25,13 @@ namespace Warehouse
         LoadOwnedProduct loadOwned;
         AddProvenProductDB addProvenProductDB;
         CheckPermissionsProvenProduct checkPermissionsProvenProduct;
+        private string numberOfItems = "";
 
 
 
         int deliveryNoteID;
         int id;
+        string serial;
         public FormCheckDelivery(int deliveryNoteID, int id)
         {
             InitializeComponent();
@@ -38,25 +42,25 @@ namespace Warehouse
             this.addProvenProductDB = new AddProvenProductDB();
             this.checkPermissionsProvenProduct = new CheckPermissionsProvenProduct(id, buttonDelete, buttonSave, buttonFinishChecking, buttonSummary);
             checkPermissionsProvenProduct.provenProductButtons();
-
-
-
-        }
-
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-            list.Add(textBoxAddSerial.Text.Trim());
-            loadOwned.addSerial(dataGridViewProvenProduct, dataGridViewProducts);
             this.ActiveControl = textBoxAddSerial;
+
+
+
+
         }
+
+
 
         private void FormCheckDelivery_Load(object sender, EventArgs e)
         {
             var data = (from c in context.ProductView where c.deliveryNoteID == deliveryNoteID select c);
+            var items  = context.DeliveryNote.FirstOrDefault(c => c.deliveryNoteID == this.deliveryNoteID);
+            List<ProductView> productViews = new List<ProductView>();
             dataGridViewProducts.DataSource = data.ToList();
+            this.ActiveControl = textBoxAddSerial;
             loadOwned.loadProducts(dataGridViewProvenProduct, deliveryNoteID, dataGridViewProducts);
+            this.numberOfItems = items.numberOfItems.ToString();
+            labelNumberOfItems.Text = dataGridViewProvenProduct.Rows.Count + "/"+ numberOfItems;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -67,6 +71,23 @@ namespace Warehouse
 
         private void textBoxAddSerial_TextChanged(object sender, EventArgs e)
         {
+            if (serial == null)
+            {
+                serial = textBoxAddSerial.Text;
+            }
+            else
+            {
+                serial = textBoxAddSerial.Text;
+            }
+            if (serial.Length >= 12) {
+                list.Add(textBoxAddSerial.Text.Trim());
+                loadOwned.addSerial(dataGridViewProvenProduct, dataGridViewProducts);
+                this.ActiveControl = textBoxAddSerial;
+                labelNumberOfItems.Text = dataGridViewProvenProduct.Rows.Count + "/" + numberOfItems;
+                
+            }
+            
+
 
         }
 
@@ -79,9 +100,10 @@ namespace Warehouse
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
-            //removeProvenProduct.removeProduct(this.dataGridViewProvenProduct, list);
+
             loadOwned.removeProduct(this.dataGridViewProvenProduct, list, dataGridViewProducts);
-           
+            labelNumberOfItems.Text = dataGridViewProvenProduct.Rows.Count + "/" + numberOfItems;
+
         }
 
         private void buttonFinishChecking_Click(object sender, EventArgs e)
@@ -104,6 +126,9 @@ namespace Warehouse
             
             SummarizeDelivery summarizeDelivery = new SummarizeDelivery(id, deliveryNoteID, dataGridViewProducts, this.dataGridViewProvenProduct);
             summarizeDelivery.summaryDelivery();
+            FormSummary formSummary = new FormSummary(summarizeDelivery.getIncorrect());
+            formSummary.Show();
+            this.Hide();
         }
     }
     

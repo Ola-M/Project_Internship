@@ -39,6 +39,7 @@
             this.dataGridViewSummary.Name = "dataGridViewSummary";
             this.dataGridViewSummary.Size = new System.Drawing.Size(776, 150);
             this.dataGridViewSummary.TabIndex = 0;
+            this.dataGridViewSummary.Visible = false;
             // 
             // FormSummary
             // 

@@ -38,19 +38,20 @@
             // labelLogin
             // 
             this.labelLogin.AutoSize = true;
-            this.labelLogin.Location = new System.Drawing.Point(180, 158);
+            this.labelLogin.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelLogin.Location = new System.Drawing.Point(237, 158);
             this.labelLogin.Name = "labelLogin";
-            this.labelLogin.Size = new System.Drawing.Size(36, 13);
+            this.labelLogin.Size = new System.Drawing.Size(64, 23);
             this.labelLogin.TabIndex = 0;
             this.labelLogin.Text = "Login:";
             // 
             // labelHaslo
             // 
             this.labelHaslo.AutoSize = true;
-            this.labelHaslo.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelHaslo.Location = new System.Drawing.Point(183, 227);
+            this.labelHaslo.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold);
+            this.labelHaslo.Location = new System.Drawing.Point(237, 227);
             this.labelHaslo.Name = "labelHaslo";
-            this.labelHaslo.Size = new System.Drawing.Size(52, 20);
+            this.labelHaslo.Size = new System.Drawing.Size(70, 23);
             this.labelHaslo.TabIndex = 1;
             this.labelHaslo.Text = "Hasło: ";
             // 
@@ -72,6 +73,7 @@
             // 
             // buttonLogin
             // 
+            this.buttonLogin.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold);
             this.buttonLogin.Location = new System.Drawing.Point(351, 312);
             this.buttonLogin.Name = "buttonLogin";
             this.buttonLogin.Size = new System.Drawing.Size(165, 52);

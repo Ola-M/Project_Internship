@@ -17,6 +17,9 @@ namespace Warehouse.deliveryCheck
         int deliveryNoteId;
         DataGridView dataGridViewProduct;
         DataGridView dataGridViewProvenProduct;
+        List<Product> list = new List<Product>();
+        
+
         public SummarizeDelivery(int userId, int deliveryNoteId, DataGridView dataGridViewProduct, DataGridView dataGridViewProvenProduct)
         {
             this.userId = userId;
@@ -27,21 +30,35 @@ namespace Warehouse.deliveryCheck
         }
         public void summaryDelivery()
         {
-            summary.deliveryNoteID = deliveryNoteId;
-            delivery = context.Delivery.FirstOrDefault(c => c.deliveryNoteID == this.deliveryNoteId);
-            summary.deliveryID = delivery.deliveryID;
-            summary.usersID = userId;
-            summary.correct = checkCorrect();
-            summary.closed = true;
-            summary.deliveryCloseDate = DateTime.Now;
-            context.Summary.Add(summary);
-            context.SaveChanges();
+            var summaryExist = context.Summary.FirstOrDefault(c => c.deliveryNoteID == this.deliveryNoteId);
+
+            if ((summaryExist == null)||(summaryExist.correct == false))
+            {
+                if (summaryExist != null)
+                {
+                    context.Summary.Remove(summaryExist);
+                    context.SaveChanges();
+                }
+                summary.deliveryNoteID = deliveryNoteId;
+                delivery = context.Delivery.FirstOrDefault(c => c.deliveryNoteID == this.deliveryNoteId);
+                summary.deliveryID = delivery.deliveryID;
+                summary.usersID = userId;
+                summary.correct = checkCorrect();
+                summary.closed = true;
+                summary.deliveryCloseDate = DateTime.Now;
+                context.Summary.Add(summary);
+                context.SaveChanges();
+            }
+            else
+            {
+                checkCorrect();
+            }
         }
         private bool checkCorrect()
         {
             deliveryNote = context.DeliveryNote.FirstOrDefault(c => c.deliveryNoteID == this.deliveryNoteId);
 
-            int ilosc = 0;
+            
             string grid2 = "";
             string grid1 = "";
             for (int i = dataGridViewProduct.RowCount - 1; i >= 0; i--)
@@ -58,17 +75,25 @@ namespace Warehouse.deliveryCheck
 
                 if ((grid1 != grid2))
                 {
-                    return true;
+                    this.list.Add(context.Product.FirstOrDefault(c => c.serialNo == grid1));
+                    
                 }
             }
-           if(dataGridViewProvenProduct.Rows.Count != deliveryNote.numberOfItems)
+           if((dataGridViewProvenProduct.Rows.Count != deliveryNote.numberOfItems)||(list.Count > 0))
+                {
+                    return false;
+                }
+           else
             {
                 return true;
             }
 
 
-            return false;
         
+        }
+        public List<Product> getIncorrect()
+        {
+            return list;
         }
     }
 }
