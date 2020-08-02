@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Warehouse.admin;
 
@@ -13,15 +8,21 @@ namespace Warehouse
 {
     public partial class FormAdmin : Form
     {
-        warehouseDatabaseEntities1 context = new warehouseDatabaseEntities1();
-        List<string> textBoxList = new List<string>();
-        AddingUser addingUser;
-        
-        
+        private warehouseDatabaseEntities1 context = new warehouseDatabaseEntities1();
+        private List<string> textBoxList = new List<string>();
+        RemoveUser removeUser;
+        ClearTextBox clearTextBox;
+        List<CheckBox> checkBoxesList = new List<CheckBox>();
+        EditUsers editUsers;
+        AddOrUpdateUsers addOrUpdateUsers ;
+
         public FormAdmin()
         {
             InitializeComponent();
-            this.addingUser = new AddingUser(textBoxList,checkedListBoxPermissions);
+            this.addOrUpdateUsers = new AddOrUpdateUsers(textBoxList, checkBoxesList);
+            this.removeUser = new RemoveUser();
+            this.editUsers = new EditUsers(textBoxList,checkBoxesList, dataGridViewUsers);
+            this.clearTextBox = new ClearTextBox(textBoxName, textBoxForname, textBoxLogin, textBoxPassword, textBoxList);
         }
 
 
@@ -31,41 +32,43 @@ namespace Warehouse
             this.usersTableAdapter.Fill(this.warehouseDatabaseDataSet1.Users);
 
         }
-
-        private void sss()
+        private void createCheckBoxList()
         {
-            textBoxList.Add(textBoxName.Text);
-            textBoxList.Add(textBoxForname.Text);
-            textBoxList.Add(textBoxLogin.Text);
-            textBoxList.Add(textBoxPassword.Text);
+            checkBoxesList.Add(checkBoxWarehouseman);
+            checkBoxesList.Add(checkBoxLogistician);
+            checkBoxesList.Add(checkBoxAdmin);
         }
+
+
 
         private void buttonAddUser_Click(object sender, EventArgs e)
         {
-            //this.addingUser.permission("admin");
-            // sss();
-            // this.addingUser.addingNewUser(dataGridViewUsers);
-            Permissions permissions;
-            UserPermissions userPermissions = new UserPermissions();
-            for (int i = 0; i < checkedListBoxPermissions.Items.Count; i++)
-            {
-                if (checkedListBoxPermissions.GetItemChecked(i))
-                {
-                    var blabla = checkedListBoxPermissions.Items[i].ToString();
-                    permissions = context.Permissions.FirstOrDefault(c => c.permissionName == blabla);
-                    userPermissions.permissionsID = permissions.permissionID;
-                    userPermissions.userID = 6;
-                    context.UserPermissions.Add(userPermissions);
-                    context.SaveChanges();
-                }
-            }
-            
-            
+            textBoxList.Clear();
+            checkBoxesList.Clear();
+            createCheckBoxList();
+            clearTextBox.addTextBoxToList();
+            addOrUpdateUsers.addOrUpdate(dataGridViewUsers);
+            clearTextBox.clearText();
+            checkBoxesList.Clear();
+            FormAdmin_Load(sender, e);
 
         }
 
         private void buttonDeleteUser_Click(object sender, EventArgs e)
         {
+            removeUser.delUser(dataGridViewUsers);
+            clearTextBox.clearText();
+            FormAdmin_Load(sender, e);
+
+        }
+        private void dataGridViewUsers_DoubleClick(object sender, EventArgs e)
+        {
+            createCheckBoxList();
+            textBoxList = editUsers.addU();
+            textBoxName.Text = textBoxList[0];
+            textBoxForname.Text = textBoxList[1];
+            textBoxLogin.Text = textBoxList[2];
+            textBoxPassword.Text = textBoxList[3];
 
         }
     }

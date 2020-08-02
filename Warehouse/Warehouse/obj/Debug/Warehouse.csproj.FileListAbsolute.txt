@@ -95,3 +95,6 @@ D:\Project_Internship\Warehouse\Warehouse\bin\Debug\Z.Dapper.Plus.xml
 C:\Users\BartoszSkrabka\Desktop\Apka\Warehouse\Warehouse\obj\Debug\Warehouse.FormCheckDelivery.resources
 C:\Users\BartoszSkrabka\Desktop\Apka\Warehouse\Warehouse\obj\Debug\Warehouse.forms.FormSummary.resources
 C:\Users\BartoszSkrabka\Desktop\Apka\Warehouse\Warehouse\obj\Debug\Warehouse.FormAdmin.resources
+D:\Project_Internship\Warehouse\Warehouse\obj\Debug\Warehouse.FormAdmin.resources
+D:\Project_Internship\Warehouse\Warehouse\obj\Debug\Warehouse.FormCheckDelivery.resources
+D:\Project_Internship\Warehouse\Warehouse\obj\Debug\Warehouse.forms.FormSummary.resources

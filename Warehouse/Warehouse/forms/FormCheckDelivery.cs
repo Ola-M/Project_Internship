@@ -25,7 +25,7 @@ namespace Warehouse
         LoadOwnedProduct loadOwned;
         AddProvenProductDB addProvenProductDB;
         CheckPermissionsProvenProduct checkPermissionsProvenProduct;
-        private string numberOfItems = "";
+        private string numberOfItems = "0";
 
 
 
@@ -53,14 +53,20 @@ namespace Warehouse
 
         private void FormCheckDelivery_Load(object sender, EventArgs e)
         {
-            var data = (from c in context.ProductView where c.deliveryNoteID == deliveryNoteID select c);
-            var items  = context.DeliveryNote.FirstOrDefault(c => c.deliveryNoteID == this.deliveryNoteID);
-            List<ProductView> productViews = new List<ProductView>();
-            dataGridViewProducts.DataSource = data.ToList();
-            this.ActiveControl = textBoxAddSerial;
-            loadOwned.loadProducts(dataGridViewProvenProduct, deliveryNoteID, dataGridViewProducts);
-            this.numberOfItems = items.numberOfItems.ToString();
-            labelNumberOfItems.Text = dataGridViewProvenProduct.Rows.Count + "/"+ numberOfItems;
+            try
+            {
+                var data = (from c in context.ProductView where c.deliveryNoteID == deliveryNoteID select c);
+                var items = context.DeliveryNote.FirstOrDefault(c => c.deliveryNoteID == this.deliveryNoteID);
+                List<ProductView> productViews = new List<ProductView>();
+                dataGridViewProducts.DataSource = data.ToList();
+                this.ActiveControl = textBoxAddSerial;
+                loadOwned.loadProducts(dataGridViewProvenProduct, deliveryNoteID, dataGridViewProducts);
+                if (items != null)
+                {
+                    this.numberOfItems = items.numberOfItems.ToString();
+                }
+                labelNumberOfItems.Text = dataGridViewProvenProduct.Rows.Count + "/" + numberOfItems;
+            }catch(Exception ex) { }
         }
 
         private void button2_Click(object sender, EventArgs e)
