@@ -37,6 +37,8 @@
             this.buttonBack = new System.Windows.Forms.Button();
             this.buttonSummary = new System.Windows.Forms.Button();
             this.labelNumberOfItems = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.labelCorrectProducts = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProducts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProvenProduct)).BeginInit();
             this.SuspendLayout();
@@ -76,7 +78,7 @@
             this.buttonSave.Text = "Zapisz dostawę";
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Visible = false;
-            this.buttonSave.Click += new System.EventHandler(this.button2_Click);
+            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
             // textBoxAddSerial
             // 
@@ -84,6 +86,7 @@
             this.textBoxAddSerial.Name = "textBoxAddSerial";
             this.textBoxAddSerial.Size = new System.Drawing.Size(227, 20);
             this.textBoxAddSerial.TabIndex = 4;
+            this.textBoxAddSerial.Visible = false;
             this.textBoxAddSerial.TextChanged += new System.EventHandler(this.textBoxAddSerial_TextChanged);
             // 
             // buttonDelete
@@ -138,16 +141,37 @@
             // 
             this.labelNumberOfItems.AutoSize = true;
             this.labelNumberOfItems.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold);
-            this.labelNumberOfItems.Location = new System.Drawing.Point(75, 575);
+            this.labelNumberOfItems.Location = new System.Drawing.Point(340, 540);
             this.labelNumberOfItems.Name = "labelNumberOfItems";
             this.labelNumberOfItems.Size = new System.Drawing.Size(0, 23);
             this.labelNumberOfItems.TabIndex = 9;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold);
+            this.label1.Location = new System.Drawing.Point(12, 540);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(306, 23);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Ilość zeskanowanych produktów:";
+            // 
+            // labelCorrectProducts
+            // 
+            this.labelCorrectProducts.AutoSize = true;
+            this.labelCorrectProducts.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold);
+            this.labelCorrectProducts.Location = new System.Drawing.Point(16, 600);
+            this.labelCorrectProducts.Name = "labelCorrectProducts";
+            this.labelCorrectProducts.Size = new System.Drawing.Size(0, 23);
+            this.labelCorrectProducts.TabIndex = 11;
             // 
             // FormCheckDelivery
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1417, 641);
+            this.Controls.Add(this.labelCorrectProducts);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.labelNumberOfItems);
             this.Controls.Add(this.buttonSummary);
             this.Controls.Add(this.buttonBack);
@@ -178,5 +202,7 @@
         private System.Windows.Forms.Button buttonBack;
         private System.Windows.Forms.Button buttonSummary;
         private System.Windows.Forms.Label labelNumberOfItems;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelCorrectProducts;
     }
 }

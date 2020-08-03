@@ -17,13 +17,14 @@ namespace Warehouse
         public int provenProductID { get; set; }
         public int deliveryNoteID { get; set; }
         public int usersID { get; set; }
-        public System.DateTime checkDate { get; set; }
+        public Nullable<System.DateTime> checkDate { get; set; }
         public string cCompany { get; set; }
         public string cOrderNumber { get; set; }
-        public int cItemNumber { get; set; }
+        public Nullable<int> cItemNumber { get; set; }
         public string cProductCode { get; set; }
         public string cProductName { get; set; }
         public string cSerialNo { get; set; }
+        public Nullable<bool> offTheList { get; set; }
     
         public virtual DeliveryNote DeliveryNote { get; set; }
         public virtual Users Users { get; set; }

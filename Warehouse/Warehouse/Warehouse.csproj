@@ -147,14 +147,14 @@
     <Compile Include="deliveryCheck\LoadOwnedProduct.cs" />
     <Compile Include="deliveryCheck\RemoveProvenProduct.cs" />
     <Compile Include="deliveryCheck\SummarizeDelivery.cs" />
+    <Compile Include="deliveryAddDataBase\AddExcelToDatabase.cs" />
+    <Compile Include="deliveryAddDataBase\LoadExcel.cs" />
     <Compile Include="DeliveryNote.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="DeliveryView.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="deliveryAddDataBase\AddExcelToDatabase.cs" />
-    <Compile Include="deliveryAddDataBase\LoadExcel.cs" />
     <Compile Include="FormAdmin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -201,6 +201,8 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
     <Compile Include="ObservableListSource.cs" />
+    <Compile Include="deliveryAddDataBase\LoadDeliveryNote.cs" />
+    <Compile Include="deliveryAddDataBase\LoadProduct.cs" />
     <Compile Include="OwnedProductView.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -210,8 +212,6 @@
     <Compile Include="Product.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="deliveryAddDataBase\LoadDeliveryNote.cs" />
-    <Compile Include="deliveryAddDataBase\LoadProduct.cs" />
     <Compile Include="ProductView.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

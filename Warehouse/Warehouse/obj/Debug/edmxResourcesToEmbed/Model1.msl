@@ -43,22 +43,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ProvenProduct">
-      <EntityTypeMapping TypeName="warehouseDatabaseModel.ProvenProduct">
-        <MappingFragment StoreEntitySet="ProvenProduct">
-          <ScalarProperty Name="cSerialNo" ColumnName="cSerialNo" />
-          <ScalarProperty Name="cProductName" ColumnName="cProductName" />
-          <ScalarProperty Name="cProductCode" ColumnName="cProductCode" />
-          <ScalarProperty Name="cItemNumber" ColumnName="cItemNumber" />
-          <ScalarProperty Name="cOrderNumber" ColumnName="cOrderNumber" />
-          <ScalarProperty Name="cCompany" ColumnName="cCompany" />
-          <ScalarProperty Name="checkDate" ColumnName="checkDate" />
-          <ScalarProperty Name="usersID" ColumnName="usersID" />
-          <ScalarProperty Name="deliveryNoteID" ColumnName="deliveryNoteID" />
-          <ScalarProperty Name="provenProductID" ColumnName="provenProductID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Provider">
       <EntityTypeMapping TypeName="warehouseDatabaseModel.Provider">
         <MappingFragment StoreEntitySet="Provider">
@@ -116,6 +100,7 @@
     <EntitySetMapping Name="OwnedProductView">
       <EntityTypeMapping TypeName="warehouseDatabaseModel.OwnedProductView">
         <MappingFragment StoreEntitySet="OwnedProductView">
+          <ScalarProperty Name="Is_in_delivery_note" ColumnName="Is in delivery note" />
           <ScalarProperty Name="deliveryNoteID" ColumnName="deliveryNoteID" />
           <ScalarProperty Name="Company" ColumnName="Company" />
           <ScalarProperty Name="ProductName" ColumnName="ProductName" />
@@ -130,6 +115,23 @@
           <ScalarProperty Name="Company" ColumnName="Company" />
           <ScalarProperty Name="ProductName" ColumnName="ProductName" />
           <ScalarProperty Name="Serial" ColumnName="Serial" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProvenProduct">
+      <EntityTypeMapping TypeName="warehouseDatabaseModel.ProvenProduct">
+        <MappingFragment StoreEntitySet="ProvenProduct">
+          <ScalarProperty Name="offTheList" ColumnName="offTheList" />
+          <ScalarProperty Name="cSerialNo" ColumnName="cSerialNo" />
+          <ScalarProperty Name="cProductName" ColumnName="cProductName" />
+          <ScalarProperty Name="cProductCode" ColumnName="cProductCode" />
+          <ScalarProperty Name="cItemNumber" ColumnName="cItemNumber" />
+          <ScalarProperty Name="cOrderNumber" ColumnName="cOrderNumber" />
+          <ScalarProperty Name="cCompany" ColumnName="cCompany" />
+          <ScalarProperty Name="checkDate" ColumnName="checkDate" />
+          <ScalarProperty Name="usersID" ColumnName="usersID" />
+          <ScalarProperty Name="deliveryNoteID" ColumnName="deliveryNoteID" />
+          <ScalarProperty Name="provenProductID" ColumnName="provenProductID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

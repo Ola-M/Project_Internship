@@ -29,7 +29,6 @@ namespace Warehouse
         public virtual DbSet<DeliveryNote> DeliveryNote { get; set; }
         public virtual DbSet<Permissions> Permissions { get; set; }
         public virtual DbSet<Product> Product { get; set; }
-        public virtual DbSet<ProvenProduct> ProvenProduct { get; set; }
         public virtual DbSet<Provider> Provider { get; set; }
         public virtual DbSet<Summary> Summary { get; set; }
         public virtual DbSet<UserPermissions> UserPermissions { get; set; }
@@ -37,5 +36,6 @@ namespace Warehouse
         public virtual DbSet<DeliveryView> DeliveryView { get; set; }
         public virtual DbSet<OwnedProductView> OwnedProductView { get; set; }
         public virtual DbSet<ProductView> ProductView { get; set; }
+        public virtual DbSet<ProvenProduct> ProvenProduct { get; set; }
     }
 }

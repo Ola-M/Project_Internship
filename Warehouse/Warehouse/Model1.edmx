@@ -28,7 +28,7 @@
             <PropertyRef Name="permissionID" />
           </Key>
           <Property Name="permissionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="permissionName" Type="varchar" MaxLength="50" />
+          <Property Name="permissionName" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -50,13 +50,14 @@
           <Property Name="provenProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="deliveryNoteID" Type="int" Nullable="false" />
           <Property Name="usersID" Type="int" Nullable="false" />
-          <Property Name="checkDate" Type="datetime" Nullable="false" />
-          <Property Name="cCompany" Type="varchar(max)" Nullable="false" />
-          <Property Name="cOrderNumber" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="cItemNumber" Type="int" Nullable="false" />
-          <Property Name="cProductCode" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="cProductName" Type="varchar(max)" Nullable="false" />
+          <Property Name="checkDate" Type="datetime" />
+          <Property Name="cCompany" Type="varchar(max)" />
+          <Property Name="cOrderNumber" Type="varchar" MaxLength="50" />
+          <Property Name="cItemNumber" Type="int" />
+          <Property Name="cProductCode" Type="varchar" MaxLength="50" />
+          <Property Name="cProductName" Type="varchar(max)" />
           <Property Name="cSerialNo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="offTheList" Type="bit" />
         </EntityType>
         <EntityType Name="Provider">
           <Key>
@@ -119,14 +120,15 @@ warning 6002: The table/view 'warehouseDatabase.dbo.OwnedProductView' does not h
         <EntityType Name="OwnedProductView">
           <Key>
             <PropertyRef Name="Serial" />
+            <PropertyRef Name="deliveryNoteID" />
             <PropertyRef Name="ProductName" />
             <PropertyRef Name="Company" />
-            <PropertyRef Name="deliveryNoteID" />
           </Key>
           <Property Name="Serial" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="ProductName" Type="varchar(max)" Nullable="false" />
           <Property Name="Company" Type="varchar(max)" Nullable="false" />
           <Property Name="deliveryNoteID" Type="int" Nullable="false" />
+          <Property Name="Is in delivery note" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'warehouseDatabase.dbo.ProductView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -287,7 +289,8 @@ warning 6002: The table/view 'warehouseDatabase.dbo.ProductView' does not have a
     [OwnedProductView].[Serial] AS [Serial], 
     [OwnedProductView].[ProductName] AS [ProductName], 
     [OwnedProductView].[Company] AS [Company], 
-    [OwnedProductView].[deliveryNoteID] AS [deliveryNoteID]
+    [OwnedProductView].[deliveryNoteID] AS [deliveryNoteID], 
+    [OwnedProductView].[Is in delivery note] AS [Is in delivery note]
     FROM [dbo].[OwnedProductView] AS [OwnedProductView]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="ProductView" EntityType="Self.ProductView" store:Type="Views" store:Schema="dbo">
@@ -348,62 +351,62 @@ warning 6002: The table/view 'warehouseDatabase.dbo.ProductView' does not have a
           <EntitySet Name="DeliveryNote" EntityType="warehouseDatabaseModel.DeliveryNote" />
           <EntitySet Name="Permissions" EntityType="warehouseDatabaseModel.Permissions" />
           <EntitySet Name="Product" EntityType="warehouseDatabaseModel.Product" />
-          <EntitySet Name="ProvenProduct" EntityType="warehouseDatabaseModel.ProvenProduct" />
           <EntitySet Name="Provider" EntityType="warehouseDatabaseModel.Provider" />
           <EntitySet Name="Summary" EntityType="warehouseDatabaseModel.Summary" />
           <EntitySet Name="UserPermissions" EntityType="warehouseDatabaseModel.UserPermissions" />
           <EntitySet Name="Users" EntityType="warehouseDatabaseModel.Users" />
           <EntitySet Name="DeliveryView" EntityType="warehouseDatabaseModel.DeliveryView" />
           <AssociationSet Name="FK_Summary_Delivery" Association="warehouseDatabaseModel.FK_Summary_Delivery">
-            <End Role="Delivery" EntitySet="Delivery" />
-            <End Role="Summary" EntitySet="Summary" />
+            <End EntitySet="Delivery" Role="Delivery" />
+            <End EntitySet="Summary" Role="Summary" />
           </AssociationSet>
           <AssociationSet Name="FK_DeliveryNote_Provider" Association="warehouseDatabaseModel.FK_DeliveryNote_Provider">
-            <End Role="Provider" EntitySet="Provider" />
-            <End Role="DeliveryNote" EntitySet="DeliveryNote" />
+            <End EntitySet="Provider" Role="Provider" />
+            <End EntitySet="DeliveryNote" Role="DeliveryNote" />
           </AssociationSet>
+          <AssociationSet Name="FK_Summary_DeliveryNote" Association="warehouseDatabaseModel.FK_Summary_DeliveryNote">
+            <End EntitySet="DeliveryNote" Role="DeliveryNote" />
+            <End EntitySet="Summary" Role="Summary" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserPermissions_Permissions" Association="warehouseDatabaseModel.FK_UserPermissions_Permissions">
+            <End EntitySet="Permissions" Role="Permissions" />
+            <End EntitySet="UserPermissions" Role="UserPermissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Summary_Users" Association="warehouseDatabaseModel.FK_Summary_Users">
+            <End EntitySet="Users" Role="Users" />
+            <End EntitySet="Summary" Role="Summary" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserPermissions_Users" Association="warehouseDatabaseModel.FK_UserPermissions_Users">
+            <End EntitySet="Users" Role="Users" />
+            <End EntitySet="UserPermissions" Role="UserPermissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_DeliveryNote" Association="warehouseDatabaseModel.FK_Product_DeliveryNote">
+            <End EntitySet="DeliveryNote" Role="DeliveryNote" />
+            <End EntitySet="Product" Role="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Delivery_DeliveryNote" Association="warehouseDatabaseModel.FK_Delivery_DeliveryNote">
+            <End EntitySet="DeliveryNote" Role="DeliveryNote" />
+            <End EntitySet="Delivery" Role="Delivery" />
+          </AssociationSet>
+          <EntitySet Name="OwnedProductView" EntityType="warehouseDatabaseModel.OwnedProductView" />
+          <EntitySet Name="ProductView" EntityType="warehouseDatabaseModel.ProductView" />
+          <EntitySet Name="ProvenProduct" EntityType="warehouseDatabaseModel.ProvenProduct" />
           <AssociationSet Name="FK_ProvenProduct_DeliveryNote" Association="warehouseDatabaseModel.FK_ProvenProduct_DeliveryNote">
             <End Role="DeliveryNote" EntitySet="DeliveryNote" />
             <End Role="ProvenProduct" EntitySet="ProvenProduct" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Summary_DeliveryNote" Association="warehouseDatabaseModel.FK_Summary_DeliveryNote">
-            <End Role="DeliveryNote" EntitySet="DeliveryNote" />
-            <End Role="Summary" EntitySet="Summary" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserPermissions_Permissions" Association="warehouseDatabaseModel.FK_UserPermissions_Permissions">
-            <End Role="Permissions" EntitySet="Permissions" />
-            <End Role="UserPermissions" EntitySet="UserPermissions" />
           </AssociationSet>
           <AssociationSet Name="FK_ProvenProduct_Users" Association="warehouseDatabaseModel.FK_ProvenProduct_Users">
             <End Role="Users" EntitySet="Users" />
             <End Role="ProvenProduct" EntitySet="ProvenProduct" />
           </AssociationSet>
-          <AssociationSet Name="FK_Summary_Users" Association="warehouseDatabaseModel.FK_Summary_Users">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Summary" EntitySet="Summary" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserPermissions_Users" Association="warehouseDatabaseModel.FK_UserPermissions_Users">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="UserPermissions" EntitySet="UserPermissions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Product_DeliveryNote" Association="warehouseDatabaseModel.FK_Product_DeliveryNote">
-            <End Role="DeliveryNote" EntitySet="DeliveryNote" />
-            <End Role="Product" EntitySet="Product" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Delivery_DeliveryNote" Association="warehouseDatabaseModel.FK_Delivery_DeliveryNote">
-            <End Role="DeliveryNote" EntitySet="DeliveryNote" />
-            <End Role="Delivery" EntitySet="Delivery" />
-          </AssociationSet>
-          <EntitySet Name="OwnedProductView" EntityType="warehouseDatabaseModel.OwnedProductView" />
-          <EntitySet Name="ProductView" EntityType="warehouseDatabaseModel.ProductView" />
         </EntityContainer>
         <EntityType Name="Delivery">
           <Key>
             <PropertyRef Name="deliveryID" />
           </Key>
-          <Property Name="deliveryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="deliveryNoteID" Type="Int32" Nullable="false" />
-          <Property Name="checked" Type="Boolean" Nullable="false" />
+          <Property Name="deliveryID" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="deliveryNoteID" Nullable="false" Type="Int32" />
+          <Property Name="checked" Nullable="false" Type="Boolean" />
           <NavigationProperty Name="Summary" Relationship="warehouseDatabaseModel.FK_Summary_Delivery" FromRole="Delivery" ToRole="Summary" />
           <NavigationProperty Name="DeliveryNote" Relationship="warehouseDatabaseModel.FK_Delivery_DeliveryNote" FromRole="Delivery" ToRole="DeliveryNote" />
         </EntityType>
@@ -411,76 +414,59 @@ warning 6002: The table/view 'warehouseDatabase.dbo.ProductView' does not have a
           <Key>
             <PropertyRef Name="deliveryNoteID" />
           </Key>
-          <Property Name="deliveryNoteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="providerID" Type="Int32" Nullable="false" />
-          <Property Name="deliveryNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="invoiceDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="numberOfItems" Type="Int32" Nullable="false" />
+          <Property Name="deliveryNoteID" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="providerID" Nullable="false" Type="Int32" />
+          <Property Name="deliveryNumber" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="invoiceDate" Nullable="false" Precision="0" Type="DateTime" />
+          <Property Name="numberOfItems" Nullable="false" Type="Int32" />
           <NavigationProperty Name="Provider" Relationship="warehouseDatabaseModel.FK_DeliveryNote_Provider" FromRole="DeliveryNote" ToRole="Provider" />
-          <NavigationProperty Name="ProvenProduct" Relationship="warehouseDatabaseModel.FK_ProvenProduct_DeliveryNote" FromRole="DeliveryNote" ToRole="ProvenProduct" />
           <NavigationProperty Name="Summary" Relationship="warehouseDatabaseModel.FK_Summary_DeliveryNote" FromRole="DeliveryNote" ToRole="Summary" />
           <NavigationProperty Name="Product" Relationship="warehouseDatabaseModel.FK_Product_DeliveryNote" FromRole="DeliveryNote" ToRole="Product" />
           <NavigationProperty Name="Delivery" Relationship="warehouseDatabaseModel.FK_Delivery_DeliveryNote" FromRole="DeliveryNote" ToRole="Delivery" />
+          <NavigationProperty Name="ProvenProduct" Relationship="warehouseDatabaseModel.FK_ProvenProduct_DeliveryNote" FromRole="DeliveryNote" ToRole="ProvenProduct" />
         </EntityType>
         <EntityType Name="Permissions">
           <Key>
             <PropertyRef Name="permissionID" />
           </Key>
-          <Property Name="permissionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="permissionName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="permissionID" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="permissionName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
           <NavigationProperty Name="UserPermissions" Relationship="warehouseDatabaseModel.FK_UserPermissions_Permissions" FromRole="Permissions" ToRole="UserPermissions" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="productID" />
           </Key>
-          <Property Name="productID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="deliveryNoteID" Type="Int32" Nullable="false" />
-          <Property Name="company" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="orderNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="itemNumber" Type="Int32" Nullable="false" />
-          <Property Name="productCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="productName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="serialNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="productID" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="deliveryNoteID" Nullable="false" Type="Int32" />
+          <Property Name="company" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="orderNumber" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="itemNumber" Nullable="false" Type="Int32" />
+          <Property Name="productCode" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="productName" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="serialNo" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
           <NavigationProperty Name="DeliveryNote" Relationship="warehouseDatabaseModel.FK_Product_DeliveryNote" FromRole="Product" ToRole="DeliveryNote" />
-        </EntityType>
-        <EntityType Name="ProvenProduct">
-          <Key>
-            <PropertyRef Name="provenProductID" />
-          </Key>
-          <Property Name="provenProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="deliveryNoteID" Type="Int32" Nullable="false" />
-          <Property Name="usersID" Type="Int32" Nullable="false" />
-          <Property Name="checkDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="cCompany" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="cOrderNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="cItemNumber" Type="Int32" Nullable="false" />
-          <Property Name="cProductCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="cProductName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="cSerialNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="DeliveryNote" Relationship="warehouseDatabaseModel.FK_ProvenProduct_DeliveryNote" FromRole="ProvenProduct" ToRole="DeliveryNote" />
-          <NavigationProperty Name="Users" Relationship="warehouseDatabaseModel.FK_ProvenProduct_Users" FromRole="ProvenProduct" ToRole="Users" />
         </EntityType>
         <EntityType Name="Provider">
           <Key>
             <PropertyRef Name="providerID" />
           </Key>
-          <Property Name="providerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="companyName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="contact" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="providerID" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="companyName" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="contact" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" Type="String" />
           <NavigationProperty Name="DeliveryNote" Relationship="warehouseDatabaseModel.FK_DeliveryNote_Provider" FromRole="Provider" ToRole="DeliveryNote" />
         </EntityType>
         <EntityType Name="Summary">
           <Key>
             <PropertyRef Name="summaryID" />
           </Key>
-          <Property Name="summaryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="deliveryNoteID" Type="Int32" Nullable="false" />
-          <Property Name="deliveryID" Type="Int32" Nullable="false" />
-          <Property Name="usersID" Type="Int32" Nullable="false" />
-          <Property Name="correct" Type="Boolean" Nullable="false" />
-          <Property Name="closed" Type="Boolean" Nullable="false" />
-          <Property Name="deliveryCloseDate" Type="DateTime" Precision="3" />
+          <Property Name="summaryID" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="deliveryNoteID" Nullable="false" Type="Int32" />
+          <Property Name="deliveryID" Nullable="false" Type="Int32" />
+          <Property Name="usersID" Nullable="false" Type="Int32" />
+          <Property Name="correct" Nullable="false" Type="Boolean" />
+          <Property Name="closed" Nullable="false" Type="Boolean" />
+          <Property Name="deliveryCloseDate" Precision="3" Type="DateTime" />
           <NavigationProperty Name="Delivery" Relationship="warehouseDatabaseModel.FK_Summary_Delivery" FromRole="Summary" ToRole="Delivery" />
           <NavigationProperty Name="DeliveryNote" Relationship="warehouseDatabaseModel.FK_Summary_DeliveryNote" FromRole="Summary" ToRole="DeliveryNote" />
           <NavigationProperty Name="Users" Relationship="warehouseDatabaseModel.FK_Summary_Users" FromRole="Summary" ToRole="Users" />
@@ -489,9 +475,9 @@ warning 6002: The table/view 'warehouseDatabase.dbo.ProductView' does not have a
           <Key>
             <PropertyRef Name="userPermissionsID" />
           </Key>
-          <Property Name="userPermissionsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="userID" Type="Int32" Nullable="false" />
-          <Property Name="permissionsID" Type="Int32" Nullable="false" />
+          <Property Name="userPermissionsID" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="userID" Nullable="false" Type="Int32" />
+          <Property Name="permissionsID" Nullable="false" Type="Int32" />
           <NavigationProperty Name="Permissions" Relationship="warehouseDatabaseModel.FK_UserPermissions_Permissions" FromRole="UserPermissions" ToRole="Permissions" />
           <NavigationProperty Name="Users" Relationship="warehouseDatabaseModel.FK_UserPermissions_Users" FromRole="UserPermissions" ToRole="Users" />
         </EntityType>
@@ -499,14 +485,14 @@ warning 6002: The table/view 'warehouseDatabase.dbo.ProductView' does not have a
           <Key>
             <PropertyRef Name="usersID" />
           </Key>
-          <Property Name="usersID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="forname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="login" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ProvenProduct" Relationship="warehouseDatabaseModel.FK_ProvenProduct_Users" FromRole="Users" ToRole="ProvenProduct" />
+          <Property Name="usersID" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="forname" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="login" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="password" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
           <NavigationProperty Name="Summary" Relationship="warehouseDatabaseModel.FK_Summary_Users" FromRole="Users" ToRole="Summary" />
           <NavigationProperty Name="UserPermissions" Relationship="warehouseDatabaseModel.FK_UserPermissions_Users" FromRole="Users" ToRole="UserPermissions" />
+          <NavigationProperty Name="ProvenProduct" Relationship="warehouseDatabaseModel.FK_ProvenProduct_Users" FromRole="Users" ToRole="ProvenProduct" />
         </EntityType>
         <EntityType Name="DeliveryView">
           <Key>
@@ -517,16 +503,16 @@ warning 6002: The table/view 'warehouseDatabase.dbo.ProductView' does not have a
             <PropertyRef Name="checked" />
             <PropertyRef Name="deliveryID" />
           </Key>
-          <Property Name="deliveryNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="invoiceDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="numberOfItems" Type="Int32" Nullable="false" />
-          <Property Name="companyName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="checked" Type="Boolean" Nullable="false" />
-          <Property Name="deliveryID" Type="Int32" Nullable="false" />
+          <Property Name="deliveryNumber" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="invoiceDate" Nullable="false" Precision="0" Type="DateTime" />
+          <Property Name="numberOfItems" Nullable="false" Type="Int32" />
+          <Property Name="companyName" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="checked" Nullable="false" Type="Boolean" />
+          <Property Name="deliveryID" Nullable="false" Type="Int32" />
         </EntityType>
         <Association Name="FK_Summary_Delivery">
-          <End Type="warehouseDatabaseModel.Delivery" Role="Delivery" Multiplicity="1" />
-          <End Type="warehouseDatabaseModel.Summary" Role="Summary" Multiplicity="*" />
+          <End Type="warehouseDatabaseModel.Delivery" Multiplicity="1" Role="Delivery" />
+          <End Type="warehouseDatabaseModel.Summary" Multiplicity="*" Role="Summary" />
           <ReferentialConstraint>
             <Principal Role="Delivery">
               <PropertyRef Name="deliveryID" />
@@ -537,8 +523,8 @@ warning 6002: The table/view 'warehouseDatabase.dbo.ProductView' does not have a
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_DeliveryNote_Provider">
-          <End Type="warehouseDatabaseModel.Provider" Role="Provider" Multiplicity="1" />
-          <End Type="warehouseDatabaseModel.DeliveryNote" Role="DeliveryNote" Multiplicity="*" />
+          <End Type="warehouseDatabaseModel.Provider" Multiplicity="1" Role="Provider" />
+          <End Type="warehouseDatabaseModel.DeliveryNote" Multiplicity="*" Role="DeliveryNote" />
           <ReferentialConstraint>
             <Principal Role="Provider">
               <PropertyRef Name="providerID" />
@@ -548,21 +534,9 @@ warning 6002: The table/view 'warehouseDatabase.dbo.ProductView' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ProvenProduct_DeliveryNote">
-          <End Type="warehouseDatabaseModel.DeliveryNote" Role="DeliveryNote" Multiplicity="1" />
-          <End Type="warehouseDatabaseModel.ProvenProduct" Role="ProvenProduct" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DeliveryNote">
-              <PropertyRef Name="deliveryNoteID" />
-            </Principal>
-            <Dependent Role="ProvenProduct">
-              <PropertyRef Name="deliveryNoteID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Summary_DeliveryNote">
-          <End Type="warehouseDatabaseModel.DeliveryNote" Role="DeliveryNote" Multiplicity="1" />
-          <End Type="warehouseDatabaseModel.Summary" Role="Summary" Multiplicity="*" />
+          <End Type="warehouseDatabaseModel.DeliveryNote" Multiplicity="1" Role="DeliveryNote" />
+          <End Type="warehouseDatabaseModel.Summary" Multiplicity="*" Role="Summary" />
           <ReferentialConstraint>
             <Principal Role="DeliveryNote">
               <PropertyRef Name="deliveryNoteID" />
@@ -573,8 +547,8 @@ warning 6002: The table/view 'warehouseDatabase.dbo.ProductView' does not have a
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UserPermissions_Permissions">
-          <End Type="warehouseDatabaseModel.Permissions" Role="Permissions" Multiplicity="1" />
-          <End Type="warehouseDatabaseModel.UserPermissions" Role="UserPermissions" Multiplicity="*" />
+          <End Type="warehouseDatabaseModel.Permissions" Multiplicity="1" Role="Permissions" />
+          <End Type="warehouseDatabaseModel.UserPermissions" Multiplicity="*" Role="UserPermissions" />
           <ReferentialConstraint>
             <Principal Role="Permissions">
               <PropertyRef Name="permissionID" />
@@ -584,21 +558,9 @@ warning 6002: The table/view 'warehouseDatabase.dbo.ProductView' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ProvenProduct_Users">
-          <End Type="warehouseDatabaseModel.Users" Role="Users" Multiplicity="1" />
-          <End Type="warehouseDatabaseModel.ProvenProduct" Role="ProvenProduct" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="usersID" />
-            </Principal>
-            <Dependent Role="ProvenProduct">
-              <PropertyRef Name="usersID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Summary_Users">
-          <End Type="warehouseDatabaseModel.Users" Role="Users" Multiplicity="1" />
-          <End Type="warehouseDatabaseModel.Summary" Role="Summary" Multiplicity="*" />
+          <End Type="warehouseDatabaseModel.Users" Multiplicity="1" Role="Users" />
+          <End Type="warehouseDatabaseModel.Summary" Multiplicity="*" Role="Summary" />
           <ReferentialConstraint>
             <Principal Role="Users">
               <PropertyRef Name="usersID" />
@@ -609,8 +571,8 @@ warning 6002: The table/view 'warehouseDatabase.dbo.ProductView' does not have a
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UserPermissions_Users">
-          <End Type="warehouseDatabaseModel.Users" Role="Users" Multiplicity="1" />
-          <End Type="warehouseDatabaseModel.UserPermissions" Role="UserPermissions" Multiplicity="*" />
+          <End Type="warehouseDatabaseModel.Users" Multiplicity="1" Role="Users" />
+          <End Type="warehouseDatabaseModel.UserPermissions" Multiplicity="*" Role="UserPermissions" />
           <ReferentialConstraint>
             <Principal Role="Users">
               <PropertyRef Name="usersID" />
@@ -621,8 +583,8 @@ warning 6002: The table/view 'warehouseDatabase.dbo.ProductView' does not have a
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Product_DeliveryNote">
-          <End Type="warehouseDatabaseModel.DeliveryNote" Role="DeliveryNote" Multiplicity="1" />
-          <End Type="warehouseDatabaseModel.Product" Role="Product" Multiplicity="*" />
+          <End Type="warehouseDatabaseModel.DeliveryNote" Multiplicity="1" Role="DeliveryNote" />
+          <End Type="warehouseDatabaseModel.Product" Multiplicity="*" Role="Product" />
           <ReferentialConstraint>
             <Principal Role="DeliveryNote">
               <PropertyRef Name="deliveryNoteID" />
@@ -633,8 +595,8 @@ warning 6002: The table/view 'warehouseDatabase.dbo.ProductView' does not have a
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Delivery_DeliveryNote">
-          <End Type="warehouseDatabaseModel.DeliveryNote" Role="DeliveryNote" Multiplicity="1" />
-          <End Type="warehouseDatabaseModel.Delivery" Role="Delivery" Multiplicity="*" />
+          <End Type="warehouseDatabaseModel.DeliveryNote" Multiplicity="1" Role="DeliveryNote" />
+          <End Type="warehouseDatabaseModel.Delivery" Multiplicity="*" Role="Delivery" />
           <ReferentialConstraint>
             <Principal Role="DeliveryNote">
               <PropertyRef Name="deliveryNoteID" />
@@ -651,10 +613,11 @@ warning 6002: The table/view 'warehouseDatabase.dbo.ProductView' does not have a
             <PropertyRef Name="Company" />
             <PropertyRef Name="deliveryNoteID" />
           </Key>
-          <Property Name="Serial" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Company" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="deliveryNoteID" Type="Int32" Nullable="false" />
+          <Property Name="Serial" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="ProductName" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="Company" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="deliveryNoteID" Nullable="false" Type="Int32" />
+          <Property Name="Is_in_delivery_note" Type="Boolean" />
         </EntityType>
         <EntityType Name="ProductView">
           <Key>
@@ -663,11 +626,53 @@ warning 6002: The table/view 'warehouseDatabase.dbo.ProductView' does not have a
             <PropertyRef Name="Company" />
             <PropertyRef Name="deliveryNoteID" />
           </Key>
-          <Property Name="Serial" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Company" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="deliveryNoteID" Type="Int32" Nullable="false" />
+          <Property Name="Serial" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="ProductName" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="Company" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="deliveryNoteID" Nullable="false" Type="Int32" />
         </EntityType>
+        <EntityType Name="ProvenProduct">
+          <Key>
+            <PropertyRef Name="provenProductID" />
+          </Key>
+          <Property Name="provenProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="deliveryNoteID" Type="Int32" Nullable="false" />
+          <Property Name="usersID" Type="Int32" Nullable="false" />
+          <Property Name="checkDate" Type="DateTime" Precision="3" />
+          <Property Name="cCompany" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="cOrderNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cItemNumber" Type="Int32" />
+          <Property Name="cProductCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cProductName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="cSerialNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DeliveryNote" Relationship="warehouseDatabaseModel.FK_ProvenProduct_DeliveryNote" FromRole="ProvenProduct" ToRole="DeliveryNote" />
+          <NavigationProperty Name="Users" Relationship="warehouseDatabaseModel.FK_ProvenProduct_Users" FromRole="ProvenProduct" ToRole="Users" />
+          <Property Name="offTheList" Type="Boolean" />
+        </EntityType>
+        <Association Name="FK_ProvenProduct_DeliveryNote">
+          <End Type="warehouseDatabaseModel.DeliveryNote" Role="DeliveryNote" Multiplicity="1" />
+          <End Type="warehouseDatabaseModel.ProvenProduct" Role="ProvenProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeliveryNote">
+              <PropertyRef Name="deliveryNoteID" />
+            </Principal>
+            <Dependent Role="ProvenProduct">
+              <PropertyRef Name="deliveryNoteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProvenProduct_Users">
+          <End Type="warehouseDatabaseModel.Users" Role="Users" Multiplicity="1" />
+          <End Type="warehouseDatabaseModel.ProvenProduct" Role="ProvenProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="usersID" />
+            </Principal>
+            <Dependent Role="ProvenProduct">
+              <PropertyRef Name="usersID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -713,22 +718,6 @@ warning 6002: The table/view 'warehouseDatabase.dbo.ProductView' does not have a
                 <ScalarProperty Name="company" ColumnName="company" />
                 <ScalarProperty Name="deliveryNoteID" ColumnName="deliveryNoteID" />
                 <ScalarProperty Name="productID" ColumnName="productID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ProvenProduct">
-            <EntityTypeMapping TypeName="warehouseDatabaseModel.ProvenProduct">
-              <MappingFragment StoreEntitySet="ProvenProduct">
-                <ScalarProperty Name="cSerialNo" ColumnName="cSerialNo" />
-                <ScalarProperty Name="cProductName" ColumnName="cProductName" />
-                <ScalarProperty Name="cProductCode" ColumnName="cProductCode" />
-                <ScalarProperty Name="cItemNumber" ColumnName="cItemNumber" />
-                <ScalarProperty Name="cOrderNumber" ColumnName="cOrderNumber" />
-                <ScalarProperty Name="cCompany" ColumnName="cCompany" />
-                <ScalarProperty Name="checkDate" ColumnName="checkDate" />
-                <ScalarProperty Name="usersID" ColumnName="usersID" />
-                <ScalarProperty Name="deliveryNoteID" ColumnName="deliveryNoteID" />
-                <ScalarProperty Name="provenProductID" ColumnName="provenProductID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -789,6 +778,7 @@ warning 6002: The table/view 'warehouseDatabase.dbo.ProductView' does not have a
           <EntitySetMapping Name="OwnedProductView">
             <EntityTypeMapping TypeName="warehouseDatabaseModel.OwnedProductView">
               <MappingFragment StoreEntitySet="OwnedProductView">
+                <ScalarProperty Name="Is_in_delivery_note" ColumnName="Is in delivery note" />
                 <ScalarProperty Name="deliveryNoteID" ColumnName="deliveryNoteID" />
                 <ScalarProperty Name="Company" ColumnName="Company" />
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />
@@ -803,6 +793,23 @@ warning 6002: The table/view 'warehouseDatabase.dbo.ProductView' does not have a
                 <ScalarProperty Name="Company" ColumnName="Company" />
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />
                 <ScalarProperty Name="Serial" ColumnName="Serial" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProvenProduct">
+            <EntityTypeMapping TypeName="warehouseDatabaseModel.ProvenProduct">
+              <MappingFragment StoreEntitySet="ProvenProduct">
+                <ScalarProperty Name="offTheList" ColumnName="offTheList" />
+                <ScalarProperty Name="cSerialNo" ColumnName="cSerialNo" />
+                <ScalarProperty Name="cProductName" ColumnName="cProductName" />
+                <ScalarProperty Name="cProductCode" ColumnName="cProductCode" />
+                <ScalarProperty Name="cItemNumber" ColumnName="cItemNumber" />
+                <ScalarProperty Name="cOrderNumber" ColumnName="cOrderNumber" />
+                <ScalarProperty Name="cCompany" ColumnName="cCompany" />
+                <ScalarProperty Name="checkDate" ColumnName="checkDate" />
+                <ScalarProperty Name="usersID" ColumnName="usersID" />
+                <ScalarProperty Name="deliveryNoteID" ColumnName="deliveryNoteID" />
+                <ScalarProperty Name="provenProductID" ColumnName="provenProductID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -17,10 +17,10 @@ namespace Warehouse
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public DeliveryNote()
         {
-            this.ProvenProduct = new HashSet<ProvenProduct>();
             this.Summary = new HashSet<Summary>();
             this.Product = new HashSet<Product>();
             this.Delivery = new HashSet<Delivery>();
+            this.ProvenProduct = new HashSet<ProvenProduct>();
         }
     
         public int deliveryNoteID { get; set; }
@@ -31,12 +31,12 @@ namespace Warehouse
     
         public virtual Provider Provider { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProvenProduct> ProvenProduct { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Summary> Summary { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Product { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Delivery> Delivery { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProvenProduct> ProvenProduct { get; set; }
     }
 }

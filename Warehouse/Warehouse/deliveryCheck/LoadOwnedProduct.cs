@@ -16,19 +16,23 @@ namespace Warehouse.deliveryCheck
         ProvenProduct pProduct;
         warehouseDatabaseEntities1 context = new warehouseDatabaseEntities1();
         List<OwnedProductView> dataOwnedProduct;
+        DataGridView dataGridViewProvenProducts;
+        DataGridView dataGridViewProducts;
         TextBox textBox;
-        public LoadOwnedProduct(List<OwnedProductView> dataOwnedProduct, TextBox textBox)
+        public LoadOwnedProduct(List<OwnedProductView> dataOwnedProduct, TextBox textBox, DataGridView dataGridViewProvenProducts, DataGridView dataGridViewProducts)
         {
             this.dataOwnedProduct = dataOwnedProduct;
             this.textBox = textBox;
+            this.dataGridViewProvenProducts = dataGridViewProvenProducts;
+            this.dataGridViewProducts = dataGridViewProducts;
 
         }
-        public void loadProducts(DataGridView dataGridView, int deliveryNoteID, DataGridView dataGridView1)
+        public List<OwnedProductView> loadProducts( int deliveryNoteID)
         {
             this.dataOwnedProduct = (from c in context.OwnedProductView where c.deliveryNoteID == deliveryNoteID select c).ToList();
-            dataGridView.DataSource = this.dataOwnedProduct;
-            dataGridView.Columns["deliveryNoteID"].Visible = false;
-            foreach(DataGridViewRow row in dataGridView1.Rows)
+            dataGridViewProvenProducts.DataSource = this.dataOwnedProduct;
+            dataGridViewProvenProducts.Columns["deliveryNoteID"].Visible = false;
+            foreach(DataGridViewRow row in dataGridViewProducts.Rows)
             {
                 var dataGridViewProductCell = row.Cells[0].Value.ToString().Trim();
                 pProduct = context.ProvenProduct.FirstOrDefault(c => c.cSerialNo == dataGridViewProductCell);
@@ -38,30 +42,50 @@ namespace Warehouse.deliveryCheck
                     
                 }
             }
-            
+            {
+                foreach (DataGridViewRow row in dataGridViewProvenProducts.Rows)
+                {
+                    if (row.Cells[4].Value.Equals(true))
+                    {
+                        row.DefaultCellStyle.BackColor = Color.Red;
+                    }
+                }
 
+            }
+
+            return this.dataOwnedProduct;
 
         }
-        public void addSerial(DataGridView dataGridView, DataGridView dataGridView1)
+        public void addSerial(List<string> list,TextBox textBoxAddSerial)
         {
             
-            if (serialRepeat(dataGridView))
+            if (serialRepeat())
             {
                 
                 if (serialExist()) {
-                    addSerialToDbAndList(dataGridView, dataGridView1);
+                    list.Add(textBoxAddSerial.Text.Trim());
+                    addSerialToDbAndList();
+                    rowsColorGreen();  
                 }
+                else
+                {
+                    list.Add(textBoxAddSerial.Text.Trim());
+                    addSerialToDbAndList();
+                    
+                        rowsColorRed();
+                }
+                test();
             }
         }
-        private void addSerialToDbAndList(DataGridView dataGridView, DataGridView dataGridView1)
+        private void addSerialToDbAndList( )
         {
             this.dataOwnedProduct.Add(new OwnedProductView() { Serial = this.textBox.Text.Trim() });
-            dataGridView.DataSource = null;
+            this.dataGridViewProvenProducts.DataSource = null;
 
-            dataGridView.DataSource = dataOwnedProduct;
-            rowsColor(dataGridView1);
-            dataGridView.Columns["deliveryNoteID"].Visible = false;
-            this.textBox.Clear();
+            this.dataGridViewProvenProducts.DataSource = dataOwnedProduct;
+
+            this.dataGridViewProvenProducts.Columns["deliveryNoteID"].Visible = false;
+            
         }
         private bool serialExist()
         {
@@ -75,11 +99,11 @@ namespace Warehouse.deliveryCheck
             }
 
         }
-        private bool serialRepeat(DataGridView dataGridView)
+        private bool serialRepeat()
         {
             String searchValue = this.textBox.Text;
             
-            foreach (DataGridViewRow row in dataGridView.Rows)
+            foreach (DataGridViewRow row in this.dataGridViewProvenProducts.Rows)
             {
                 if (row.Cells[0].Value.ToString().Equals(searchValue.Trim()))
                 {
@@ -91,9 +115,9 @@ namespace Warehouse.deliveryCheck
             
 
         }
-        private void rowsColor(DataGridView dataGridView1)
+        private void rowsColorGreen()
         {
-            foreach (DataGridViewRow row in dataGridView1.Rows)
+            foreach (DataGridViewRow row in this.dataGridViewProducts.Rows)
             {
                 var tableValue = row.Cells[0].Value.ToString().Trim();
                 if (tableValue.Equals(this.textBox.Text.Trim()))
@@ -105,50 +129,31 @@ namespace Warehouse.deliveryCheck
             }
 
         }
-        public void removeProduct(DataGridView dataGridView, List<string> list, DataGridView dataGridViewProduct)
+        private void rowsColorRed()
         {
-            try
+            foreach (DataGridViewRow row in this.dataGridViewProvenProducts.Rows)
             {
-                ProvenProduct provenProduct;
-                String delId;
-                foreach (DataGridViewRow item in dataGridView.SelectedRows)
+                var tableValue = row.Cells[0].Value.ToString().Trim();
+                if (tableValue.Equals(this.textBox.Text.Trim()))
                 {
-                    if (item.Cells[1].Value != null)
-                    {
 
-                        delId = item.Cells[0].Value.ToString();
-                        provenProduct = context.ProvenProduct.First(c => c.cSerialNo == delId);
-                        context.ProvenProduct.Remove(provenProduct);
-                    }
-                    else
-                    {
-
-                        list.Remove(item.Cells[0].Value.ToString());
-                    }
-                    foreach (DataGridViewRow row in dataGridViewProduct.Rows)
-                    {
-                        var xxx = row.Cells[0].Value.ToString().Trim();
-                        if ((xxx != null) && (xxx.Equals(item.Cells[0].Value.ToString())))
-                        {
-                            row.DefaultCellStyle.BackColor = Color.Empty;
-                        }
-                    }
-
-                    this.dataOwnedProduct.RemoveAt(item.Index);
-
+                    row.DefaultCellStyle.BackColor = Color.Red;
                 }
-                context.SaveChanges();
-                dataGridView.DataSource = null;
-                dataGridView.DataSource = this.dataOwnedProduct;
-                dataGridView.Columns["deliveryNoteID"].Visible = false;
+
             }
-            catch (Exception ex)
+
+        }
+        
+        private void test()
+        {
+            foreach (DataGridViewRow row in this.dataGridViewProvenProducts.Rows)
             {
-                MessageBox.Show(ex.Message);
+                if ((row.Cells[4].Value != null)&&(row.Cells[4].Value.Equals(true)))
+                {
+                    row.DefaultCellStyle.BackColor = Color.Red;
+                }
             }
         }
-
-
 
     }
 }

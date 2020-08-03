@@ -125,8 +125,6 @@ namespace Warehouse
                 var result = MessageBox.Show(message, caption,
                                              MessageBoxButtons.OKCancel,
                                              MessageBoxIcon.Question);
-
-                // If the no button was pressed ...
                 if (result == DialogResult.OK)
                 {
                     var delivery = context.Delivery.FirstOrDefault(d => d.deliveryID == goToDelivery);

@@ -18,5 +18,6 @@ namespace Warehouse
         public string ProductName { get; set; }
         public string Company { get; set; }
         public int deliveryNoteID { get; set; }
+        public Nullable<bool> Is_in_delivery_note { get; set; }
     }
 }

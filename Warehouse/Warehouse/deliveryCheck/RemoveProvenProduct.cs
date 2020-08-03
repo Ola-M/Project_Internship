@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,45 +10,50 @@ namespace Warehouse.deliveryCheck
 {
     public class RemoveProvenProduct
     {
-        warehouseDatabaseEntities1 context = new warehouseDatabaseEntities1();
-        List<OwnedProductView> dataOwnedProduct;
-        public RemoveProvenProduct(List<OwnedProductView> dataOwnedProduct)
+        private warehouseDatabaseEntities1 context = new warehouseDatabaseEntities1();
+        private DataGridView dataGridViewProvenProduct;
+        private DataGridView dataGridViewProducts;
+        public RemoveProvenProduct(DataGridView dataGridViewProvenProduct, DataGridView dataGridViewProducts)
         {
-            this.dataOwnedProduct = dataOwnedProduct;
+            this.dataGridViewProvenProduct = dataGridViewProvenProduct;
+            this.dataGridViewProducts = dataGridViewProducts;
         }
-        public void removeProduct(DataGridView dataGridView, List<string> list)
+        public void removeProduct( List<string> list, List<OwnedProductView> dataOwnedProducts)
         {
             try
             {
                 ProvenProduct provenProduct;
                 String delId;
-
-                foreach (DataGridViewRow item in dataGridView.SelectedRows)
+                foreach (DataGridViewRow item in dataGridViewProvenProduct.SelectedRows)
                 {
                     if (item.Cells[1].Value != null)
                     {
 
-                        var xxx = this.dataOwnedProduct.Count;
                         delId = item.Cells[0].Value.ToString();
                         provenProduct = context.ProvenProduct.First(c => c.cSerialNo == delId);
                         context.ProvenProduct.Remove(provenProduct);
-                        this.dataOwnedProduct.RemoveAt(item.Index);
                     }
                     else
                     {
 
                         list.Remove(item.Cells[0].Value.ToString());
-                        this.dataOwnedProduct.RemoveAt(item.Index);
+                    }
+                    foreach (DataGridViewRow row in dataGridViewProducts.Rows)
+                    {
+                        var xxx = row.Cells[0].Value.ToString().Trim();
+                        if ((xxx != null) && (xxx.Equals(item.Cells[0].Value.ToString())))
+                        {
+                            row.DefaultCellStyle.BackColor = Color.Empty;
+                        }
                     }
 
+                    dataOwnedProducts.RemoveAt(item.Index);
 
                 }
                 context.SaveChanges();
-                dataGridView.DataSource = null;
-                dataGridView.DataSource = this.dataOwnedProduct;
-                dataGridView.Columns["deliveryNoteID"].Visible = false;
-
-
+                dataGridViewProvenProduct.DataSource = null;
+                dataGridViewProvenProduct.DataSource = dataOwnedProducts;
+                dataGridViewProvenProduct.Columns["deliveryNoteID"].Visible = false;
             }
             catch (Exception ex)
             {

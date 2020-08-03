@@ -25,6 +25,7 @@ namespace Warehouse
         LoadOwnedProduct loadOwned;
         AddProvenProductDB addProvenProductDB;
         CheckPermissionsProvenProduct checkPermissionsProvenProduct;
+        RemoveProvenProduct removeProvenProduct;
         private string numberOfItems = "0";
 
 
@@ -38,10 +39,11 @@ namespace Warehouse
             this.ActiveControl = textBoxAddSerial;
             this.deliveryNoteID = deliveryNoteID;
             this.id = id;
-            this.loadOwned = new LoadOwnedProduct(dataOwnedProducts, textBoxAddSerial);
-            this.addProvenProductDB = new AddProvenProductDB();
-            this.checkPermissionsProvenProduct = new CheckPermissionsProvenProduct(id, buttonDelete, buttonSave, buttonFinishChecking, buttonSummary);
-            checkPermissionsProvenProduct.provenProductButtons();
+            this.loadOwned = new LoadOwnedProduct(dataOwnedProducts, textBoxAddSerial, dataGridViewProvenProduct, dataGridViewProducts);
+            this.addProvenProductDB = new AddProvenProductDB(dataGridViewProducts, dataGridViewProvenProduct);
+            this.checkPermissionsProvenProduct = new CheckPermissionsProvenProduct(id, buttonDelete, buttonSave, buttonFinishChecking, buttonSummary, textBoxAddSerial);
+            this.removeProvenProduct = new RemoveProvenProduct(dataGridViewProvenProduct, dataGridViewProducts);
+            checkPermissionsProvenProduct.provenProductButtons(deliveryNoteID);
             this.ActiveControl = textBoxAddSerial;
 
 
@@ -56,25 +58,21 @@ namespace Warehouse
             try
             {
                 var data = (from c in context.ProductView where c.deliveryNoteID == deliveryNoteID select c);
-                var items = context.DeliveryNote.FirstOrDefault(c => c.deliveryNoteID == this.deliveryNoteID);
                 List<ProductView> productViews = new List<ProductView>();
                 dataGridViewProducts.DataSource = data.ToList();
                 this.ActiveControl = textBoxAddSerial;
-                loadOwned.loadProducts(dataGridViewProvenProduct, deliveryNoteID, dataGridViewProducts);
-                if (items != null)
-                {
-                    this.numberOfItems = items.numberOfItems.ToString();
-                }
-                labelNumberOfItems.Text = dataGridViewProvenProduct.Rows.Count + "/" + numberOfItems;
-            }catch(Exception ex) { }
+                dataOwnedProducts = loadOwned.loadProducts( deliveryNoteID);
+                labelNumberOfItems.Text = dataGridViewProvenProduct.Rows.Count.ToString();
+                correctProducts();
+            }
+            catch(Exception ex) { }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void buttonSave_Click(object sender, EventArgs e)
         {
-            addProvenProductDB.addProven(list, id, dataOwnedProducts, dataGridViewProvenProduct, deliveryNoteID);
+            addProvenProductDB.addProven(list, id, dataOwnedProducts, deliveryNoteID);
             list.Clear();
         }
-
         private void textBoxAddSerial_TextChanged(object sender, EventArgs e)
         {
             if (serial == null)
@@ -86,10 +84,11 @@ namespace Warehouse
                 serial = textBoxAddSerial.Text;
             }
             if (serial.Length >= 12) {
-                list.Add(textBoxAddSerial.Text.Trim());
-                loadOwned.addSerial(dataGridViewProvenProduct, dataGridViewProducts);
+                loadOwned.addSerial(list, textBoxAddSerial);
                 this.ActiveControl = textBoxAddSerial;
-                labelNumberOfItems.Text = dataGridViewProvenProduct.Rows.Count + "/" + numberOfItems;
+                labelNumberOfItems.Text = dataGridViewProvenProduct.Rows.Count.ToString();
+                correctProducts();
+                textBoxAddSerial.Clear();
                 
             }
             
@@ -105,10 +104,17 @@ namespace Warehouse
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)
-        {
-
-            loadOwned.removeProduct(this.dataGridViewProvenProduct, list, dataGridViewProducts);
-            labelNumberOfItems.Text = dataGridViewProvenProduct.Rows.Count + "/" + numberOfItems;
+        {            
+            removeProvenProduct.removeProduct(list, dataOwnedProducts);
+            foreach (DataGridViewRow row in dataGridViewProvenProduct.Rows)
+            {
+                if ((row.Cells[4].Value != null)&&(row.Cells[4].Value.Equals(true)))
+                {
+                    row.DefaultCellStyle.BackColor = Color.Red;
+                }
+            }
+            labelNumberOfItems.Text = dataGridViewProvenProduct.Rows.Count.ToString();
+            correctProducts();
 
         }
 
@@ -135,6 +141,29 @@ namespace Warehouse
             FormSummary formSummary = new FormSummary(summarizeDelivery.getIncorrect());
             formSummary.Show();
             this.Hide();
+        }
+
+        private void correctProducts()
+        {
+            int xxx = 0;
+            var bbbb = context.Product.FirstOrDefault(c => c.serialNo == textBoxAddSerial.Text);
+            foreach (DataGridViewRow row in dataGridViewProvenProduct.Rows)
+            {
+                if ((row.Cells[4].Value != null)&&(row.Cells[4].Value.Equals(false)))
+                {
+                    xxx++;
+                }
+                else if((row.Cells[4].Value == null) && (bbbb != null)){
+                    xxx++;
+                }
+            }
+            var items = context.DeliveryNote.FirstOrDefault(c => c.deliveryNoteID == this.deliveryNoteID);
+            if (items != null)
+            {
+                this.numberOfItems = items.numberOfItems.ToString();
+            }
+
+            labelCorrectProducts.Text = "Ilość zgodnych produktów: " + xxx + "/" + numberOfItems;
         }
     }
     

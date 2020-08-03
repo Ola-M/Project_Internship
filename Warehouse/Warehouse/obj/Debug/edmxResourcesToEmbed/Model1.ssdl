@@ -23,7 +23,7 @@
       <PropertyRef Name="permissionID" />
     </Key>
     <Property Name="permissionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="permissionName" Type="varchar" MaxLength="50" />
+    <Property Name="permissionName" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="Product">
     <Key>
@@ -45,13 +45,14 @@
     <Property Name="provenProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="deliveryNoteID" Type="int" Nullable="false" />
     <Property Name="usersID" Type="int" Nullable="false" />
-    <Property Name="checkDate" Type="datetime" Nullable="false" />
-    <Property Name="cCompany" Type="varchar(max)" Nullable="false" />
-    <Property Name="cOrderNumber" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="cItemNumber" Type="int" Nullable="false" />
-    <Property Name="cProductCode" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="cProductName" Type="varchar(max)" Nullable="false" />
+    <Property Name="checkDate" Type="datetime" />
+    <Property Name="cCompany" Type="varchar(max)" />
+    <Property Name="cOrderNumber" Type="varchar" MaxLength="50" />
+    <Property Name="cItemNumber" Type="int" />
+    <Property Name="cProductCode" Type="varchar" MaxLength="50" />
+    <Property Name="cProductName" Type="varchar(max)" />
     <Property Name="cSerialNo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="offTheList" Type="bit" />
   </EntityType>
   <EntityType Name="Provider">
     <Key>
@@ -114,14 +115,15 @@ warning 6002: The table/view 'warehouseDatabase.dbo.OwnedProductView' does not h
   <EntityType Name="OwnedProductView">
     <Key>
       <PropertyRef Name="Serial" />
+      <PropertyRef Name="deliveryNoteID" />
       <PropertyRef Name="ProductName" />
       <PropertyRef Name="Company" />
-      <PropertyRef Name="deliveryNoteID" />
     </Key>
     <Property Name="Serial" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="ProductName" Type="varchar(max)" Nullable="false" />
     <Property Name="Company" Type="varchar(max)" Nullable="false" />
     <Property Name="deliveryNoteID" Type="int" Nullable="false" />
+    <Property Name="Is in delivery note" Type="bit" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'warehouseDatabase.dbo.ProductView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -282,7 +284,8 @@ warning 6002: The table/view 'warehouseDatabase.dbo.ProductView' does not have a
     [OwnedProductView].[Serial] AS [Serial], 
     [OwnedProductView].[ProductName] AS [ProductName], 
     [OwnedProductView].[Company] AS [Company], 
-    [OwnedProductView].[deliveryNoteID] AS [deliveryNoteID]
+    [OwnedProductView].[deliveryNoteID] AS [deliveryNoteID], 
+    [OwnedProductView].[Is in delivery note] AS [Is in delivery note]
     FROM [dbo].[OwnedProductView] AS [OwnedProductView]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="ProductView" EntityType="Self.ProductView" store:Type="Views" store:Schema="dbo">
