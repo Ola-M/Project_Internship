@@ -14,16 +14,17 @@ namespace Warehouse.admin
         private List<UserPermissions> userPermissionsList = new List<UserPermissions>();
         private List<CheckBox> checkBoxesList;
         DataGridView dataGridViewUsers;
+        private AddPermissions addPermissions;
         public EditUsers(List<string> textBoxList,List<CheckBox> checkBoxesList, DataGridView dataGridViewUsers)
         {
             
             this.textBoxList = textBoxList;
             this.checkBoxesList = checkBoxesList;
             this.dataGridViewUsers = dataGridViewUsers;
-
+            this.addPermissions = new AddPermissions(checkBoxesList);
         }
 
-        public void updateUsers()
+      /*  public void updateUsers()
         {
             AddUser addingUser = new AddUser(textBoxList,checkBoxesList);
             string eee;
@@ -43,37 +44,22 @@ namespace Warehouse.admin
                     user.password = textBoxList[3].ToString();
                     context.SaveChanges();
                     
-                    //addingUser.permission(user.usersID);
                 }
                 else
                 {
                     MessageBox.Show("mesagge");
                 }
             }
-        }
+        }*/
 
-
-
-
-
-        public List<string> addU()
+        public List<CheckBox> getPermissions()
         {
-            
             try
             {
+
                 userPermissionsList = context.UserPermissions.ToList();
-                string ppp;
-                int zzz = 0;
                 foreach (DataGridViewRow view in dataGridViewUsers.SelectedRows)
                 {
-                    ppp = view.Cells[0].Value.ToString();
-                    zzz = int.Parse(view.Cells[0].Value.ToString());
-                    user = context.Users.FirstOrDefault(c => c.usersID == zzz);
-                    textBoxList.Add(user.name.ToString());
-                    textBoxList.Add(user.forname.ToString());
-                    textBoxList.Add(user.login.ToString());
-                    textBoxList.Add(user.password.ToString());
-                    context.SaveChanges();
 
                     foreach (UserPermissions userPermissions in userPermissionsList)
                     {
@@ -95,6 +81,37 @@ namespace Warehouse.admin
                         }
 
                     }
+                }
+            }
+            catch (System.InvalidOperationException e)
+            {
+
+            }
+            addPermissions.permission(user.usersID);
+            return checkBoxesList;
+        }
+
+
+
+        public List<string> getUser()
+        {
+            
+            try
+            {
+                string ppp;
+                int zzz = 0;
+                foreach (DataGridViewRow view in dataGridViewUsers.SelectedRows)
+                {
+                    ppp = view.Cells[0].Value.ToString();
+                    zzz = int.Parse(view.Cells[0].Value.ToString());
+                    user = context.Users.FirstOrDefault(c => c.usersID == zzz);
+                    textBoxList.Add(user.name.ToString());
+                    textBoxList.Add(user.forname.ToString());
+                    textBoxList.Add(user.login.ToString());
+                    textBoxList.Add(user.password.ToString());
+                    context.SaveChanges();
+
+                   
 
                 }
                 

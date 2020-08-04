@@ -10,6 +10,7 @@ namespace Warehouse.admin
         private List<CheckBox> checkBoxesList;
         private Permissions permissions;
         private UserPermissions userPermissions = new UserPermissions();
+        private List<UserPermissions> userPermissionsList = new List<UserPermissions>();
         public AddPermissions(List<CheckBox> checkBoxesList)
         {
             this.checkBoxesList = checkBoxesList;
@@ -19,12 +20,13 @@ namespace Warehouse.admin
         {
             string checkBoxName;
 
-            if(idUsers != 0)
+            if (idUsers != 0)
             {
                 for (int i = 0; i < checkBoxesList.Count; i++)
                 {
                     if (checkBoxesList[i].Checked == true)
                     {
+                        deletePermissions(idUsers);
                         checkBoxName = checkBoxesList[i].Text.Trim();
                         addPermision(checkBoxName, idUsers);
                     }
@@ -41,6 +43,27 @@ namespace Warehouse.admin
             userPermissions.userID = userId;
             context.UserPermissions.Add(userPermissions);
             context.SaveChanges();
+        }
+        private void deletePermissions(int idUsers)
+        {
+            try
+            {
+                userPermissionsList = context.UserPermissions.ToList();
+                foreach (UserPermissions userPermissions in userPermissionsList)
+                {
+                    var xxx = context.UserPermissions.FirstOrDefault(c => c.userID == idUsers);
+                    if (xxx != null)
+                    {       
+                                context.UserPermissions.Remove(xxx);
+                                context.SaveChanges();
+                    }
+
+                }
+            }
+            catch (System.InvalidOperationException e)
+            {
+
+            }
         }
     }
 }

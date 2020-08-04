@@ -6,29 +6,16 @@
     <EntitySet Name="Permissions" EntityType="warehouseDatabaseModel.Permissions" />
     <EntitySet Name="Product" EntityType="warehouseDatabaseModel.Product" />
     <EntitySet Name="Provider" EntityType="warehouseDatabaseModel.Provider" />
-    <EntitySet Name="Summary" EntityType="warehouseDatabaseModel.Summary" />
     <EntitySet Name="UserPermissions" EntityType="warehouseDatabaseModel.UserPermissions" />
     <EntitySet Name="Users" EntityType="warehouseDatabaseModel.Users" />
     <EntitySet Name="DeliveryView" EntityType="warehouseDatabaseModel.DeliveryView" />
-    <AssociationSet Name="FK_Summary_Delivery" Association="warehouseDatabaseModel.FK_Summary_Delivery">
-      <End EntitySet="Delivery" Role="Delivery" />
-      <End EntitySet="Summary" Role="Summary" />
-    </AssociationSet>
     <AssociationSet Name="FK_DeliveryNote_Provider" Association="warehouseDatabaseModel.FK_DeliveryNote_Provider">
       <End EntitySet="Provider" Role="Provider" />
       <End EntitySet="DeliveryNote" Role="DeliveryNote" />
     </AssociationSet>
-    <AssociationSet Name="FK_Summary_DeliveryNote" Association="warehouseDatabaseModel.FK_Summary_DeliveryNote">
-      <End EntitySet="DeliveryNote" Role="DeliveryNote" />
-      <End EntitySet="Summary" Role="Summary" />
-    </AssociationSet>
     <AssociationSet Name="FK_UserPermissions_Permissions" Association="warehouseDatabaseModel.FK_UserPermissions_Permissions">
       <End EntitySet="Permissions" Role="Permissions" />
       <End EntitySet="UserPermissions" Role="UserPermissions" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Summary_Users" Association="warehouseDatabaseModel.FK_Summary_Users">
-      <End EntitySet="Users" Role="Users" />
-      <End EntitySet="Summary" Role="Summary" />
     </AssociationSet>
     <AssociationSet Name="FK_UserPermissions_Users" Association="warehouseDatabaseModel.FK_UserPermissions_Users">
       <End EntitySet="Users" Role="Users" />
@@ -53,6 +40,21 @@
       <End Role="Users" EntitySet="Users" />
       <End Role="ProvenProduct" EntitySet="ProvenProduct" />
     </AssociationSet>
+    <EntitySet Name="IncompatibleProductsView" EntityType="warehouseDatabaseModel.IncompatibleProductsView" />
+    <EntitySet Name="Summary" EntityType="warehouseDatabaseModel.Summary" />
+    <AssociationSet Name="FK_Summary_Delivery" Association="warehouseDatabaseModel.FK_Summary_Delivery">
+      <End Role="Delivery" EntitySet="Delivery" />
+      <End Role="Summary" EntitySet="Summary" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Summary_DeliveryNote" Association="warehouseDatabaseModel.FK_Summary_DeliveryNote">
+      <End Role="DeliveryNote" EntitySet="DeliveryNote" />
+      <End Role="Summary" EntitySet="Summary" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Summary_Users" Association="warehouseDatabaseModel.FK_Summary_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Summary" EntitySet="Summary" />
+    </AssociationSet>
+    <EntitySet Name="xxxxxxxxxxxx" EntityType="warehouseDatabaseModel.xxxxxxxxxxxx" />
   </EntityContainer>
   <EntityType Name="Delivery">
     <Key>
@@ -61,8 +63,8 @@
     <Property Name="deliveryID" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
     <Property Name="deliveryNoteID" Nullable="false" Type="Int32" />
     <Property Name="checked" Nullable="false" Type="Boolean" />
-    <NavigationProperty Name="Summary" Relationship="warehouseDatabaseModel.FK_Summary_Delivery" FromRole="Delivery" ToRole="Summary" />
     <NavigationProperty Name="DeliveryNote" Relationship="warehouseDatabaseModel.FK_Delivery_DeliveryNote" FromRole="Delivery" ToRole="DeliveryNote" />
+    <NavigationProperty Name="Summary" Relationship="warehouseDatabaseModel.FK_Summary_Delivery" FromRole="Delivery" ToRole="Summary" />
   </EntityType>
   <EntityType Name="DeliveryNote">
     <Key>
@@ -74,10 +76,10 @@
     <Property Name="invoiceDate" Nullable="false" Precision="0" Type="DateTime" />
     <Property Name="numberOfItems" Nullable="false" Type="Int32" />
     <NavigationProperty Name="Provider" Relationship="warehouseDatabaseModel.FK_DeliveryNote_Provider" FromRole="DeliveryNote" ToRole="Provider" />
-    <NavigationProperty Name="Summary" Relationship="warehouseDatabaseModel.FK_Summary_DeliveryNote" FromRole="DeliveryNote" ToRole="Summary" />
     <NavigationProperty Name="Product" Relationship="warehouseDatabaseModel.FK_Product_DeliveryNote" FromRole="DeliveryNote" ToRole="Product" />
     <NavigationProperty Name="Delivery" Relationship="warehouseDatabaseModel.FK_Delivery_DeliveryNote" FromRole="DeliveryNote" ToRole="Delivery" />
     <NavigationProperty Name="ProvenProduct" Relationship="warehouseDatabaseModel.FK_ProvenProduct_DeliveryNote" FromRole="DeliveryNote" ToRole="ProvenProduct" />
+    <NavigationProperty Name="Summary" Relationship="warehouseDatabaseModel.FK_Summary_DeliveryNote" FromRole="DeliveryNote" ToRole="Summary" />
   </EntityType>
   <EntityType Name="Permissions">
     <Key>
@@ -110,21 +112,6 @@
     <Property Name="contact" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" Type="String" />
     <NavigationProperty Name="DeliveryNote" Relationship="warehouseDatabaseModel.FK_DeliveryNote_Provider" FromRole="Provider" ToRole="DeliveryNote" />
   </EntityType>
-  <EntityType Name="Summary">
-    <Key>
-      <PropertyRef Name="summaryID" />
-    </Key>
-    <Property Name="summaryID" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
-    <Property Name="deliveryNoteID" Nullable="false" Type="Int32" />
-    <Property Name="deliveryID" Nullable="false" Type="Int32" />
-    <Property Name="usersID" Nullable="false" Type="Int32" />
-    <Property Name="correct" Nullable="false" Type="Boolean" />
-    <Property Name="closed" Nullable="false" Type="Boolean" />
-    <Property Name="deliveryCloseDate" Precision="3" Type="DateTime" />
-    <NavigationProperty Name="Delivery" Relationship="warehouseDatabaseModel.FK_Summary_Delivery" FromRole="Summary" ToRole="Delivery" />
-    <NavigationProperty Name="DeliveryNote" Relationship="warehouseDatabaseModel.FK_Summary_DeliveryNote" FromRole="Summary" ToRole="DeliveryNote" />
-    <NavigationProperty Name="Users" Relationship="warehouseDatabaseModel.FK_Summary_Users" FromRole="Summary" ToRole="Users" />
-  </EntityType>
   <EntityType Name="UserPermissions">
     <Key>
       <PropertyRef Name="userPermissionsID" />
@@ -144,9 +131,9 @@
     <Property Name="forname" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
     <Property Name="login" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
     <Property Name="password" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
-    <NavigationProperty Name="Summary" Relationship="warehouseDatabaseModel.FK_Summary_Users" FromRole="Users" ToRole="Summary" />
     <NavigationProperty Name="UserPermissions" Relationship="warehouseDatabaseModel.FK_UserPermissions_Users" FromRole="Users" ToRole="UserPermissions" />
     <NavigationProperty Name="ProvenProduct" Relationship="warehouseDatabaseModel.FK_ProvenProduct_Users" FromRole="Users" ToRole="ProvenProduct" />
+    <NavigationProperty Name="Summary" Relationship="warehouseDatabaseModel.FK_Summary_Users" FromRole="Users" ToRole="Summary" />
   </EntityType>
   <EntityType Name="DeliveryView">
     <Key>
@@ -164,18 +151,6 @@
     <Property Name="checked" Nullable="false" Type="Boolean" />
     <Property Name="deliveryID" Nullable="false" Type="Int32" />
   </EntityType>
-  <Association Name="FK_Summary_Delivery">
-    <End Type="warehouseDatabaseModel.Delivery" Multiplicity="1" Role="Delivery" />
-    <End Type="warehouseDatabaseModel.Summary" Multiplicity="*" Role="Summary" />
-    <ReferentialConstraint>
-      <Principal Role="Delivery">
-        <PropertyRef Name="deliveryID" />
-      </Principal>
-      <Dependent Role="Summary">
-        <PropertyRef Name="deliveryID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_DeliveryNote_Provider">
     <End Type="warehouseDatabaseModel.Provider" Multiplicity="1" Role="Provider" />
     <End Type="warehouseDatabaseModel.DeliveryNote" Multiplicity="*" Role="DeliveryNote" />
@@ -188,18 +163,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Summary_DeliveryNote">
-    <End Type="warehouseDatabaseModel.DeliveryNote" Multiplicity="1" Role="DeliveryNote" />
-    <End Type="warehouseDatabaseModel.Summary" Multiplicity="*" Role="Summary" />
-    <ReferentialConstraint>
-      <Principal Role="DeliveryNote">
-        <PropertyRef Name="deliveryNoteID" />
-      </Principal>
-      <Dependent Role="Summary">
-        <PropertyRef Name="deliveryNoteID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_UserPermissions_Permissions">
     <End Type="warehouseDatabaseModel.Permissions" Multiplicity="1" Role="Permissions" />
     <End Type="warehouseDatabaseModel.UserPermissions" Multiplicity="*" Role="UserPermissions" />
@@ -209,18 +172,6 @@
       </Principal>
       <Dependent Role="UserPermissions">
         <PropertyRef Name="permissionsID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Summary_Users">
-    <End Type="warehouseDatabaseModel.Users" Multiplicity="1" Role="Users" />
-    <End Type="warehouseDatabaseModel.Summary" Multiplicity="*" Role="Summary" />
-    <ReferentialConstraint>
-      <Principal Role="Users">
-        <PropertyRef Name="usersID" />
-      </Principal>
-      <Dependent Role="Summary">
-        <PropertyRef Name="usersID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -327,4 +278,84 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="IncompatibleProductsView">
+    <Key>
+      <PropertyRef Name="cSerialNo" />
+      <PropertyRef Name="deliveryNoteID" />
+      <PropertyRef Name="forname" />
+    </Key>
+    <Property Name="cSerialNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="deliveryNoteID" Type="Int32" Nullable="false" />
+    <Property Name="forname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="checkDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Summary">
+    <Key>
+      <PropertyRef Name="summaryID" />
+    </Key>
+    <Property Name="summaryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="deliveryNoteID" Type="Int32" Nullable="false" />
+    <Property Name="deliveryID" Type="Int32" Nullable="false" />
+    <Property Name="usersID" Type="Int32" Nullable="false" />
+    <Property Name="correct" Type="Boolean" Nullable="false" />
+    <Property Name="closed" Type="Boolean" Nullable="false" />
+    <Property Name="deliveryCloseDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Delivery" Relationship="warehouseDatabaseModel.FK_Summary_Delivery" FromRole="Summary" ToRole="Delivery" />
+    <NavigationProperty Name="DeliveryNote" Relationship="warehouseDatabaseModel.FK_Summary_DeliveryNote" FromRole="Summary" ToRole="DeliveryNote" />
+    <NavigationProperty Name="Users" Relationship="warehouseDatabaseModel.FK_Summary_Users" FromRole="Summary" ToRole="Users" />
+  </EntityType>
+  <Association Name="FK_Summary_Delivery">
+    <End Type="warehouseDatabaseModel.Delivery" Role="Delivery" Multiplicity="1" />
+    <End Type="warehouseDatabaseModel.Summary" Role="Summary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Delivery">
+        <PropertyRef Name="deliveryID" />
+      </Principal>
+      <Dependent Role="Summary">
+        <PropertyRef Name="deliveryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Summary_DeliveryNote">
+    <End Type="warehouseDatabaseModel.DeliveryNote" Role="DeliveryNote" Multiplicity="1" />
+    <End Type="warehouseDatabaseModel.Summary" Role="Summary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DeliveryNote">
+        <PropertyRef Name="deliveryNoteID" />
+      </Principal>
+      <Dependent Role="Summary">
+        <PropertyRef Name="deliveryNoteID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Summary_Users">
+    <End Type="warehouseDatabaseModel.Users" Role="Users" Multiplicity="1" />
+    <End Type="warehouseDatabaseModel.Summary" Role="Summary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="usersID" />
+      </Principal>
+      <Dependent Role="Summary">
+        <PropertyRef Name="usersID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="xxxxxxxxxxxx">
+    <Key>
+      <PropertyRef Name="deliveryNoteID" />
+      <PropertyRef Name="company" />
+      <PropertyRef Name="orderNumber" />
+      <PropertyRef Name="itemNumber" />
+      <PropertyRef Name="productCode" />
+      <PropertyRef Name="productName" />
+      <PropertyRef Name="serialNo" />
+    </Key>
+    <Property Name="deliveryNoteID" Type="Int32" Nullable="false" />
+    <Property Name="company" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="orderNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="itemNumber" Type="Int32" Nullable="false" />
+    <Property Name="productCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="productName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="serialNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
 </Schema>

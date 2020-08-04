@@ -14,13 +14,16 @@ namespace Warehouse.admin
         private List<string> textBoxList;
         private Users users = new Users();
         
+        
         public AddOrUpdateUsers(List<string> textBoxList, List<CheckBox> checkBoxesList)
         {
             this.textBoxList = textBoxList;
             this.checkBoxesList = checkBoxesList;
+            
         }
         public void addOrUpdate( DataGridView dataGridViewUsers)
         {
+            EdycjaUsera edycjaUsera = new EdycjaUsera(textBoxList,checkBoxesList, dataGridViewUsers);
             EditUsers editUsers = new EditUsers(textBoxList, checkBoxesList, dataGridViewUsers);
             AddUser addUser = new AddUser(textBoxList, checkBoxesList);
             AddPermissions addPermissions = new AddPermissions(checkBoxesList);
@@ -49,7 +52,7 @@ namespace Warehouse.admin
                                              MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
-                    editUsers.updateUsers();
+                    edycjaUsera.updateUsers();
                     addPermissions.permission(users.usersID);
                     MessageBox.Show("Edytowano użytkownika");
                 }

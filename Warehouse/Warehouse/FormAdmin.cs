@@ -63,13 +63,19 @@ namespace Warehouse
         }
         private void dataGridViewUsers_DoubleClick(object sender, EventArgs e)
         {
+            
+            checkBoxesList.Clear();
+            textBoxList.Clear();
             createCheckBoxList();
-            textBoxList = editUsers.addU();
+            textBoxList = editUsers.getUser();
             textBoxName.Text = textBoxList[0];
             textBoxForname.Text = textBoxList[1];
             textBoxLogin.Text = textBoxList[2];
             textBoxPassword.Text = textBoxList[3];
-
+            checkBoxesList = editUsers.getPermissions();
+            checkBoxWarehouseman = checkBoxesList[0];
+            checkBoxLogistician = checkBoxesList[1];
+            checkBoxAdmin = checkBoxesList[2];
         }
     }
 }

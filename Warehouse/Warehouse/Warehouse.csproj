@@ -134,6 +134,7 @@
     <Compile Include="admin\AddUser.cs" />
     <Compile Include="admin\ClearTextBox.cs" />
     <Compile Include="admin\EditUsers.cs" />
+    <Compile Include="admin\EdycjaUsera.cs" />
     <Compile Include="admin\RemoveUser.cs" />
     <Compile Include="bazaDanych\PobieranieDanych.cs" />
     <Compile Include="Delivery.cs">
@@ -184,6 +185,9 @@
     </Compile>
     <Compile Include="forms\FormLogin.Designer.cs">
       <DependentUpon>FormLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IncompatibleProductsView.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Model1.Context.cs">
       <AutoGen>True</AutoGen>
@@ -256,6 +260,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>warehouseDatabaseDeliveryView1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="xxxxxxxxxxxx.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <EmbeddedResource Include="FormAdmin.resx">
       <DependentUpon>FormAdmin.cs</DependentUpon>

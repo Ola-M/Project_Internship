@@ -4,21 +4,17 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1eda64a51a2547e5a4100d0f41ed4a25" Name="Diagram1" ZoomLevel="81">
+      <Diagram DiagramId="1eda64a51a2547e5a4100d0f41ed4a25" Name="Diagram1" ZoomLevel="94">
         <EntityTypeShape EntityType="warehouseDatabaseModel.Delivery" PointX="5.25" PointY="9.5" Width="1.5" />
         <EntityTypeShape EntityType="warehouseDatabaseModel.DeliveryNote" PointX="3" PointY="7.125" Width="1.5" />
         <EntityTypeShape EntityType="warehouseDatabaseModel.Permissions" PointX="3" PointY="0.75" Width="1.5" />
         <EntityTypeShape EntityType="warehouseDatabaseModel.Product" PointX="5.25" PointY="12.25" Width="1.5" />
         <EntityTypeShape EntityType="warehouseDatabaseModel.Provider" PointX="0.75" PointY="7.625" Width="1.5" />
-        <EntityTypeShape EntityType="warehouseDatabaseModel.Summary" PointX="7.5" PointY="7.75" Width="1.5" />
         <EntityTypeShape EntityType="warehouseDatabaseModel.UserPermissions" PointX="5.25" PointY="1.5" Width="1.5" />
         <EntityTypeShape EntityType="warehouseDatabaseModel.Users" PointX="3" PointY="3.25" Width="1.5" />
         <EntityTypeShape EntityType="warehouseDatabaseModel.DeliveryView" PointX="7.75" PointY="4.125" Width="1.5" />
-        <AssociationConnector Association="warehouseDatabaseModel.FK_Summary_Delivery" />
         <AssociationConnector Association="warehouseDatabaseModel.FK_DeliveryNote_Provider" />
-        <AssociationConnector Association="warehouseDatabaseModel.FK_Summary_DeliveryNote" />
         <AssociationConnector Association="warehouseDatabaseModel.FK_UserPermissions_Permissions" />
-        <AssociationConnector Association="warehouseDatabaseModel.FK_Summary_Users" />
         <AssociationConnector Association="warehouseDatabaseModel.FK_UserPermissions_Users" />
         <AssociationConnector Association="warehouseDatabaseModel.FK_Product_DeliveryNote" />
         <AssociationConnector Association="warehouseDatabaseModel.FK_Delivery_DeliveryNote" />
@@ -27,6 +23,12 @@
         <EntityTypeShape EntityType="warehouseDatabaseModel.ProvenProduct" Width="1.5" PointX="5.25" PointY="5" />
         <AssociationConnector Association="warehouseDatabaseModel.FK_ProvenProduct_DeliveryNote" />
         <AssociationConnector Association="warehouseDatabaseModel.FK_ProvenProduct_Users" />
+        <EntityTypeShape EntityType="warehouseDatabaseModel.IncompatibleProductsView" Width="1.5" PointX="10.375" PointY="4.75" />
+        <EntityTypeShape EntityType="warehouseDatabaseModel.Summary" Width="1.5" PointX="7.5" PointY="7.875" />
+        <AssociationConnector Association="warehouseDatabaseModel.FK_Summary_Delivery" />
+        <AssociationConnector Association="warehouseDatabaseModel.FK_Summary_DeliveryNote" />
+        <AssociationConnector Association="warehouseDatabaseModel.FK_Summary_Users" />
+        <EntityTypeShape EntityType="warehouseDatabaseModel.xxxxxxxxxxxx" Width="1.5" PointX="10.375" PointY="7.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

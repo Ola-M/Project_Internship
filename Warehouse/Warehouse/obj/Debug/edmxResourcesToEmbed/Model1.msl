@@ -52,19 +52,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Summary">
-      <EntityTypeMapping TypeName="warehouseDatabaseModel.Summary">
-        <MappingFragment StoreEntitySet="Summary">
-          <ScalarProperty Name="deliveryCloseDate" ColumnName="deliveryCloseDate" />
-          <ScalarProperty Name="closed" ColumnName="closed" />
-          <ScalarProperty Name="correct" ColumnName="correct" />
-          <ScalarProperty Name="usersID" ColumnName="usersID" />
-          <ScalarProperty Name="deliveryID" ColumnName="deliveryID" />
-          <ScalarProperty Name="deliveryNoteID" ColumnName="deliveryNoteID" />
-          <ScalarProperty Name="summaryID" ColumnName="summaryID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="UserPermissions">
       <EntityTypeMapping TypeName="warehouseDatabaseModel.UserPermissions">
         <MappingFragment StoreEntitySet="UserPermissions">
@@ -132,6 +119,42 @@
           <ScalarProperty Name="usersID" ColumnName="usersID" />
           <ScalarProperty Name="deliveryNoteID" ColumnName="deliveryNoteID" />
           <ScalarProperty Name="provenProductID" ColumnName="provenProductID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IncompatibleProductsView">
+      <EntityTypeMapping TypeName="warehouseDatabaseModel.IncompatibleProductsView">
+        <MappingFragment StoreEntitySet="IncompatibleProductsView">
+          <ScalarProperty Name="checkDate" ColumnName="checkDate" />
+          <ScalarProperty Name="forname" ColumnName="forname" />
+          <ScalarProperty Name="deliveryNoteID" ColumnName="deliveryNoteID" />
+          <ScalarProperty Name="cSerialNo" ColumnName="cSerialNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Summary">
+      <EntityTypeMapping TypeName="warehouseDatabaseModel.Summary">
+        <MappingFragment StoreEntitySet="Summary">
+          <ScalarProperty Name="deliveryCloseDate" ColumnName="deliveryCloseDate" />
+          <ScalarProperty Name="closed" ColumnName="closed" />
+          <ScalarProperty Name="correct" ColumnName="correct" />
+          <ScalarProperty Name="usersID" ColumnName="usersID" />
+          <ScalarProperty Name="deliveryID" ColumnName="deliveryID" />
+          <ScalarProperty Name="deliveryNoteID" ColumnName="deliveryNoteID" />
+          <ScalarProperty Name="summaryID" ColumnName="summaryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="xxxxxxxxxxxx">
+      <EntityTypeMapping TypeName="warehouseDatabaseModel.xxxxxxxxxxxx">
+        <MappingFragment StoreEntitySet="xxxxxxxxxxxx">
+          <ScalarProperty Name="serialNo" ColumnName="serialNo" />
+          <ScalarProperty Name="productName" ColumnName="productName" />
+          <ScalarProperty Name="productCode" ColumnName="productCode" />
+          <ScalarProperty Name="itemNumber" ColumnName="itemNumber" />
+          <ScalarProperty Name="orderNumber" ColumnName="orderNumber" />
+          <ScalarProperty Name="company" ColumnName="company" />
+          <ScalarProperty Name="deliveryNoteID" ColumnName="deliveryNoteID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

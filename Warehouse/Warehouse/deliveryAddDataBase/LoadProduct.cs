@@ -32,7 +32,7 @@ namespace Warehouse.productAdd
 
                     product.productCode = dataTable.Rows[i][3].ToString();
                     product.productName = dataTable.Rows[i][4].ToString();
-                    product.serialNo = dataTable.Rows[i][5].ToString();
+                    product.serialNo = dataTable.Rows[i][5].ToString().Trim();
                     
 
                     products.Add(product);

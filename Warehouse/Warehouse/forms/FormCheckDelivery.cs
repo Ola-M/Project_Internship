@@ -138,7 +138,7 @@ namespace Warehouse
             
             SummarizeDelivery summarizeDelivery = new SummarizeDelivery(id, deliveryNoteID, dataGridViewProducts, this.dataGridViewProvenProduct);
             summarizeDelivery.summaryDelivery();
-            FormSummary formSummary = new FormSummary(summarizeDelivery.getIncorrect());
+            FormSummary formSummary = new FormSummary(deliveryNoteID, summarizeDelivery.getIncorrect());
             formSummary.Show();
             this.Hide();
         }

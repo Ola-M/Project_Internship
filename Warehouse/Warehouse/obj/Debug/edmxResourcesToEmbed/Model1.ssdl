@@ -111,6 +111,30 @@ warning 6002: The table/view 'warehouseDatabase.dbo.DeliveryView' does not have 
     <Property Name="deliveryID" Type="int" Nullable="false" />
   </EntityType>
   <!--Errors Found During Generation:
+warning 6002: The table/view 'warehouseDatabase.dbo.IncompatibleProductsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="IncompatibleProductsView">
+    <Key>
+      <PropertyRef Name="cSerialNo" />
+      <PropertyRef Name="deliveryNoteID" />
+      <PropertyRef Name="forname" />
+    </Key>
+    <Property Name="cSerialNo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="deliveryNoteID" Type="int" Nullable="false" />
+    <Property Name="forname" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="checkDate" Type="datetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'warehouseDatabase.dbo.MissingProductsView' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="MissingProductsView">
+          <Property Name="deliveryNoteID" Type="int" />
+          <Property Name="company" Type="varchar(max)" />
+          <Property Name="orderNumber" Type="varchar" MaxLength="50" />
+          <Property Name="itemNumber" Type="int" />
+          <Property Name="productCode" Type="varchar" MaxLength="50" />
+          <Property Name="productName" Type="varchar(max)" />
+          <Property Name="serialNo" Type="varchar" MaxLength="50" />
+        </EntityType>-->
+  <!--Errors Found During Generation:
 warning 6002: The table/view 'warehouseDatabase.dbo.OwnedProductView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="OwnedProductView">
     <Key>
@@ -138,6 +162,26 @@ warning 6002: The table/view 'warehouseDatabase.dbo.ProductView' does not have a
     <Property Name="ProductName" Type="varchar(max)" Nullable="false" />
     <Property Name="Company" Type="varchar(max)" Nullable="false" />
     <Property Name="deliveryNoteID" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'warehouseDatabase.dbo.xxxxxxxxxxxx' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="xxxxxxxxxxxx">
+    <Key>
+      <PropertyRef Name="deliveryNoteID" />
+      <PropertyRef Name="company" />
+      <PropertyRef Name="orderNumber" />
+      <PropertyRef Name="itemNumber" />
+      <PropertyRef Name="productCode" />
+      <PropertyRef Name="productName" />
+      <PropertyRef Name="serialNo" />
+    </Key>
+    <Property Name="deliveryNoteID" Type="int" Nullable="false" />
+    <Property Name="company" Type="varchar(max)" Nullable="false" />
+    <Property Name="orderNumber" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="itemNumber" Type="int" Nullable="false" />
+    <Property Name="productCode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="productName" Type="varchar(max)" Nullable="false" />
+    <Property Name="serialNo" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <Association Name="FK_Delivery_DeliveryNote">
     <End Role="DeliveryNote" Type="Self.DeliveryNote" Multiplicity="1" />
@@ -279,6 +323,14 @@ warning 6002: The table/view 'warehouseDatabase.dbo.ProductView' does not have a
     [DeliveryView].[deliveryID] AS [deliveryID]
     FROM [dbo].[DeliveryView] AS [DeliveryView]</DefiningQuery>
     </EntitySet>
+    <EntitySet Name="IncompatibleProductsView" EntityType="Self.IncompatibleProductsView" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [IncompatibleProductsView].[cSerialNo] AS [cSerialNo], 
+    [IncompatibleProductsView].[deliveryNoteID] AS [deliveryNoteID], 
+    [IncompatibleProductsView].[forname] AS [forname], 
+    [IncompatibleProductsView].[checkDate] AS [checkDate]
+    FROM [dbo].[IncompatibleProductsView] AS [IncompatibleProductsView]</DefiningQuery>
+    </EntitySet>
     <EntitySet Name="OwnedProductView" EntityType="Self.OwnedProductView" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [OwnedProductView].[Serial] AS [Serial], 
@@ -295,6 +347,17 @@ warning 6002: The table/view 'warehouseDatabase.dbo.ProductView' does not have a
     [ProductView].[Company] AS [Company], 
     [ProductView].[deliveryNoteID] AS [deliveryNoteID]
     FROM [dbo].[ProductView] AS [ProductView]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="xxxxxxxxxxxx" EntityType="Self.xxxxxxxxxxxx" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [xxxxxxxxxxxx].[deliveryNoteID] AS [deliveryNoteID], 
+    [xxxxxxxxxxxx].[company] AS [company], 
+    [xxxxxxxxxxxx].[orderNumber] AS [orderNumber], 
+    [xxxxxxxxxxxx].[itemNumber] AS [itemNumber], 
+    [xxxxxxxxxxxx].[productCode] AS [productCode], 
+    [xxxxxxxxxxxx].[productName] AS [productName], 
+    [xxxxxxxxxxxx].[serialNo] AS [serialNo]
+    FROM [dbo].[xxxxxxxxxxxx] AS [xxxxxxxxxxxx]</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK_Delivery_DeliveryNote" Association="Self.FK_Delivery_DeliveryNote">
       <End Role="DeliveryNote" EntitySet="DeliveryNote" />
