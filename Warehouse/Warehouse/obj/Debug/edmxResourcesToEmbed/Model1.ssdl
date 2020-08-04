@@ -1,0 +1,403 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="warehouseDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Delivery">
+    <Key>
+      <PropertyRef Name="deliveryID" />
+    </Key>
+    <Property Name="deliveryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="deliveryNoteID" Type="int" Nullable="false" />
+    <Property Name="checked" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DeliveryNote">
+    <Key>
+      <PropertyRef Name="deliveryNoteID" />
+    </Key>
+    <Property Name="deliveryNoteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="providerID" Type="int" Nullable="false" />
+    <Property Name="deliveryNumber" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="invoiceDate" Type="date" Nullable="false" />
+    <Property Name="numberOfItems" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Permissions">
+    <Key>
+      <PropertyRef Name="permissionID" />
+    </Key>
+    <Property Name="permissionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="permissionName" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="productID" />
+    </Key>
+    <Property Name="productID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="deliveryNoteID" Type="int" Nullable="false" />
+    <Property Name="company" Type="varchar(max)" Nullable="false" />
+    <Property Name="orderNumber" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="itemNumber" Type="int" Nullable="false" />
+    <Property Name="productCode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="productName" Type="varchar(max)" Nullable="false" />
+    <Property Name="serialNo" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProvenProduct">
+    <Key>
+      <PropertyRef Name="provenProductID" />
+    </Key>
+    <Property Name="provenProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="deliveryNoteID" Type="int" Nullable="false" />
+    <Property Name="usersID" Type="int" Nullable="false" />
+    <Property Name="checkDate" Type="datetime" />
+    <Property Name="cCompany" Type="varchar(max)" />
+    <Property Name="cOrderNumber" Type="varchar" MaxLength="50" />
+    <Property Name="cItemNumber" Type="int" />
+    <Property Name="cProductCode" Type="varchar" MaxLength="50" />
+    <Property Name="cProductName" Type="varchar(max)" />
+    <Property Name="cSerialNo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="offTheList" Type="bit" />
+  </EntityType>
+  <EntityType Name="Provider">
+    <Key>
+      <PropertyRef Name="providerID" />
+    </Key>
+    <Property Name="providerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="companyName" Type="varchar(max)" Nullable="false" />
+    <Property Name="contact" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Summary">
+    <Key>
+      <PropertyRef Name="summaryID" />
+    </Key>
+    <Property Name="summaryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="deliveryNoteID" Type="int" Nullable="false" />
+    <Property Name="deliveryID" Type="int" Nullable="false" />
+    <Property Name="usersID" Type="int" Nullable="false" />
+    <Property Name="correct" Type="bit" Nullable="false" />
+    <Property Name="closed" Type="bit" Nullable="false" />
+    <Property Name="deliveryCloseDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="UserPermissions">
+    <Key>
+      <PropertyRef Name="userPermissionsID" />
+    </Key>
+    <Property Name="userPermissionsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userID" Type="int" Nullable="false" />
+    <Property Name="permissionsID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="usersID" />
+    </Key>
+    <Property Name="usersID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="forname" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="login" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'warehouseDatabase.dbo.DeliveryView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="DeliveryView">
+    <Key>
+      <PropertyRef Name="deliveryNumber" />
+      <PropertyRef Name="invoiceDate" />
+      <PropertyRef Name="numberOfItems" />
+      <PropertyRef Name="companyName" />
+      <PropertyRef Name="checked" />
+      <PropertyRef Name="deliveryID" />
+    </Key>
+    <Property Name="deliveryNumber" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="invoiceDate" Type="date" Nullable="false" />
+    <Property Name="numberOfItems" Type="int" Nullable="false" />
+    <Property Name="companyName" Type="varchar(max)" Nullable="false" />
+    <Property Name="checked" Type="bit" Nullable="false" />
+    <Property Name="deliveryID" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'warehouseDatabase.dbo.IncompatibleProductsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="IncompatibleProductsView">
+    <Key>
+      <PropertyRef Name="cSerialNo" />
+      <PropertyRef Name="deliveryNoteID" />
+      <PropertyRef Name="forname" />
+    </Key>
+    <Property Name="cSerialNo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="deliveryNoteID" Type="int" Nullable="false" />
+    <Property Name="forname" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="checkDate" Type="datetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'warehouseDatabase.dbo.MissingProductsView' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="MissingProductsView">
+          <Property Name="deliveryNoteID" Type="int" />
+          <Property Name="company" Type="varchar(max)" />
+          <Property Name="orderNumber" Type="varchar" MaxLength="50" />
+          <Property Name="itemNumber" Type="int" />
+          <Property Name="productCode" Type="varchar" MaxLength="50" />
+          <Property Name="productName" Type="varchar(max)" />
+          <Property Name="serialNo" Type="varchar" MaxLength="50" />
+        </EntityType>-->
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'warehouseDatabase.dbo.OwnedProductView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="OwnedProductView">
+    <Key>
+      <PropertyRef Name="Serial" />
+      <PropertyRef Name="deliveryNoteID" />
+      <PropertyRef Name="ProductName" />
+      <PropertyRef Name="Company" />
+    </Key>
+    <Property Name="Serial" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ProductName" Type="varchar(max)" Nullable="false" />
+    <Property Name="Company" Type="varchar(max)" Nullable="false" />
+    <Property Name="deliveryNoteID" Type="int" Nullable="false" />
+    <Property Name="Is in delivery note" Type="bit" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'warehouseDatabase.dbo.ProductView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="ProductView">
+    <Key>
+      <PropertyRef Name="Serial" />
+      <PropertyRef Name="ProductName" />
+      <PropertyRef Name="Company" />
+      <PropertyRef Name="deliveryNoteID" />
+    </Key>
+    <Property Name="Serial" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ProductName" Type="varchar(max)" Nullable="false" />
+    <Property Name="Company" Type="varchar(max)" Nullable="false" />
+    <Property Name="deliveryNoteID" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'warehouseDatabase.dbo.xxxxxxxxxxxx' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="xxxxxxxxxxxx">
+    <Key>
+      <PropertyRef Name="deliveryNoteID" />
+      <PropertyRef Name="company" />
+      <PropertyRef Name="orderNumber" />
+      <PropertyRef Name="itemNumber" />
+      <PropertyRef Name="productCode" />
+      <PropertyRef Name="productName" />
+      <PropertyRef Name="serialNo" />
+    </Key>
+    <Property Name="deliveryNoteID" Type="int" Nullable="false" />
+    <Property Name="company" Type="varchar(max)" Nullable="false" />
+    <Property Name="orderNumber" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="itemNumber" Type="int" Nullable="false" />
+    <Property Name="productCode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="productName" Type="varchar(max)" Nullable="false" />
+    <Property Name="serialNo" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Delivery_DeliveryNote">
+    <End Role="DeliveryNote" Type="Self.DeliveryNote" Multiplicity="1" />
+    <End Role="Delivery" Type="Self.Delivery" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DeliveryNote">
+        <PropertyRef Name="deliveryNoteID" />
+      </Principal>
+      <Dependent Role="Delivery">
+        <PropertyRef Name="deliveryNoteID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DeliveryNote_Provider">
+    <End Role="Provider" Type="Self.Provider" Multiplicity="1" />
+    <End Role="DeliveryNote" Type="Self.DeliveryNote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Provider">
+        <PropertyRef Name="providerID" />
+      </Principal>
+      <Dependent Role="DeliveryNote">
+        <PropertyRef Name="providerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_DeliveryNote">
+    <End Role="DeliveryNote" Type="Self.DeliveryNote" Multiplicity="1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DeliveryNote">
+        <PropertyRef Name="deliveryNoteID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="deliveryNoteID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProvenProduct_DeliveryNote">
+    <End Role="DeliveryNote" Type="Self.DeliveryNote" Multiplicity="1" />
+    <End Role="ProvenProduct" Type="Self.ProvenProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DeliveryNote">
+        <PropertyRef Name="deliveryNoteID" />
+      </Principal>
+      <Dependent Role="ProvenProduct">
+        <PropertyRef Name="deliveryNoteID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProvenProduct_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="ProvenProduct" Type="Self.ProvenProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="usersID" />
+      </Principal>
+      <Dependent Role="ProvenProduct">
+        <PropertyRef Name="usersID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Summary_Delivery">
+    <End Role="Delivery" Type="Self.Delivery" Multiplicity="1" />
+    <End Role="Summary" Type="Self.Summary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Delivery">
+        <PropertyRef Name="deliveryID" />
+      </Principal>
+      <Dependent Role="Summary">
+        <PropertyRef Name="deliveryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Summary_DeliveryNote">
+    <End Role="DeliveryNote" Type="Self.DeliveryNote" Multiplicity="1" />
+    <End Role="Summary" Type="Self.Summary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DeliveryNote">
+        <PropertyRef Name="deliveryNoteID" />
+      </Principal>
+      <Dependent Role="Summary">
+        <PropertyRef Name="deliveryNoteID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Summary_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Summary" Type="Self.Summary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="usersID" />
+      </Principal>
+      <Dependent Role="Summary">
+        <PropertyRef Name="usersID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserPermissions_Permissions">
+    <End Role="Permissions" Type="Self.Permissions" Multiplicity="1" />
+    <End Role="UserPermissions" Type="Self.UserPermissions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Permissions">
+        <PropertyRef Name="permissionID" />
+      </Principal>
+      <Dependent Role="UserPermissions">
+        <PropertyRef Name="permissionsID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserPermissions_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="UserPermissions" Type="Self.UserPermissions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="usersID" />
+      </Principal>
+      <Dependent Role="UserPermissions">
+        <PropertyRef Name="userID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="warehouseDatabaseModelStoreContainer">
+    <EntitySet Name="Delivery" EntityType="Self.Delivery" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DeliveryNote" EntityType="Self.DeliveryNote" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Permissions" EntityType="Self.Permissions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProvenProduct" EntityType="Self.ProvenProduct" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Provider" EntityType="Self.Provider" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Summary" EntityType="Self.Summary" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserPermissions" EntityType="Self.UserPermissions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DeliveryView" EntityType="Self.DeliveryView" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [DeliveryView].[deliveryNumber] AS [deliveryNumber], 
+    [DeliveryView].[invoiceDate] AS [invoiceDate], 
+    [DeliveryView].[numberOfItems] AS [numberOfItems], 
+    [DeliveryView].[companyName] AS [companyName], 
+    [DeliveryView].[checked] AS [checked], 
+    [DeliveryView].[deliveryID] AS [deliveryID]
+    FROM [dbo].[DeliveryView] AS [DeliveryView]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="IncompatibleProductsView" EntityType="Self.IncompatibleProductsView" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [IncompatibleProductsView].[cSerialNo] AS [cSerialNo], 
+    [IncompatibleProductsView].[deliveryNoteID] AS [deliveryNoteID], 
+    [IncompatibleProductsView].[forname] AS [forname], 
+    [IncompatibleProductsView].[checkDate] AS [checkDate]
+    FROM [dbo].[IncompatibleProductsView] AS [IncompatibleProductsView]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="OwnedProductView" EntityType="Self.OwnedProductView" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [OwnedProductView].[Serial] AS [Serial], 
+    [OwnedProductView].[ProductName] AS [ProductName], 
+    [OwnedProductView].[Company] AS [Company], 
+    [OwnedProductView].[deliveryNoteID] AS [deliveryNoteID], 
+    [OwnedProductView].[Is in delivery note] AS [Is in delivery note]
+    FROM [dbo].[OwnedProductView] AS [OwnedProductView]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ProductView" EntityType="Self.ProductView" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ProductView].[Serial] AS [Serial], 
+    [ProductView].[ProductName] AS [ProductName], 
+    [ProductView].[Company] AS [Company], 
+    [ProductView].[deliveryNoteID] AS [deliveryNoteID]
+    FROM [dbo].[ProductView] AS [ProductView]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="xxxxxxxxxxxx" EntityType="Self.xxxxxxxxxxxx" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [xxxxxxxxxxxx].[deliveryNoteID] AS [deliveryNoteID], 
+    [xxxxxxxxxxxx].[company] AS [company], 
+    [xxxxxxxxxxxx].[orderNumber] AS [orderNumber], 
+    [xxxxxxxxxxxx].[itemNumber] AS [itemNumber], 
+    [xxxxxxxxxxxx].[productCode] AS [productCode], 
+    [xxxxxxxxxxxx].[productName] AS [productName], 
+    [xxxxxxxxxxxx].[serialNo] AS [serialNo]
+    FROM [dbo].[xxxxxxxxxxxx] AS [xxxxxxxxxxxx]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_Delivery_DeliveryNote" Association="Self.FK_Delivery_DeliveryNote">
+      <End Role="DeliveryNote" EntitySet="DeliveryNote" />
+      <End Role="Delivery" EntitySet="Delivery" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DeliveryNote_Provider" Association="Self.FK_DeliveryNote_Provider">
+      <End Role="Provider" EntitySet="Provider" />
+      <End Role="DeliveryNote" EntitySet="DeliveryNote" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_DeliveryNote" Association="Self.FK_Product_DeliveryNote">
+      <End Role="DeliveryNote" EntitySet="DeliveryNote" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProvenProduct_DeliveryNote" Association="Self.FK_ProvenProduct_DeliveryNote">
+      <End Role="DeliveryNote" EntitySet="DeliveryNote" />
+      <End Role="ProvenProduct" EntitySet="ProvenProduct" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProvenProduct_Users" Association="Self.FK_ProvenProduct_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="ProvenProduct" EntitySet="ProvenProduct" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Summary_Delivery" Association="Self.FK_Summary_Delivery">
+      <End Role="Delivery" EntitySet="Delivery" />
+      <End Role="Summary" EntitySet="Summary" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Summary_DeliveryNote" Association="Self.FK_Summary_DeliveryNote">
+      <End Role="DeliveryNote" EntitySet="DeliveryNote" />
+      <End Role="Summary" EntitySet="Summary" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Summary_Users" Association="Self.FK_Summary_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Summary" EntitySet="Summary" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserPermissions_Permissions" Association="Self.FK_UserPermissions_Permissions">
+      <End Role="Permissions" EntitySet="Permissions" />
+      <End Role="UserPermissions" EntitySet="UserPermissions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserPermissions_Users" Association="Self.FK_UserPermissions_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UserPermissions" EntitySet="UserPermissions" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
