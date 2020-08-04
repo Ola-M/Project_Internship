@@ -129,17 +129,6 @@ warning 6002: The table/view 'warehouseDatabase.dbo.IncompatibleProductsView' do
           <Property Name="checkDate" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6013: The table/view 'warehouseDatabase.dbo.MissingProductsView' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="MissingProductsView">
-          <Property Name="deliveryNoteID" Type="int" />
-          <Property Name="company" Type="varchar(max)" />
-          <Property Name="orderNumber" Type="varchar" MaxLength="50" />
-          <Property Name="itemNumber" Type="int" />
-          <Property Name="productCode" Type="varchar" MaxLength="50" />
-          <Property Name="productName" Type="varchar(max)" />
-          <Property Name="serialNo" Type="varchar" MaxLength="50" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
 warning 6002: The table/view 'warehouseDatabase.dbo.OwnedProductView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="OwnedProductView">
           <Key>
@@ -167,26 +156,6 @@ warning 6002: The table/view 'warehouseDatabase.dbo.ProductView' does not have a
           <Property Name="ProductName" Type="varchar(max)" Nullable="false" />
           <Property Name="Company" Type="varchar(max)" Nullable="false" />
           <Property Name="deliveryNoteID" Type="int" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'warehouseDatabase.dbo.xxxxxxxxxxxx' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="xxxxxxxxxxxx">
-          <Key>
-            <PropertyRef Name="deliveryNoteID" />
-            <PropertyRef Name="company" />
-            <PropertyRef Name="orderNumber" />
-            <PropertyRef Name="itemNumber" />
-            <PropertyRef Name="productCode" />
-            <PropertyRef Name="productName" />
-            <PropertyRef Name="serialNo" />
-          </Key>
-          <Property Name="deliveryNoteID" Type="int" Nullable="false" />
-          <Property Name="company" Type="varchar(max)" Nullable="false" />
-          <Property Name="orderNumber" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="itemNumber" Type="int" Nullable="false" />
-          <Property Name="productCode" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="productName" Type="varchar(max)" Nullable="false" />
-          <Property Name="serialNo" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <Association Name="FK_Delivery_DeliveryNote">
           <End Role="DeliveryNote" Type="Self.DeliveryNote" Multiplicity="1" />
@@ -353,17 +322,6 @@ warning 6002: The table/view 'warehouseDatabase.dbo.xxxxxxxxxxxx' does not have 
     [ProductView].[deliveryNoteID] AS [deliveryNoteID]
     FROM [dbo].[ProductView] AS [ProductView]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="xxxxxxxxxxxx" EntityType="Self.xxxxxxxxxxxx" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [xxxxxxxxxxxx].[deliveryNoteID] AS [deliveryNoteID], 
-    [xxxxxxxxxxxx].[company] AS [company], 
-    [xxxxxxxxxxxx].[orderNumber] AS [orderNumber], 
-    [xxxxxxxxxxxx].[itemNumber] AS [itemNumber], 
-    [xxxxxxxxxxxx].[productCode] AS [productCode], 
-    [xxxxxxxxxxxx].[productName] AS [productName], 
-    [xxxxxxxxxxxx].[serialNo] AS [serialNo]
-    FROM [dbo].[xxxxxxxxxxxx] AS [xxxxxxxxxxxx]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_Delivery_DeliveryNote" Association="Self.FK_Delivery_DeliveryNote">
             <End Role="DeliveryNote" EntitySet="DeliveryNote" />
             <End Role="Delivery" EntitySet="Delivery" />
@@ -463,7 +421,6 @@ warning 6002: The table/view 'warehouseDatabase.dbo.xxxxxxxxxxxx' does not have 
             <End Role="Users" EntitySet="Users" />
             <End Role="Summary" EntitySet="Summary" />
           </AssociationSet>
-          <EntitySet Name="xxxxxxxxxxxx" EntityType="warehouseDatabaseModel.xxxxxxxxxxxx" />
         </EntityContainer>
         <EntityType Name="Delivery">
           <Key>
@@ -749,24 +706,6 @@ warning 6002: The table/view 'warehouseDatabase.dbo.xxxxxxxxxxxx' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="xxxxxxxxxxxx">
-          <Key>
-            <PropertyRef Name="deliveryNoteID" />
-            <PropertyRef Name="company" />
-            <PropertyRef Name="orderNumber" />
-            <PropertyRef Name="itemNumber" />
-            <PropertyRef Name="productCode" />
-            <PropertyRef Name="productName" />
-            <PropertyRef Name="serialNo" />
-          </Key>
-          <Property Name="deliveryNoteID" Type="Int32" Nullable="false" />
-          <Property Name="company" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="orderNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="itemNumber" Type="Int32" Nullable="false" />
-          <Property Name="productCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="productName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="serialNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -914,19 +853,6 @@ warning 6002: The table/view 'warehouseDatabase.dbo.xxxxxxxxxxxx' does not have 
                 <ScalarProperty Name="deliveryID" ColumnName="deliveryID" />
                 <ScalarProperty Name="deliveryNoteID" ColumnName="deliveryNoteID" />
                 <ScalarProperty Name="summaryID" ColumnName="summaryID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="xxxxxxxxxxxx">
-            <EntityTypeMapping TypeName="warehouseDatabaseModel.xxxxxxxxxxxx">
-              <MappingFragment StoreEntitySet="xxxxxxxxxxxx">
-                <ScalarProperty Name="serialNo" ColumnName="serialNo" />
-                <ScalarProperty Name="productName" ColumnName="productName" />
-                <ScalarProperty Name="productCode" ColumnName="productCode" />
-                <ScalarProperty Name="itemNumber" ColumnName="itemNumber" />
-                <ScalarProperty Name="orderNumber" ColumnName="orderNumber" />
-                <ScalarProperty Name="company" ColumnName="company" />
-                <ScalarProperty Name="deliveryNoteID" ColumnName="deliveryNoteID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

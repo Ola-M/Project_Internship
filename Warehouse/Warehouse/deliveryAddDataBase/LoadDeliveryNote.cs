@@ -15,15 +15,14 @@ namespace Warehouse.productAdd
         public void addDeliveryNote(ComboBox box,DataTable dataTable)
         {
 
-            var nazwaDostawcy = box.Text;
+            var providerName = box.Text;
             DateTime thisDay = DateTime.Now;
             if ((dataTable != null) && (dataTable.Rows.Count >= 5))
             {
 
-               // List<Product> products = new List<Product>();
                 DeliveryNote deliveryNote = new DeliveryNote();
 
-                Provider prov = context.Provider.FirstOrDefault(c => c.companyName == nazwaDostawcy);
+                Provider prov = context.Provider.FirstOrDefault(c => c.companyName == providerName);
                 deliveryNote.providerID = prov.providerID;
                 deliveryNote.deliveryNumber = dataTable.Columns[4].ToString();
 

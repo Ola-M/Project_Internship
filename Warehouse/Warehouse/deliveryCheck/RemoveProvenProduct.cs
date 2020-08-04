@@ -40,8 +40,8 @@ namespace Warehouse.deliveryCheck
                     }
                     foreach (DataGridViewRow row in dataGridViewProducts.Rows)
                     {
-                        var xxx = row.Cells[0].Value.ToString().Trim();
-                        if ((xxx != null) && (xxx.Equals(item.Cells[0].Value.ToString())))
+                        var serial = row.Cells[0].Value.ToString().Trim();
+                        if ((serial != null) && (serial.Equals(item.Cells[0].Value.ToString())))
                         {
                             row.DefaultCellStyle.BackColor = Color.Empty;
                         }

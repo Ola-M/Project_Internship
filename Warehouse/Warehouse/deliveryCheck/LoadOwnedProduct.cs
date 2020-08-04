@@ -74,7 +74,7 @@ namespace Warehouse.deliveryCheck
                     
                         rowsColorRed();
                 }
-                test();
+                wrongItems();
             }
         }
         private void addSerialToDbAndList( )
@@ -144,7 +144,7 @@ namespace Warehouse.deliveryCheck
 
         }
         
-        private void test()
+        private void wrongItems()
         {
             foreach (DataGridViewRow row in this.dataGridViewProvenProducts.Rows)
             {

@@ -29,10 +29,7 @@ namespace Warehouse.admin
 
         private void usersAdd()
         {
-            //string getLogin = textBoxList[2];
-          //  users = context.Users.FirstOrDefault(c => c.login == getLogin);
-           // if (users == null)
-           // {
+
                 users.name = textBoxList[0].ToString();
                 users.forname = textBoxList[1].ToString();
                 users.login = textBoxList[2].ToString();
@@ -40,16 +37,7 @@ namespace Warehouse.admin
 
                 context.Users.Add(users);
                 context.SaveChanges();
-                //permission(users.usersID);
 
-         //       MessageBox.Show("Dodano użytkownika");
-               // return users.usersID;
-         //   }
-          //  else
-           // {
-            //    MessageBox.Show("Taki login isteje");
-               // return users.usersID;
-          //  }
         }
 
         private bool checkBoxFilled()    

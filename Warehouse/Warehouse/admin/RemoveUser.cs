@@ -23,16 +23,15 @@ namespace Warehouse.admin
 
                         deleteUserLogin = item.Cells[3].Value.ToString();
                         users = context.Users.First(c => c.login == deleteUserLogin);
-                        int www = users.usersID;
                         
                         foreach (UserPermissions u in userPermissionsList)
                         {
 
-                            var xxx = context.UserPermissions.FirstOrDefault(c => c.userID == www);
+                            var userPermissionsExist = context.UserPermissions.FirstOrDefault(c => c.userID == users.usersID);
                             
-                            if (xxx != null)
+                            if (userPermissionsExist != null)
                             {
-                                context.UserPermissions.Remove(xxx);
+                                context.UserPermissions.Remove(userPermissionsExist);
                                 context.SaveChanges();
                             }
 

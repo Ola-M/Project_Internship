@@ -8,14 +8,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-using Warehouse.bazaDanych;
 using Warehouse.deliveryCheck;
 
 namespace Warehouse
 {
     public partial class FormLogin : Form
     {
-        PobieranieDanych pobieranie = new PobieranieDanych();
         int id = 0;
         public FormLogin()
         {

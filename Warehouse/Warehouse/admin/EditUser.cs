@@ -1,23 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Warehouse.admin
 {
-    class EdycjaUsera
+    class EditUser
     {
         private warehouseDatabaseEntities1 context = new warehouseDatabaseEntities1();
         private List<string> textBoxList;
         private Users user = new Users();
-        private Permissions permissions = new Permissions();
-        private UserPermissions userPermissions = new UserPermissions();
-        private List<UserPermissions> userPermissionsList = new List<UserPermissions>();
         private List<CheckBox> checkBoxesList;
         DataGridView dataGridViewUsers;
-        public EdycjaUsera(List<string> textBoxList, List<CheckBox> checkBoxesList, DataGridView dataGridViewUsers)
+        public EditUser(List<string> textBoxList, List<CheckBox> checkBoxesList, DataGridView dataGridViewUsers)
         {
 
             this.textBoxList = textBoxList;
@@ -28,15 +23,15 @@ namespace Warehouse.admin
         public void updateUsers()
         {
             AddUser addingUser = new AddUser(textBoxList, checkBoxesList);
-            string eee;
-            int dd = 0;
+            string getUserID;
+            int userID = 0;
 
             foreach (DataGridViewRow view in dataGridViewUsers.SelectedRows)
             {
-                eee = view.Cells[0].Value.ToString();
-                dd = int.Parse(eee);
+                getUserID = view.Cells[0].Value.ToString();
+                userID = int.Parse(getUserID);
 
-                user = context.Users.FirstOrDefault(c => c.usersID == dd);
+                user = context.Users.FirstOrDefault(c => c.usersID == userID);
                 if (user != null)
                 {
                     user.name = textBoxList[0].ToString();

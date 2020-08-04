@@ -13,7 +13,7 @@ namespace Warehouse
         RemoveUser removeUser;
         ClearTextBox clearTextBox;
         List<CheckBox> checkBoxesList = new List<CheckBox>();
-        EditUsers editUsers;
+        GetUser editUsers;
         AddOrUpdateUsers addOrUpdateUsers ;
 
         public FormAdmin()
@@ -21,7 +21,7 @@ namespace Warehouse
             InitializeComponent();
             this.addOrUpdateUsers = new AddOrUpdateUsers(textBoxList, checkBoxesList);
             this.removeUser = new RemoveUser();
-            this.editUsers = new EditUsers(textBoxList,checkBoxesList, dataGridViewUsers);
+            this.editUsers = new GetUser(textBoxList,checkBoxesList, dataGridViewUsers);
             this.clearTextBox = new ClearTextBox(textBoxName, textBoxForname, textBoxLogin, textBoxPassword, textBoxList);
         }
 

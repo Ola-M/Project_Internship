@@ -15,18 +15,19 @@ namespace Warehouse.forms
         warehouseDatabaseEntities1 context = new warehouseDatabaseEntities1();
         int deliveryNoteID;
         List<Product> incorrectProducts;
-        public FormSummary(int deliveryNoteID, List<Product> products)
+        int userID;
+        public FormSummary(int deliveryNoteID, List<Product> products, int userID)
         {
             this.deliveryNoteID = deliveryNoteID;
             InitializeComponent();
             this.incorrectProducts = products;
+            this.userID = userID;
         }
 
         private void FormSummary_Load(object sender, EventArgs e)
         {
             var dataIncompapatible = (from c in context.IncompatibleProductsView where c.deliveryNoteID == deliveryNoteID select c);
                 dataGridViewIncompatibleProducts.DataSource = dataIncompapatible.ToList();
-            //var dataMissing = (from c in context.xxxxxxxxxxxx where c.deliveryNoteID == deliveryNoteID select c);
             dataGridViewMissingProducts.DataSource = incorrectProducts;
             dataGridViewMissingProducts.Columns[0].Visible = false;
             dataGridViewMissingProducts.Columns[1].Visible = false;
@@ -36,13 +37,13 @@ namespace Warehouse.forms
             var contact = context.Provider.FirstOrDefault(c => c.providerID == contactProviderID.providerID);
             labelContact.Text = "Kontakt: " + contact.contact;
 
-
-
-
         }
-        private void products()
-        {
 
+        private void buttonBack_Click(object sender, EventArgs e)
+        {
+            FormCheckDelivery formCheckDelivery = new FormCheckDelivery(deliveryNoteID, userID);
+            formCheckDelivery.Show();
+            this.Hide();
         }
     }
 }

@@ -22,9 +22,8 @@ namespace Warehouse.admin
             
         }
         public void addOrUpdate( DataGridView dataGridViewUsers)
-        {
-            EdycjaUsera edycjaUsera = new EdycjaUsera(textBoxList,checkBoxesList, dataGridViewUsers);
-            EditUsers editUsers = new EditUsers(textBoxList, checkBoxesList, dataGridViewUsers);
+        {          
+            EditUser editUsers = new EditUser(textBoxList, checkBoxesList, dataGridViewUsers);
             AddUser addUser = new AddUser(textBoxList, checkBoxesList);
             AddPermissions addPermissions = new AddPermissions(checkBoxesList);
             string getLogin = textBoxList[2];
@@ -40,7 +39,6 @@ namespace Warehouse.admin
                 }
                     
                 
-                // return users.usersID;
             }
             else
             {
@@ -52,13 +50,12 @@ namespace Warehouse.admin
                                              MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
-                    edycjaUsera.updateUsers();
+                    addPermissions.deletePermissions(users.usersID);
+                    editUsers.updateUsers();
                     addPermissions.permission(users.usersID);
                     MessageBox.Show("Edytowano użytkownika");
                 }
                     
-                
-                // return users.usersID;
             }
 
         }

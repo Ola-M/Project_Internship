@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Warehouse.bazaDanych;
 using Warehouse.deliveryAddDataBase;
 using Warehouse.deliveryCheck;
 using Warehouse.forms;
@@ -138,23 +137,23 @@ namespace Warehouse
             
             SummarizeDelivery summarizeDelivery = new SummarizeDelivery(id, deliveryNoteID, dataGridViewProducts, this.dataGridViewProvenProduct);
             summarizeDelivery.summaryDelivery();
-            FormSummary formSummary = new FormSummary(deliveryNoteID, summarizeDelivery.getIncorrect());
+            FormSummary formSummary = new FormSummary(deliveryNoteID, summarizeDelivery.getIncorrect(), id);
             formSummary.Show();
             this.Hide();
         }
 
         private void correctProducts()
         {
-            int xxx = 0;
-            var bbbb = context.Product.FirstOrDefault(c => c.serialNo == textBoxAddSerial.Text);
+            int matchProducts = 0;
+            var product = context.Product.FirstOrDefault(c => c.serialNo == textBoxAddSerial.Text);
             foreach (DataGridViewRow row in dataGridViewProvenProduct.Rows)
             {
                 if ((row.Cells[4].Value != null)&&(row.Cells[4].Value.Equals(false)))
                 {
-                    xxx++;
+                    matchProducts++;
                 }
-                else if((row.Cells[4].Value == null) && (bbbb != null)){
-                    xxx++;
+                else if((row.Cells[4].Value == null) && (product != null)){
+                    matchProducts++;
                 }
             }
             var items = context.DeliveryNote.FirstOrDefault(c => c.deliveryNoteID == this.deliveryNoteID);
@@ -163,7 +162,7 @@ namespace Warehouse
                 this.numberOfItems = items.numberOfItems.ToString();
             }
 
-            labelCorrectProducts.Text = "Ilość zgodnych produktów: " + xxx + "/" + numberOfItems;
+            labelCorrectProducts.Text = "Ilość zgodnych produktów: " + matchProducts + "/" + numberOfItems;
         }
     }
     

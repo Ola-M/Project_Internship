@@ -26,10 +26,10 @@ namespace Warehouse.admin
                 {
                     if (checkBoxesList[i].Checked == true)
                     {
-                        deletePermissions(idUsers);
                         checkBoxName = checkBoxesList[i].Text.Trim();
                         addPermision(checkBoxName, idUsers);
                     }
+
                 }
             }
             
@@ -44,17 +44,19 @@ namespace Warehouse.admin
             context.UserPermissions.Add(userPermissions);
             context.SaveChanges();
         }
-        private void deletePermissions(int idUsers)
+
+
+        public void deletePermissions(int idUsers)
         {
             try
             {
                 userPermissionsList = context.UserPermissions.ToList();
                 foreach (UserPermissions userPermissions in userPermissionsList)
                 {
-                    var xxx = context.UserPermissions.FirstOrDefault(c => c.userID == idUsers);
-                    if (xxx != null)
+                    var userPermissionsExist = context.UserPermissions.FirstOrDefault(c => c.userID == idUsers);
+                    if (userPermissionsExist != null)
                     {       
-                                context.UserPermissions.Remove(xxx);
+                                context.UserPermissions.Remove(userPermissionsExist);
                                 context.SaveChanges();
                     }
 
